@@ -20,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		registry
 		.addInterceptor(interceptor)
 		.addPathPatterns("/**")
-		.excludePathPatterns("/error", "/static/**", "/user/sign-out");
+		.excludePathPatterns("/error", "/static/**");
 	}
 	
 	// 웹 이미지 path와 서버에 업로드 된 이미지와 매핑 설정

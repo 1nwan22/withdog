@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AccountController {
 
+	// http://localhost/account/sign-in
+	@GetMapping("/sign-in")
+	public String signIn(Model model) {
+		model.addAttribute("viewName", "/account/signIn");
+		return "template/layout";
+	}
+	
 	// http://localhost/account/sign-up
 	@GetMapping("/sign-up")
 	public String signUp(Model model) {

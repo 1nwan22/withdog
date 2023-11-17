@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <div class="d-flex justify-content-center w-100">
 	<div id="headerBox" class="d-flex justify-content-center">
 		<div id="logo">
