@@ -1,1 +1,21 @@
 @charset "UTF-8";
+a a:hover {display: none;}
+header {height: 100px; background-color: antiquewhite;}
+#headerBox {width:64%; height: 100px; background-color: azure;}
+body {background-color: aqua;}
+#logo {width: 20%; height: 100px; background-color: beige;}
+.nav-group {height: 100px; width: 80%; background-color: aquamarine;}
+.nav-box {height: 60px;}
+.sub-nav {height: 40px;}
+.contents {min-height: 880px; background-color: bisque;}
+.content-box {display: flex;}
+#content {width: 64%; background-color: beige; margin: 0%;}
+#leftSide {height: 880px; width: 18%; background-color: blue; margin: 0%;}
+#rightSide {height: 880px; width: 18%; background-color: blueviolet; margin: 0%;}
+.sign-up-box {width: 450px; height: 650px; background-color: aquamarine;}
+
+
+
+footer {height: 100px; background-color: blanchedalmond;}
+
+
