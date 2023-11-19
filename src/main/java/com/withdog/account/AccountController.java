@@ -22,4 +22,5 @@ public class AccountController {
 		model.addAttribute("viewName", "/account/signUp");
 		return "template/layout";
 	}
+	
 }
