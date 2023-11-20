@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <div class="d-flex justify-content-center w-100 h-100">
 	<div class="sign-box mt-5 p-4">
-		<form id="signUpForm" method="post" action="/account/signUp">
+		<form id="signUpForm" method="post" action="/account/sign-up">
 			<div class="my-4">
 				<div class="d-flex justify-content-between align-items-center">
 					<input type="text" id="email" name="email"
@@ -68,7 +68,7 @@
 			// AJAX - 중복확인
 			$.ajax({
 				// request get(생략)
-				url : "/account/isDuplicatedEmail",
+				url : "/account/is-duplicated-email",
 				data : {
 					"email" : email
 				}
@@ -108,7 +108,7 @@
 			// AJAX - 중복확인
 			$.ajax({
 				// request get(생략)
-				url : "/account/isDuplicatedUserId",
+				url : "/account/is-duplicated-user-id",
 				data : {
 					"userId" : userId
 				}
@@ -187,7 +187,7 @@
 			$.post(url, params).done(function(data) {
 				if (data.code == 200) {
 					alert("가입을 환영합니다");
-					location.href = "/account/sign-in"
+					location.href = "/account/sign-in-view"
 				} else {
 					alert(data.errorMessage);
 				}

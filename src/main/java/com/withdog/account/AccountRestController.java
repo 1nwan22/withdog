@@ -3,6 +3,8 @@ package com.withdog.account;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,7 @@ public class AccountRestController {
 	@Autowired
 	private AccountBO accountBO;
 	
-	@RequestMapping("/isDuplicatedEmail")
+	@RequestMapping("/is-duplicated-email")
 	public Map<String, Object> isDuplicatedEmail(@RequestParam("email") String email) {
 		
 		AccountEntity account = accountBO.getAccountEntityByEmail(email);
@@ -36,7 +38,7 @@ public class AccountRestController {
 		return result;
 	}
 	
-	@RequestMapping("/isDuplicatedUserId")
+	@RequestMapping("/is-duplicated-user-id")
 	public Map<String, Object> isDuplicatedUserId(@RequestParam("userId") String userId) {
 		
 		AccountEntity account = accountBO.getAccountEntityByUserId(userId);
@@ -52,7 +54,7 @@ public class AccountRestController {
 		return result;
 	}
 	
-	@PostMapping("/signUp")
+	@PostMapping("/sign-up")
 	public Map<String, Object> signUp(
 			@RequestParam("email") String email, 
 			@RequestParam("userId") String userId,
@@ -73,6 +75,16 @@ public class AccountRestController {
 			result.put("result", "success");
 		}
 		
+		return result;
+	}
+	
+	@PostMapping("/sign-in")
+	public Map<String, Object> signIn(
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			HttpSession session) {
+		session.setAttribute("email", email);
+		Map<String, Object> result = new HashMap<>();
 		return result;
 	}
 }

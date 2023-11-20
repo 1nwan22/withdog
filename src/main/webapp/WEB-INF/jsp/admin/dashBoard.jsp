@@ -1,27 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div class="d-flex flex-wrap justify-content-between p-4 gap-5">
-		<div class="dash-board">
-			회원목록
-		</div>
-		<div class="dash-board">
-			주문목록
-		</div>
-		<div class="dash-board">
-			상품등록
-		</div>
-		<div class="dash-board">
-			상품조회
-		</div>
-		<div class="dash-board">
-			상품수정
-		</div>
-		<div class="dash-board">
-			상품삭제
-		</div>
+<div class="d-flex justify-content-center align-items-center p-4">
+	<div>
+		<a href="#" class="btn btn-success btn-lg form-control my-3">회원목록</a>
+		<a href="#" class="btn btn-success btn-lg form-control my-3">주문목록</a>
+		<a href="/product/add-product-view" class="btn btn-success btn-lg form-control my-3">상품등록</a>
+		<a href="/product/get-product-view" class="btn btn-success btn-lg form-control my-3">상품조회</a>
+	</div>
 </div>
-
-<script>
-
-
-</script>

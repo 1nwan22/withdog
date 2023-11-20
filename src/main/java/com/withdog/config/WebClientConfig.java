@@ -20,51 +20,36 @@ import reactor.netty.http.client.HttpClient;
 @Slf4j
 @Configuration
 public class WebClientConfig {
-    @Bean
-    public WebClient webClient() {
+	@Bean
+	public WebClient webClient() {
 
-        /**
-         * 통신시 timeout 세팅
-         * - connect, read, write 를 모두 5000ms
-         */
-        HttpClient httpClient = HttpClient.create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
-                .responseTimeout(Duration.ofMillis(5000))
-                .doOnConnected(conn ->
-                        conn.addHandlerLast(new ReadTimeoutHandler(5000, TimeUnit.MILLISECONDS))
-                                .addHandlerLast(new WriteTimeoutHandler(5000, TimeUnit.MILLISECONDS)));
+		/**
+		 * 통신시 timeout 세팅 - connect, read, write 를 모두 5000ms
+		 */
+		HttpClient httpClient = HttpClient.create().option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
+				.responseTimeout(Duration.ofMillis(5000))
+				.doOnConnected(conn -> conn.addHandlerLast(new ReadTimeoutHandler(5000, TimeUnit.MILLISECONDS))
+						.addHandlerLast(new WriteTimeoutHandler(5000, TimeUnit.MILLISECONDS)));
 
-        WebClient webClient = WebClient.builder()
-                .baseUrl("http://localhost")
-                .clientConnector(new ReactorClientHttpConnector(httpClient)) //생성한 HttpClient 연결
-                //Request Header 로깅 필터
-                .filter(
-                        ExchangeFilterFunction.ofRequestProcessor(
-                                clientRequest -> {
-                                    log.info(">>>>>>>>> REQUEST <<<<<<<<<<");
-                                    log.info("Request: {} {}", clientRequest.method(), clientRequest.url());
-                                    clientRequest.headers().forEach(
-                                            (name, values) -> values.forEach(value -> log.info("{} : {}", name, value))
-                                    );
-                                    return Mono.just(clientRequest);
-                                }
-                        )
-                )
-                //Response Header 로깅 필터
-                .filter(
-                        ExchangeFilterFunction.ofResponseProcessor(
-                                clientResponse -> {
-                                    log.info(">>>>>>>>>> RESPONSE <<<<<<<<<<");
-                                    clientResponse.headers().asHttpHeaders().forEach(
-                                            (name, values) -> values.forEach(value -> log.info("{} {}", name, value))
-                                    );
-                                    return Mono.just(clientResponse);
-                                }
-                        )
-                )
-                .defaultHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8") //기본 헤더설정
-                .build();
+		WebClient webClient = WebClient.builder().baseUrl("http://localhost")
+				.clientConnector(new ReactorClientHttpConnector(httpClient)) // 생성한 HttpClient 연결
+				// Request Header 로깅 필터
+				.filter(ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
+					log.info(">>>>>>>>> REQUEST <<<<<<<<<<");
+					log.info("Request: {} {}", clientRequest.method(), clientRequest.url());
+					clientRequest.headers()
+							.forEach((name, values) -> values.forEach(value -> log.info("{} : {}", name, value)));
+					return Mono.just(clientRequest);
+				}))
+				// Response Header 로깅 필터
+				.filter(ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
+					log.info(">>>>>>>>>> RESPONSE <<<<<<<<<<");
+					clientResponse.headers().asHttpHeaders()
+							.forEach((name, values) -> values.forEach(value -> log.info("{} {}", name, value)));
+					return Mono.just(clientResponse);
+				})).defaultHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8") // 기본 헤더설정
+				.build();
 
-        return webClient;
-    }
+		return webClient;
+	}
 }

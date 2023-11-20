@@ -16,8 +16,7 @@ body {background-color: aqua;}
 #emailCehckBtn {width: 100px; font-size: 12px; height: 30px;}
 #userIdCheckBtn {width: 100px; font-size: 12px; height: 30px;}
 .check-text {font-size: 12px;}
-.dash-board {width: 350px; height: 350px; background-color: coral; margin-bottom: 50px;}
-
+.search-btn {height: 30px;}
 footer {height: 100px; background-color: blanchedalmond;}
 
 
