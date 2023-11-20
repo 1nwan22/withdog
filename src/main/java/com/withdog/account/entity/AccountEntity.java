@@ -53,6 +53,8 @@ public class AccountEntity {
 	@Column(name="vetYn")
 	private String vetYn;
 	
+	private String type;
+	
 	@UpdateTimestamp
 	@Column(name="createdAt", updatable = false)
 	private Date createdAt;

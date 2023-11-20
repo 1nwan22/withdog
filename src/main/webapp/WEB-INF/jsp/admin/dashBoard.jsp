@@ -19,4 +19,9 @@
 		<div class="dash-board">
 			상품삭제
 		</div>
-	</div>
+</div>
+
+<script>
+
+
+</script>

@@ -62,7 +62,7 @@ public class AccountRestController {
 		//TODO  여유되면 다른 비밀번호식도 찾아보기
 		String hashedPassword = EncryptUtils.md5(password);
 
-		Integer id = accountBO.addUser(email, userId, userName, hashedPassword);
+		Integer id = accountBO.addAccount(email, userId, userName, hashedPassword);
 
 		Map<String, Object> result = new HashMap<>();
 		if (id == null) {

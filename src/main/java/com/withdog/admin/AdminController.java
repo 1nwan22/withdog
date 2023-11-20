@@ -12,7 +12,7 @@ public class AdminController {
 	// http://localhost/admin/dash-board
 	@GetMapping("dash-board")
 	public String dashBoard(Model model) {
-
+		
 		model.addAttribute("viewName", "/admin/dashBoard");
 		return "template/layout";
 	}

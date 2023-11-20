@@ -20,7 +20,7 @@ public class AccountBO {
 		return accountRepository.findByUserId(userId);
 	}
 	
-	public Integer addUser(String email, String userId, String userName, String password) {
+	public Integer addAccount(String email, String userId, String userName, String password) {
 		AccountEntity accountEntity = accountRepository.save(
 				AccountEntity.builder()
 				.email(email)
@@ -31,5 +31,9 @@ public class AccountBO {
 		
 		// entity는 넣은 것을 바로 꺼내올 수 있다. 그리고 엔티티 전부보다는 id만 넘기는게 좋다
 		return accountEntity == null ? null : accountEntity.getId();
+	}
+	
+	public void addAccountOauth(String email) {
+		
 	}
 }
