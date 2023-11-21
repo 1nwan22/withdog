@@ -36,7 +36,7 @@ dependencies {
 	implementation 'javax.servlet:jstl:1.2'  // springboot ver 2.x
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.7'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // junit
 
 	
 }

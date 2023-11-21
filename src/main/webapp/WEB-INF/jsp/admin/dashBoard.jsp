@@ -4,7 +4,6 @@
 	<div>
 		<a href="#" class="btn btn-success btn-lg form-control my-3">회원목록</a>
 		<a href="#" class="btn btn-success btn-lg form-control my-3">주문목록</a>
-		<a href="/product/add-product-view" class="btn btn-success btn-lg form-control my-3">상품등록</a>
-		<a href="/product/get-product-view" class="btn btn-success btn-lg form-control my-3">상품조회</a>
+		<a href="/admin/product-manager" class="btn btn-success btn-lg form-control my-3">상품관리</a>
 	</div>
 </div>

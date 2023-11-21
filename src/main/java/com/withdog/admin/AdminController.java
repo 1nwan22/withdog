@@ -11,15 +11,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 
-	// http://localhost/account/admin/dash-board
+	// http://localhost/admin/dash-board
 	@GetMapping("/dash-board")
 	public String dashBoard(Model model, HttpSession session) {
 		String email = (String) session.getAttribute("email");
-		if (email.equals("pepper@pepper.com")) {
-			model.addAttribute("viewName", "/admin/dashBoard");
-			return "template/layout";
+		if (email == null || email.equals("pepper@pepper.com") == false) {
+			return "redirect:/account/sign-in-view";
 		}
-		
+		model.addAttribute("viewName", "/admin/dashBoard");
+		return "template/layout";
+	}
+	
+	// http://localhost/admin/product-manager
+	@GetMapping("/product-manager")
+	public String productManager(Model model, HttpSession session) {
+		String email = (String) session.getAttribute("email");
+		if (email == null || email.equals("pepper@pepper.com") == false) {
+			return "redirect:/account/sign-in-view";
+		}
+		model.addAttribute("viewName", "/admin/productManager");
+		return "template/layout";
+	}
+	
+	// http://localhost/admin/account-manager
+	@GetMapping("/account-manager")
+	public String accountManager(Model model, HttpSession session) {
+		String email = (String) session.getAttribute("email");
+		if (email == null || email.equals("pepper@pepper.com") == false) {
+			return "redirect:/account/sign-in-view";
+		}
+		model.addAttribute("viewName", "/admin/accountManager");
+		return "template/layout";
+	}
+	
+	// http://localhost/admin/order-manager
+	@GetMapping("/order-manager")
+	public String orderManager(Model model, HttpSession session) {
+		String email = (String) session.getAttribute("email");
+		if (email == null || email.equals("pepper@pepper.com") == false) {
+			return "redirect:/account/sign-in-view";
+		}
+		model.addAttribute("viewName", "/admin/orderManager");
 		return "template/layout";
 	}
 }
