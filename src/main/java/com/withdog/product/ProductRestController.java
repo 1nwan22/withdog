@@ -1,6 +1,7 @@
 package com.withdog.product;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,10 +34,10 @@ public class ProductRestController {
 			@RequestParam("stock") int stock,
 			@RequestParam("content") int content,
 			@RequestParam("status") String status,
-			@RequestParam("file") MultipartFile file) {
+			@RequestParam("fileList") List<MultipartFile> fileList) {
 		
 		Integer productId = (Integer) productBO.addProduct(name, brand, price, costPrice, stock, brand, status);
-		productImageBO.addProductImage(content, status)
+		productImageBO.addProductImage(productId, fileList);
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("result", "success");
