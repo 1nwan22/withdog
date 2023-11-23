@@ -36,4 +36,18 @@ public class AccountBO {
 	public void addAccountOauth(String email) {
 		
 	}
+	
+	public String updateAccountAdminYnByEmail(String email, String adminYn) {
+		
+		AccountEntity account = accountRepository.findByEmail(email);
+		if (account != null) {
+			account.toBuilder() // 기존 값 유지
+			.adminYn(adminYn)
+			.build();
+			
+			account = accountRepository.save(account);
+		}
+		return account.getAdminYn();
+		
+	}
 }

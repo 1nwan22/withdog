@@ -21,7 +21,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Builder
+@Builder(toBuilder=true)
 @Table(name="account")
 @Entity
 public class AccountEntity {
@@ -54,6 +54,9 @@ public class AccountEntity {
 	private String vetYn;
 	
 	private String type;
+	
+	@Column(name="adminYn")
+	private String adminYn;
 	
 	@UpdateTimestamp
 	@Column(name="createdAt", updatable = false)

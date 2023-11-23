@@ -5,8 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +15,14 @@ import com.withdog.account.bo.AccountBO;
 import com.withdog.account.entity.AccountEntity;
 import com.withdog.common.EncryptUtils;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @RequestMapping("/account")
 @RestController
 public class AccountRestController {
 
-	@Autowired
-	private AccountBO accountBO;
+	private final AccountBO accountBO;
 	
 	@RequestMapping("/is-duplicated-email")
 	public Map<String, Object> isDuplicatedEmail(@RequestParam("email") String email) {
@@ -85,6 +87,19 @@ public class AccountRestController {
 			HttpSession session) {
 		session.setAttribute("email", email);
 		Map<String, Object> result = new HashMap<>();
+		return result;
+	}
+	
+	@PutMapping("/admin-permission")
+	public Map<String, Object> adminPermission(@RequestParam("email") String email) {
+		String adminYn = accountBO.updateAccountAdminYnByEmail(email, "y");
+		Map<String, Object> result = new HashMap<>();
+		if (adminYn.equals("n")) {
+			result.put("code", 500);
+			result.put("errorMessage", "관리자 승인 실패");
+		}
+		result.put("code", 200);
+		result.put("result", "success");
 		return result;
 	}
 }

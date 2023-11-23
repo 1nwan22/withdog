@@ -18,7 +18,6 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="" var="">
 				<tr>
 					<td></td>
 					<td></td>
@@ -29,7 +28,6 @@
 					<td></td>
 					<td></td>
 				</tr>
-			</c:forEach>
 			</tbody>
 		</table>
 	</div>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -44,10 +45,17 @@ public class PermissionInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		
-		if (adminAccount.equals("n") && uri.startsWith("/admin")) {
-			response.sendRedirect("/account/sign-in-view");
-			return false;
-		}
+//		if (ObjectUtils.isEmpty(adminAccount) && uri.startsWith("/admin")) {
+//			response.sendRedirect("/account/sign-in-view");
+//			return false;
+//		}
+		
+//		if (!ObjectUtils.isEmpty(adminAccount)) {
+//			if (adminAccount.equals("y") == false && uri.startsWith("/admin")) {
+//				response.sendRedirect("/account/sign-in-view");
+//				return false;
+//			}
+//		}
 		
 		return true; // 컨트롤러 수행함
 	}
