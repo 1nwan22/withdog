@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.withdog.product.bo.ProductBO;
 import com.withdog.product.bo.ProductImageBO;
+import com.withdog.product.entity.ProductEntity;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,7 +47,9 @@ public class ProductRestController {
 	}
 	
 	@RequestMapping("/get-product")
-	public Map<String, Object> getProduct() {
+	public Map<String, Object> getProduct(
+			@RequestParam("targetProductKey") String key,
+			@RequestParam("targetProductValue") Object value) {
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("result", "success");

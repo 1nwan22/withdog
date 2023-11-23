@@ -30,6 +30,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		// 로그인 여부
 		HttpSession session = request.getSession();
 		Integer userId = (Integer) session.getAttribute("userId");
+		String adminAccount = (String) session.getAttribute("adminAccount");
 		
 		// 비로그인 && /post => 로그인 페이지로 이동, 컨트롤러 수행 방지
 		if (userId == null && uri.startsWith("/post")) {
@@ -40,6 +41,11 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		// 로그인 && /user => 글 목록 페이지 이동, 컨트롤러 수행 방지
 		if (userId != null && uri.startsWith("/user")) {
 			response.sendRedirect("/post/post-list-view");
+			return false;
+		}
+		
+		if (adminAccount.equals("n") && uri.startsWith("/admin")) {
+			response.sendRedirect("/account/sign-in-view");
 			return false;
 		}
 		

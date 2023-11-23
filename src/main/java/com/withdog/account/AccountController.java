@@ -27,6 +27,8 @@ public class AccountController {
 		model.addAttribute("REDIRECT_URI", kakaoBO.REDIRECT_URI);
 		
 		model.addAttribute("viewName", "/account/signIn");
+		model.addAttribute("viewNameL", "/include/leftSide");
+		model.addAttribute("viewNameR", "/include/rightSide");
 		return "template/layout";
 	}
 	
@@ -34,6 +36,8 @@ public class AccountController {
 	@GetMapping("/sign-up-view")
 	public String signUpView(Model model) {
 		model.addAttribute("viewName", "/account/signUp");
+		model.addAttribute("viewNameL", "/include/leftSide");
+		model.addAttribute("viewNameR", "/include/rightSide");
 		return "template/layout";
 	}
 	
@@ -51,6 +55,8 @@ public class AccountController {
 	public String kakaoOauth(@RequestParam("code") String code, Model model) {
 		
 		model.addAttribute("viewName", "/admin/dashBoard");
+		model.addAttribute("viewNameL", "/include/leftSide");
+		model.addAttribute("viewNameR", "/include/rightSide");
 		kakaoBO.getUser(kakaoBO.getAccessToken(code).getAccess_token());
 		return "template/layout";
 	}

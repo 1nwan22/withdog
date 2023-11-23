@@ -23,13 +23,13 @@
 		<section class="contents">
 			<div class="content-box">
 				<div id="leftSide">
-					<jsp:include page="../${viewNameL}"></jsp:include>
+					<jsp:include page="../${viewNameL}.jsp"></jsp:include>
 				</div>
 				<div id="" class="content">
 					<jsp:include page="../${viewName}.jsp"></jsp:include>
 				</div>
 				<div id="rightSide" class="">
-					<jsp:include page="../${viewNameR}"></jsp:include>
+					<jsp:include page="../${viewNameR}.jsp"></jsp:include>
 				</div>
 			</div>
 		</section>

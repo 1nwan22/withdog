@@ -1,44 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="d-flex justify-content-between">
-	<div class="d-flex justify-content-center align-items-center p-4 col-6">
-		<table class="table text-center">
-			<thead>
-				<tr>
-					<th>제품번호</th>
-					<th>이미지</th>
-					<th>제품명</th>
-					<th>브랜드</th>
-					<th>가격</th>
-					<th>원가</th>
-					<th>재고</th>
-					<th>제품설명</th>
-					<th>제품상태</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach items="" var="">
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</c:forEach>
-			</tbody>
-		</table>
+<div>
+	<div class="d-flex justify-content-center align-items-center">
+		<div>
+				<input type="text" id="name" class="form-control my-3" placeholder="제품명">
+				<input type="text" id="brand" class="form-control my-3" placeholder="브랜드">
+				<input type="text" id="price" class="form-control my-3" placeholder="가격">
+				<input type="text" id="costPrice" class="form-control my-3" placeholder="원가">
+				<input type="text" id="stock" class="form-control my-3" placeholder="재고">
+				<input type="text" id="content" class="form-control my-3" placeholder="제품설명">
+				<input type="text" id="status" class="form-control my-3" placeholder="제품상태">
+				<input type="file" id="file" name="file" multiple accept="image/*" class="form-cnotrol my-3">
+				<div>
+					<img>
+				</div>
+				<div id="fileName" class=""></div>
+				<input type="button" id="saveBtn" class="btn btn-info form-control my-3" value="등록">
+		</div>
 	</div>
-	
-	<div class="d-flex justify-content-center align-items-center p-4 col-6">
+	<hr>
+	<div class="d-flex justify-content-center align-items-center">
 		<div>
 				<div class="d-flex align-items-center">
 					<input type="text" id="nameSearch" class="form-control my-3" placeholder="제품명">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
+					<input type="button" class="search-btn btn btn-success py-0" data-toggle="modal" data-target="#modal" data-product-id="" value="검색">
 				</div>
 				<div class="d-flex align-items-center">
 					<input type="text" id="brandSearch" class="form-control my-3" placeholder="브랜드">
@@ -56,8 +41,6 @@
 					<input type="text" id="stockSearch" class="form-control my-3" placeholder="재고">
 					<input type="button" class="search-btn btn btn-success py-0" value="검색">
 				</div>
-				<input type="button" id="editBtn" class="btn btn-warning form-control my-3" value="수정">
-				<input type="button" id="deleteBtn" class="btn btn-danger form-control my-3" value="삭제">
 		</div>
 	</div>
 </div>
@@ -67,8 +50,21 @@
 	<!-- modal-sm:작은 모달 modal-dialog-centered: 수직 기준 가운데 -->
 	<div class="modal-dialog modal-dialog-centered modal-sm">
 		<div class="modal-content text-center">
+			<div class="product-info py-3 border-bottom">
+				<div id="resultImg">이미지</div>
+				<div id="resultName">제품명</div>
+				<div id="resultBrand">브랜드</div>
+				<div id="resultPrice">가격</div>
+				<div id="resultCostPrice">원가</div>
+				<div id="resultStock">재고</div>
+				<div id="resultContent">제품설명</div>
+				<div id="resultStatus">제품상태</div>
+			</div>
 			<div class="py-3 border-bottom">
-				<a href="#none" id="deletePost">삭제하기</a>
+				<a href="#none" id="editProduct">수정하기</a>
+			</div>
+			<div class="py-3 border-bottom">
+				<a href="#none" id="deleteProduct">삭제하기</a>
 			</div>
 			<div class="py-3">
 				<a href="#none" data-dismiss="modal">취소하기</a>
@@ -146,6 +142,38 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	$(".search-btn").on("click", function () {
+		let targetProductValue = $(this).prev().val().trim();
+		let targetProductKey = $(this).prev().attr("id").replace("Search", "");
+		console.log(targetProductKey);
+		console.log(targetProductValue);
+		
+		$.ajax({
+			url:"/product/get-product"
+			, data:{"targetProductKey":targetProductKey, "targetProductValue":targetProductValue}
+		
+			, success:function(data) {
+				if (data.code == 200) {
+					$("#resultName").text(data.product.name);
+				} else if (data.code == 500) {
+					alert(data.errorMessage);
+				}
+			}
+			, error:function(request, status, error) {
+				alert("검색 에러");
+			}
+		});
+	});
+	
+	$("#editProduct").on("click", function() {
+		alert("edit");
+	});
+	
+	$("#deleteProduct").on("click", function() {
+		alert("del");
+	});
+	
 	
 	
 });
