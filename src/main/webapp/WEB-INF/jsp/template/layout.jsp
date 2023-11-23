@@ -25,7 +25,7 @@
 				<div id="leftSide">
 					<jsp:include page="../${viewNameL}"></jsp:include>
 				</div>
-				<div id="content" class="">
+				<div id="" class="content">
 					<jsp:include page="../${viewName}.jsp"></jsp:include>
 				</div>
 				<div id="rightSide" class="">

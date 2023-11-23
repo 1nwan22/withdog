@@ -9,7 +9,7 @@ body {background-color: aqua;}
 .sub-nav {height: 40px;}
 .contents {min-height: 880px; background-color: bisque;}
 .content-box {display: flex;}
-#content {width: 64%; background-color: beige; margin: 0%;}
+.content {width: 64%; background-color: beige; margin: 0%;}
 #leftSide {height: 880px; width: 18%; background-color: blue; margin: 0%;}
 #rightSide {height: 880px; width: 18%; background-color: blueviolet; margin: 0%;}
 .sign-box {width: 450px; height: 650px; background-color: aquamarine;}

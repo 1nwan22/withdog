@@ -82,10 +82,8 @@ $(document).ready(function() {
 		let status = $("#status").val().trim();
 		
 		for (let i = 0; i < selectFiles.length; i++) {
-			let fileName = "image_" + i;
-			console.log(fileName);
 			console.log(selectFiles[i]);
-			formData.append(fileName, selectFiles[i]);
+			formData.append("images", selectFiles[i]);
 		}
 		console.log(formData);
 		//formData.append("fileList", selectFiles);

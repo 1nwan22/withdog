@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,12 +33,12 @@ public class ProductRestController {
 			@RequestParam("price") int price,
 			@RequestParam("costPrice") int costPrice,
 			@RequestParam("stock") int stock,
-			@RequestParam("content") int content,
+			@RequestParam("content") String content,
 			@RequestParam("status") String status,
-			@RequestParam("fileList") List<MultipartFile> fileList) {
+			@RequestPart("images") List<MultipartFile> images) {
 		
 		Integer productId = (Integer) productBO.addProduct(name, brand, price, costPrice, stock, brand, status);
-		productImageBO.addProductImage(productId, fileList);
+		productImageBO.addProductImage(productId, images);
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("result", "success");
