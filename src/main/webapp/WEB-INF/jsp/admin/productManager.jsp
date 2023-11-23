@@ -46,19 +46,35 @@
 		</div>
 	</div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal">
+	<!-- modal-sm:작은 모달 modal-dialog-centered: 수직 기준 가운데 -->
+	<div class="modal-dialog modal-dialog-centered modal-sm">
+		<div class="modal-content text-center">
+			<div class="py-3 border-bottom">
+				<a href="#none" id="deletePost">삭제하기</a>
+			</div>
+			<div class="py-3">
+				<a href="#none" data-dismiss="modal">취소하기</a>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
 $(document).ready(function() {
 	
 	let selectFiles = new Array();
 	
 	$("#file").on("change", function(e) {
-		selectFiles = [];
+		selectFiles = []; // 초기화
 		let files = e.target.files;
 		let filesArr = Array.prototype.slice.call(files);
 		console.log(files);
 		console.log(filesArr);
 		
-		filesArr.forEach(function(f) {
+		filesArr.forEach(function(f) { // 이미지파일 체크
 			if (!f.type.match("image.*")) {
 				alert ("이미지 파일만 업로드하세요.");
 				return;
@@ -86,8 +102,6 @@ $(document).ready(function() {
 			formData.append("images", selectFiles[i]);
 		}
 		console.log(formData);
-		//formData.append("fileList", selectFiles);
-		//formData.append("imageCount", selectFiles.length);
 		formData.append("name", name);
 		formData.append("brand", brand);
 		formData.append("price", price);
