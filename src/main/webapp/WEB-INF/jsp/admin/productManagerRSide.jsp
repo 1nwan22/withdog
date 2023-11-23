@@ -23,7 +23,7 @@
 		<div>
 				<div class="d-flex align-items-center">
 					<input type="text" id="nameSearch" class="form-control my-3" placeholder="제품명">
-					<input type="button" class="search-btn btn btn-success py-0" data-toggle="modal" data-target="#modal" data-product-id="" value="검색">
+					<input type="button" class="search-btn btn btn-success py-0" value="검색">
 				</div>
 				<div class="d-flex align-items-center">
 					<input type="text" id="brandSearch" class="form-control my-3" placeholder="브랜드">
@@ -45,33 +45,7 @@
 	</div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="modal">
-	<!-- modal-sm:작은 모달 modal-dialog-centered: 수직 기준 가운데 -->
-	<div class="modal-dialog modal-dialog-centered modal-sm">
-		<div class="modal-content text-center">
-			<div class="product-info py-3 border-bottom">
-				<div id="resultImg">이미지</div>
-				<div id="resultName">제품명</div>
-				<div id="resultBrand">브랜드</div>
-				<div id="resultPrice">가격</div>
-				<div id="resultCostPrice">원가</div>
-				<div id="resultStock">재고</div>
-				<div id="resultContent">제품설명</div>
-				<div id="resultStatus">제품상태</div>
-			</div>
-			<div class="py-3 border-bottom">
-				<a href="#none" id="editProduct">수정하기</a>
-			</div>
-			<div class="py-3 border-bottom">
-				<a href="#none" id="deleteProduct">삭제하기</a>
-			</div>
-			<div class="py-3">
-				<a href="#none" data-dismiss="modal">취소하기</a>
-			</div>
-		</div>
-	</div>
-</div>
+
 
 <script>
 $(document).ready(function() {
@@ -155,7 +129,7 @@ $(document).ready(function() {
 		
 			, success:function(data) {
 				if (data.code == 200) {
-					$("#resultName").text(data.product.name);
+					alert("검색 성공");
 				} else if (data.code == 500) {
 					alert(data.errorMessage);
 				}

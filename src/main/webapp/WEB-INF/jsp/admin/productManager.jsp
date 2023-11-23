@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="d-flex justify-content-between">
+
+	<div class="d-flex justify-content-center align-items-center p-4 col-6">
+		<div>이미지</div>
+	</div>
+	
 	<div class="d-flex justify-content-center align-items-center p-4 col-6">
 		<table class="table text-center">
 			<thead>
@@ -15,49 +20,35 @@
 					<th>재고</th>
 					<th>제품설명</th>
 					<th>제품상태</th>
+					<th>수정</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach items="${productList}" var="product">
 				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>${product.id}</td>
+					<td>이미지</td>
+					<td>${product.name}</td>
+					<td>${product.brand}</td>
+					<td>${product.price}</td>
+					<td>${product.costPrice}</td>
+					<td>${product.stock}</td>
+					<td>${product.content}</td>
+					<td>${product.status}</td>
+					<td>
+						<a href="#">수정</a>
+					</td>
+					<td>
+						<a href="#">삭제</a>
+					</td>
 				</tr>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>
 	
-	<div class="d-flex justify-content-center align-items-center p-4 col-6">
-		<div>
-				<div class="d-flex align-items-center">
-					<input type="text" id="nameSearch" class="form-control my-3" placeholder="제품명">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
-				</div>
-				<div class="d-flex align-items-center">
-					<input type="text" id="brandSearch" class="form-control my-3" placeholder="브랜드">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
-				</div>
-				<div class="d-flex align-items-center">
-					<input type="text" id="priceSearch" class="form-control my-3" placeholder="가격">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
-				</div>
-				<div class="d-flex align-items-center">
-					<input type="text" id="costPriceSearch" class="form-control my-3" placeholder="원가">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
-				</div>
-				<div class="d-flex align-items-center">
-					<input type="text" id="stockSearch" class="form-control my-3" placeholder="재고">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
-				</div>
-				<input type="button" id="editBtn" class="btn btn-warning form-control my-3" value="수정">
-				<input type="button" id="deleteBtn" class="btn btn-danger form-control my-3" value="삭제">
-		</div>
-	</div>
+	
 </div>
 
 <!-- Modal -->
@@ -65,8 +56,21 @@
 	<!-- modal-sm:작은 모달 modal-dialog-centered: 수직 기준 가운데 -->
 	<div class="modal-dialog modal-dialog-centered modal-sm">
 		<div class="modal-content text-center">
+			<div class="product-info py-3 border-bottom">
+				<div id="resultImg">이미지</div>
+				<div id="resultName">제품명</div>
+				<div id="resultBrand">브랜드</div>
+				<div id="resultPrice">가격</div>
+				<div id="resultCostPrice">원가</div>
+				<div id="resultStock">재고</div>
+				<div id="resultContent">제품설명</div>
+				<div id="resultStatus">제품상태</div>
+			</div>
 			<div class="py-3 border-bottom">
-				<a href="#none" id="deletePost">삭제하기</a>
+				<a href="#none" id="editProduct">수정하기</a>
+			</div>
+			<div class="py-3 border-bottom">
+				<a href="#none" id="deleteProduct">삭제하기</a>
 			</div>
 			<div class="py-3">
 				<a href="#none" data-dismiss="modal">취소하기</a>

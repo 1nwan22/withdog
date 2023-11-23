@@ -2,9 +2,15 @@ package com.withdog.product.bo;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.withdog.product.domain.Product;
 import com.withdog.product.entity.ProductEntity;
+import com.withdog.product.mapper.ProductMapper;
 import com.withdog.product.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -14,6 +20,16 @@ import lombok.RequiredArgsConstructor;
 public class ProductBO {
 
 	private final ProductRepository productRepository;
+	private final ProductMapper productMapper;
+	
+	public Product getProductById(int id) {
+		return productMapper.selectProductById(id);
+	}
+	
+	@Transactional
+	public Page<ProductEntity> getProductList(Pageable pageable) {
+		return productRepository.findAll(pageable);
+	}
 	
 	public Integer addProduct(String name, String brand, int price, int costPrice, int stock, String content, String status) {
 		ProductEntity product = productRepository.save(

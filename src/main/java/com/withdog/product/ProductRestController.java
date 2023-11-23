@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.withdog.product.bo.ProductBO;
 import com.withdog.product.bo.ProductImageBO;
@@ -47,13 +48,14 @@ public class ProductRestController {
 	}
 	
 	@RequestMapping("/get-product")
-	public Map<String, Object> getProduct(
+	public String getProduct(
 			@RequestParam("targetProductKey") String key,
-			@RequestParam("targetProductValue") Object value) {
-		Map<String, Object> result = new HashMap<>();
-		result.put("code", 200);
-		result.put("result", "success");
-		return result;
+			@RequestParam("targetProductValue") Object value,
+			RedirectAttributes redirectAttributes) {
+		List<ProductEntity> productList = productBO.getProduct(key, value);
+		redirectAttributes.addFlashAttribute("productList", productList);
+
+		return "redirect:/admin/product-manager";
 	}
 	
 	@PutMapping("/edit-product")

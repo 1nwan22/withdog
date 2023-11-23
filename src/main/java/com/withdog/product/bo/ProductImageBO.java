@@ -22,18 +22,18 @@ public class ProductImageBO {
 	
 	public Integer addProductImage(int productId, List<MultipartFile> images) {
 		String imagePath = null;
-		
+		ProductImageEntity productImage = null;
 		if (!ObjectUtils.isEmpty(images)) {
 			for (MultipartFile image : images) {
 				imagePath = fms.saveProductFile(productId, image);
+				
+				productImage = productImageRepository.save(
+						ProductImageEntity.builder()
+						.productId(productId)
+						.ImagePath(imagePath)
+						.build());
 			}
 		}
-		
-		ProductImageEntity productImage = productImageRepository.save(
-				ProductImageEntity.builder()
-				.productId(productId)
-				.ImagePath(imagePath)
-				.build());
 				
 		return productImage == null ? null : productImage.getId();
 	}

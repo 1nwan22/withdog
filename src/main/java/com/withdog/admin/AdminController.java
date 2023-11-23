@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.withdog.product.bo.ProductBO;
 import com.withdog.product.entity.ProductEntity;
@@ -32,11 +33,12 @@ public class AdminController {
 	}
 	
 	// http://localhost/admin/product-manager
-	@GetMapping("/product-manager")
-	public String productManager(Model model, HttpSession session) {
+	@RequestMapping("/product-manager")
+	public String productManager(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 	
-		//List<ProductEntity> productList = productBO.getProduct(key, value);
-		
+		List<ProductEntity> productList = (List<ProductEntity>) redirectAttributes.getAttribute("productList");
+
+		model.addAttribute("productList", productList);
 		model.addAttribute("viewName", "/admin/productManager");
 		model.addAttribute("viewNameL", "/include/leftSide");
 		model.addAttribute("viewNameR", "/admin/productManagerRSide");
