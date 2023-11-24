@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TimelineController {
 	
 	// http://localhost/timeline/timeline-view
-	// http://lcoalhost
+	// http://localhost
 	@GetMapping("")
 	public String timelineView(Model model) {
 		model.addAttribute("viewName", "/timeline/home");

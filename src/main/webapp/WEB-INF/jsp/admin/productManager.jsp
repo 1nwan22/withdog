@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="d-flex justify-content-between">
 
-	<div class="d-flex justify-content-center align-items-center p-4 col-6">
+	<div class="d-flex justify-content-center align-items-center p-4 col-3">
 		<div>이미지</div>
 	</div>
 	
-	<div class="d-flex justify-content-center align-items-center p-4 col-6">
+	<div class="d-flex justify-content-center align-items-center p-4 col-9">
 		<table class="table text-center">
 			<thead>
 				<tr>
@@ -25,25 +25,25 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach items="${productList}" var="product">
-				<tr>
-					<td>${product.id}</td>
-					<td>이미지</td>
-					<td>${product.name}</td>
-					<td>${product.brand}</td>
-					<td>${product.price}</td>
-					<td>${product.costPrice}</td>
-					<td>${product.stock}</td>
-					<td>${product.content}</td>
-					<td>${product.status}</td>
-					<td>
-						<a href="#">수정</a>
-					</td>
-					<td>
-						<a href="#">삭제</a>
-					</td>
-				</tr>
-			</c:forEach>
+			    <c:forEach items="${products.content}" var="product">
+			        <tr>
+			            <td>${product.id}</td>
+			            <td>이미지</td>
+			            <td>${product.name}</td>
+			            <td>${product.brand}</td>
+			            <td>${product.price}</td>
+			            <td>${product.costPrice}</td>
+			            <td>${product.stock}</td>
+			            <td>${product.content}</td>
+			            <td>${product.status}</td>
+			            <td>
+			                <a href="#">수정</a>
+			            </td>
+			            <td>
+			                <a href="#">삭제</a>
+			            </td>
+			        </tr>
+			    </c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -82,72 +82,8 @@
 <script>
 $(document).ready(function() {
 	
-	let selectFiles = new Array();
 	
-	$("#file").on("change", function(e) {
-		selectFiles = []; // 초기화
-		let files = e.target.files;
-		let filesArr = Array.prototype.slice.call(files);
-		console.log(files);
-		console.log(filesArr);
-		
-		filesArr.forEach(function(f) { // 이미지파일 체크
-			if (!f.type.match("image.*")) {
-				alert ("이미지 파일만 업로드하세요.");
-				return;
-			}
-			
-			selectFiles.push(f);
-		});
-		
-	});
 	
-	$("#saveBtn").on("click", function() {
-		console.log(selectFiles);
-		let formData = new FormData();
-		
-		let name = $("#name").val().trim();
-		let brand = $("#brand").val().trim();
-		let price = $("#price").val().trim();
-		let costPrice = $("#costPrice").val().trim();
-		let stock = $("#stock").val().trim();
-		let content = $("#content").val().trim();
-		let status = $("#status").val().trim();
-		
-		for (let i = 0; i < selectFiles.length; i++) {
-			console.log(selectFiles[i]);
-			formData.append("images", selectFiles[i]);
-		}
-		console.log(formData);
-		formData.append("name", name);
-		formData.append("brand", brand);
-		formData.append("price", price);
-		formData.append("costPrice", costPrice);
-		formData.append("stock", stock);
-		formData.append("content", content);
-		formData.append("status", status);
-		
-		$.ajax({
-			type:"POST"
-			, url:"/product/add-product"
-			, data:formData
-			, enctype:"multipart/form-data"
-			, processData:false
-			, contentType:false
-		
-			, success:function(data) {
-				if (data.result == "success") {
-					alert("저장되었습니다.");
-					location.reload(true);
-				} else {
-					alert("상품 등록 실패");
-				}
-			}
-			, error:function(request, status, error) {
-				alert("상품 등록 에러")
-			}
-		});
-	});
 	
 	
 });

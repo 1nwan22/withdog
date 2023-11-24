@@ -28,7 +28,7 @@ public class ProductController {
 	public String productListView(
 			Model model,
 			@PageableDefault(size = 12, sort = "id" ,direction = Sort.Direction.DESC) Pageable pageable) {
-	
+		log.info("$$$$$$ info pageable = {}", pageable);
 		model.addAttribute("productList", productBO.getProductList(pageable));
 		model.addAttribute("viewName", "/product/productList");
 		model.addAttribute("viewNameL", "/include/leftSide");

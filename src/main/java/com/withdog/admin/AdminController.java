@@ -1,17 +1,16 @@
 package com.withdog.admin;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.withdog.product.bo.ProductBO;
-import com.withdog.product.entity.ProductEntity;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,11 +33,8 @@ public class AdminController {
 	
 	// http://localhost/admin/product-manager
 	@RequestMapping("/product-manager")
-	public String productManager(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
-	
-		List<ProductEntity> productList = (List<ProductEntity>) redirectAttributes.getAttribute("productList");
-
-		model.addAttribute("productList", productList);
+	public String productManager(Model model, @PageableDefault(size = 12, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		model.addAttribute("products", productBO.getProductList(pageable));
 		model.addAttribute("viewName", "/admin/productManager");
 		model.addAttribute("viewNameL", "/include/leftSide");
 		model.addAttribute("viewNameR", "/admin/productManagerRSide");

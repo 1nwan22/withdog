@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -48,14 +49,20 @@ public class ProductRestController {
 	}
 	
 	@RequestMapping("/get-product")
-	public String getProduct(
+	public Map<String, Object> getProduct(
 			@RequestParam("targetProductKey") String key,
 			@RequestParam("targetProductValue") Object value,
 			RedirectAttributes redirectAttributes) {
+		Map<String, Object> result = new HashMap<>();
 		List<ProductEntity> productList = productBO.getProduct(key, value);
-		redirectAttributes.addFlashAttribute("productList", productList);
+		if (ObjectUtils.isEmpty(productList)) {
+			result.put("code", 500);
+			result.put("errorMessage", "상품이 존재하지 않음");
+		}
+		result.put("code", 200);
+		result.put("productList", productList);
 
-		return "redirect:/admin/product-manager";
+		return result;
 	}
 	
 	@PutMapping("/edit-product")

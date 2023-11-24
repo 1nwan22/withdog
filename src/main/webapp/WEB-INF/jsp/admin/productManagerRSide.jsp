@@ -130,6 +130,18 @@ $(document).ready(function() {
 			, success:function(data) {
 				if (data.code == 200) {
 					alert("검색 성공");
+					
+					$.ajax({
+						type:"POST"
+						, url:"/admin/product-manager"
+						, data:JSON.stringify(data.productList)
+					
+						, success:function(response) {
+							if (response.code == 200) {
+								
+							}
+						}
+					});
 				} else if (data.code == 500) {
 					alert(data.errorMessage);
 				}
