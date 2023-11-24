@@ -39,7 +39,7 @@ public class ProductController {
 	@GetMapping("/{productId}")
 	public String productView(Model model, 
 			@PathVariable int productId) {
-		
+		log.info("$$$$$$ info productId = {}", productId);
 		Product product = productBO.getProductById(productId);
 		model.addAttribute("product", product);
 		model.addAttribute("viewName", "/product/product");

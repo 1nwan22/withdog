@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="productListWrap" class="d-flex justify between">
-	<c:forEach items="${productList}" var="product">
-		<table>
+	<c:forEach items="${productList.content}" var="product">
+		<table class="table text-center">
 			<thead>
 				<tr>
 					<th>이름</th>
@@ -19,6 +19,5 @@
 				</tr>
 			</tbody>
 		</table>
-		
 	</c:forEach>
 </div>

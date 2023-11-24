@@ -1,45 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div>
+	<!-- 제품 등록 -->
 	<div class="d-flex justify-content-center align-items-center">
 		<div>
-				<input type="text" id="name" class="form-control my-3" placeholder="제품명">
-				<input type="text" id="brand" class="form-control my-3" placeholder="브랜드">
-				<input type="text" id="price" class="form-control my-3" placeholder="가격">
-				<input type="text" id="costPrice" class="form-control my-3" placeholder="원가">
-				<input type="text" id="stock" class="form-control my-3" placeholder="재고">
-				<input type="text" id="content" class="form-control my-3" placeholder="제품설명">
-				<input type="text" id="status" class="form-control my-3" placeholder="제품상태">
-				<input type="file" id="file" name="file" multiple accept="image/*" class="form-cnotrol my-3">
-				<div>
-					<img>
-				</div>
-				<div id="fileName" class=""></div>
-				<input type="button" id="saveBtn" class="btn btn-info form-control my-3" value="등록">
+			<input type="text" id="name" class="form-control my-3" placeholder="제품명">
+			<input type="text" id="brand" class="form-control my-3" placeholder="브랜드">
+			<input type="text" id="price" class="form-control my-3" placeholder="가격">
+			<input type="text" id="costPrice" class="form-control my-3" placeholder="원가">
+			<input type="text" id="stock" class="form-control my-3" placeholder="재고">
+			<input type="text" id="content" class="form-control my-3" placeholder="제품설명">
+			<input type="text" id="status" class="form-control my-3" placeholder="제품상태">
+			<input type="file" id="file" name="file" multiple accept="image/*" class="form-cnotrol my-3">
+			<!-- 이미지 미리보기 -->
+			<div>
+				<img>
+			</div>
+			<div id="fileName" class=""></div>
+			<input type="button" id="saveBtn" class="btn btn-info form-control my-3" value="등록">
 		</div>
 	</div>
+	
 	<hr>
+	
+	<!-- 제품 검색 -->
 	<div class="d-flex justify-content-center align-items-center">
 		<div>
 				<div class="d-flex align-items-center">
 					<input type="text" id="nameSearch" class="form-control my-3" placeholder="제품명">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
+					<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
 				</div>
 				<div class="d-flex align-items-center">
 					<input type="text" id="brandSearch" class="form-control my-3" placeholder="브랜드">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
+					<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
 				</div>
 				<div class="d-flex align-items-center">
 					<input type="text" id="priceSearch" class="form-control my-3" placeholder="가격">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
+					<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
 				</div>
 				<div class="d-flex align-items-center">
 					<input type="text" id="costPriceSearch" class="form-control my-3" placeholder="원가">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
+					<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
 				</div>
 				<div class="d-flex align-items-center">
 					<input type="text" id="stockSearch" class="form-control my-3" placeholder="재고">
-					<input type="button" class="search-btn btn btn-success py-0" value="검색">
+					<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
 				</div>
 		</div>
 	</div>
@@ -151,16 +156,6 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
-	$("#editProduct").on("click", function() {
-		alert("edit");
-	});
-	
-	$("#deleteProduct").on("click", function() {
-		alert("del");
-	});
-	
-	
-	
+		
 });
 </script>

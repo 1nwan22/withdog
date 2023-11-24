@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,9 @@ import com.withdog.product.bo.ProductImageBO;
 import com.withdog.product.entity.ProductEntity;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/product")
 @RestController
@@ -74,10 +78,18 @@ public class ProductRestController {
 	}
 	
 	@DeleteMapping("/delete-product")
-	public Map<String, Object> deleteProduct() {
+	public Map<String, Object> deleteProduct(@RequestParam("productId") Integer productId) {
+		
 		Map<String, Object> result = new HashMap<>();
+		if (ObjectUtils.isEmpty(productId)) {
+			result.put("code", 500);
+			result.put("errorMessage", "삭제할 상품 없음");
+		}
+		
+		productBO.deleteProduct(productId);
 		result.put("code", 200);
 		result.put("result", "success");
 		return result;
 	}
+	
 }

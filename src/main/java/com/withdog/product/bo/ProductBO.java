@@ -31,6 +31,7 @@ public class ProductBO {
 		return productRepository.findAll(pageable);
 	}
 	
+	@Transactional
 	public Integer addProduct(String name, String brand, int price, int costPrice, int stock, String content, String status) {
 		ProductEntity product = productRepository.save(
 				ProductEntity.builder()
@@ -60,5 +61,9 @@ public class ProductBO {
 			return productRepository.findByStock((int) value);
 		}
 		return null;
+	}
+	
+	public void deleteProduct(int id) {
+		productRepository.deleteById(id);
 	}
 }

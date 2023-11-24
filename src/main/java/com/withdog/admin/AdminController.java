@@ -37,7 +37,7 @@ public class AdminController {
 		model.addAttribute("products", productBO.getProductList(pageable));
 		model.addAttribute("viewName", "/admin/productManager");
 		model.addAttribute("viewNameL", "/include/leftSide");
-		model.addAttribute("viewNameR", "/admin/productManagerRSide");
+		model.addAttribute("viewNameR", "/admin/rightSideProductManager");
 		return "template/layout";
 	}
 	

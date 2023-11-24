@@ -16,7 +16,10 @@ body {background-color: aqua;}
 #emailCehckBtn {width: 100px; font-size: 12px; height: 30px;}
 #userIdCheckBtn {width: 100px; font-size: 12px; height: 30px;}
 .check-text {font-size: 12px;}
-.search-btn {height: 30px;}
+.search-product-btn {height: 30px;}
+.edit-product-btn {height: 30px;}
+.delete-product-btn {height: 30px;}
+
 .product-box {width: 360px; height: 460px;}
 footer {height: 100px; background-color: blanchedalmond;}
 
