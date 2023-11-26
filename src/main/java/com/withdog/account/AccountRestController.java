@@ -86,6 +86,8 @@ public class AccountRestController {
 			@RequestParam("password") String password,
 			HttpSession session) {
 		session.setAttribute("email", email);
+		AccountEntity account = accountBO.getAccountEntityByEmail(email);
+		session.setAttribute("adminYn", account.getAdminYn());
 		Map<String, Object> result = new HashMap<>();
 		return result;
 	}
@@ -97,6 +99,7 @@ public class AccountRestController {
 		if (adminYn.equals("n")) {
 			result.put("code", 500);
 			result.put("errorMessage", "관리자 승인 실패");
+			return result;
 		}
 		result.put("code", 200);
 		result.put("result", "success");

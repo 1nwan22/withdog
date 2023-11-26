@@ -2,15 +2,13 @@ package com.withdog.product.bo;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.withdog.product.domain.Product;
 import com.withdog.product.entity.ProductEntity;
-import com.withdog.product.mapper.ProductMapper;
 import com.withdog.product.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -20,10 +18,10 @@ import lombok.RequiredArgsConstructor;
 public class ProductBO {
 
 	private final ProductRepository productRepository;
-	private final ProductMapper productMapper;
+	private final ProductImageBO productImageBO;
 	
-	public Product getProductById(int id) {
-		return productMapper.selectProductById(id);
+	public ProductEntity getProductById(int id) {
+		return productRepository.findById(id).orElse(null);
 	}
 	
 	@Transactional
@@ -32,7 +30,7 @@ public class ProductBO {
 	}
 	
 	@Transactional
-	public Integer addProduct(String name, String brand, int price, int costPrice, int stock, String content, String status) {
+	public Integer addProduct(String name, String brand, int price, int costPrice, int stock, String content, String status, List<MultipartFile> imageList) {
 		ProductEntity product = productRepository.save(
 				ProductEntity.builder()
 				.name(name)
@@ -43,6 +41,8 @@ public class ProductBO {
 				.content(content)
 				.status(status)
 				.build());
+		
+		productImageBO.addProductImage(product.getId(), imageList);
 		
 		return product == null ? null : product.getId();
 				
@@ -63,6 +63,7 @@ public class ProductBO {
 		return null;
 	}
 	
+	@Transactional
 	public void deleteProduct(int id) {
 		productRepository.deleteById(id);
 	}

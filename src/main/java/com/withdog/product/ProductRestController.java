@@ -6,8 +6,6 @@ import java.util.Map;
 
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,11 +40,16 @@ public class ProductRestController {
 			@RequestParam("stock") int stock,
 			@RequestParam("content") String content,
 			@RequestParam("status") String status,
-			@RequestPart("images") List<MultipartFile> images) {
+			@RequestPart("imageList") List<MultipartFile> imageList) {
 		
-		Integer productId = (Integer) productBO.addProduct(name, brand, price, costPrice, stock, brand, status);
-		productImageBO.addProductImage(productId, images);
+		Integer productId = (Integer) productBO.addProduct(name, brand, price, costPrice, stock, brand, status, imageList);
+		log.info("$$$$$$$$$$ productId = {}", productId);
 		Map<String, Object> result = new HashMap<>();
+		if (productId == null) {
+			result.put("code", 500);
+			result.put("errorMessage", "상품 등록 실패");
+			return result;
+		}
 		result.put("code", 200);
 		result.put("result", "success");
 		return result;
@@ -66,6 +69,16 @@ public class ProductRestController {
 		result.put("code", 200);
 		result.put("productList", productList);
 
+		return result;
+	}
+	
+	@PostMapping("/get-product-image")
+	public Map<String, Object> getThumnail(@RequestParam("productId") int productId) {
+		String productImage = productImageBO.getImageByProductId(productId);
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "success");
+		result.put("productImage", productImage);
 		return result;
 	}
 	

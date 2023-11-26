@@ -11,12 +11,8 @@
 			<input type="text" id="stock" class="form-control my-3" placeholder="재고">
 			<input type="text" id="content" class="form-control my-3" placeholder="제품설명">
 			<input type="text" id="status" class="form-control my-3" placeholder="제품상태">
-			<input type="file" id="file" name="file" multiple accept="image/*" class="form-cnotrol my-3">
-			<!-- 이미지 미리보기 -->
-			<div>
-				<img>
-			</div>
-			<div id="fileName" class=""></div>
+			<input type="file" id="file" name="file" multiple accept="image/*" class="form-cnotrol mt-3">
+			<div id="fileName"></div>
 			<input type="button" id="saveBtn" class="btn btn-info form-control my-3" value="등록">
 		</div>
 	</div>
@@ -56,13 +52,27 @@
 $(document).ready(function() {
 	
 	let selectFiles = new Array();
+	let selectFilesName = new Array();
 	
 	$("#file").on("change", function(e) {
 		selectFiles = []; // 초기화
+		selectFilesName = [];
+		$("#fileName").empty(); // 파일명비우기
 		let files = e.target.files;
 		let filesArr = Array.prototype.slice.call(files);
 		console.log(files);
 		console.log(filesArr);
+		for (let i = 0; i < filesArr.length; i++) {
+			console.log(files[i].name);
+			selectFilesName.push(files[i].name);
+			$("#fileName").prepend("<div>" + files[i].name + "</div>");
+		}
+		if (filesArr.length < 2) {
+			$("#fileName").empty();
+		}
+		
+		
+		
 		
 		filesArr.forEach(function(f) { // 이미지파일 체크
 			if (!f.type.match("image.*")) {
@@ -89,7 +99,7 @@ $(document).ready(function() {
 		
 		for (let i = 0; i < selectFiles.length; i++) {
 			console.log(selectFiles[i]);
-			formData.append("images", selectFiles[i]);
+			formData.append("imageList", selectFiles[i]);
 		}
 		console.log(formData);
 		formData.append("name", name);

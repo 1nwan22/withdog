@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,20 +30,24 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		
 		// 로그인 여부
 		HttpSession session = request.getSession();
-		Integer userId = (Integer) session.getAttribute("userId");
-		String adminAccount = (String) session.getAttribute("adminAccount");
+//		Integer userId = (Integer) session.getAttribute("userId");
+//		Boolean adminAccount = false;
+//		if (((String) session.getAttribute("adminYn")).equals("y")) {
+//			adminAccount = true;
+//		}
+		
 		
 		// 비로그인 && /post => 로그인 페이지로 이동, 컨트롤러 수행 방지
-		if (userId == null && uri.startsWith("/post")) {
-			response.sendRedirect("/user/sign-in-view");
-			return false; // 컨트롤러 수행 안함(원래 요청에 대해서)
-		}
+//		if (userId == null && uri.startsWith("/post")) {
+//			response.sendRedirect("/user/sign-in-view");
+//			return false; // 컨트롤러 수행 안함(원래 요청에 대해서)
+//		}
 		
 		// 로그인 && /user => 글 목록 페이지 이동, 컨트롤러 수행 방지
-		if (userId != null && uri.startsWith("/user")) {
-			response.sendRedirect("/post/post-list-view");
-			return false;
-		}
+//		if (userId != null && uri.startsWith("/user")) {
+//			response.sendRedirect("/post/post-list-view");
+//			return false;
+//		}
 		
 //		if (ObjectUtils.isEmpty(adminAccount) && uri.startsWith("/admin")) {
 //			response.sendRedirect("/account/sign-in-view");
@@ -57,6 +61,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 //			}
 //		}
 		
+		
 		return true; // 컨트롤러 수행함
 	}
 	
@@ -69,6 +74,18 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		
 		// view 객체가 mav로 존재한다는건 아직 jsp가 html로 변환되기 전이다.
 		logger.info("[########] postHandle");
+		HttpSession session = request.getSession();
+		String adminYn = (String) session.getAttribute("adminYn");
+		
+		if (mav != null && StringUtils.hasText(adminYn) && adminYn.equals("y")) {
+	        mav.addObject("viewNameL", "/admin/leftSideAdmin");
+	    }
+		if (mav != null && StringUtils.hasText(adminYn) && adminYn.equals("n")) {
+	        mav.addObject("viewNameL", "/account/leftSideAccount");
+	    }
+		if (mav != null && !StringUtils.hasText(adminYn)) {
+	        mav.addObject("viewNameL", "/include/leftSide");
+	    }
 		
 	}
 	

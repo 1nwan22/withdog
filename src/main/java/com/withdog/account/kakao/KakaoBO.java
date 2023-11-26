@@ -1,17 +1,16 @@
 package com.withdog.account.kakao;
 
-import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.withdog.account.bo.AccountBO;
-import com.withdog.account.entity.AccountEntity;
 
 import lombok.RequiredArgsConstructor;
 

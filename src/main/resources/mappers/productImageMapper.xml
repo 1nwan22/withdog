@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.withdog.product.mapper.ProductImageMapper">
+    <insert id="insertProductImage" parameterType="map">
+        INSERT INTO `product_image`
+        (
+            `productId`,
+            `imagePath`,
+            `createdAt`
+        )
+        VALUES
+        <foreach collection="imagePathList" item="imagePath" separator=",">
+            (#{productId}, #{imagePath}, NOW())
+        </foreach>
+    </insert>
+    
+    <select id="selectImageByProductId" parameterType="int" resultType="String">
+    	SELECT
+    		`imagePath`
+    	FROM
+    		`product_image`
+    	WHERE
+    		`productId` = #{productId}
+    	LIMIT 1
+    
+    </select>
+    
+</mapper>

@@ -10,10 +10,10 @@ public class TimelineController {
 	
 	// http://localhost/timeline/timeline-view
 	// http://localhost
-	@GetMapping("")
+	@GetMapping("/")
 	public String timelineView(Model model) {
 		model.addAttribute("viewName", "/timeline/home");
-		model.addAttribute("viewNameL", "/include/leftSide");
+//		model.addAttribute("viewNameL", "/include/leftSide");
 		model.addAttribute("viewNameR", "/include/rightSide");
 		return "template/layout";
 	}

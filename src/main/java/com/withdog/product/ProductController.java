@@ -1,5 +1,6 @@
 package com.withdog.product;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -9,8 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.withdog.common.Paging;
 import com.withdog.product.bo.ProductBO;
-import com.withdog.product.domain.Product;
+import com.withdog.product.entity.ProductEntity;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductController {
 	
 	private final ProductBO productBO;
+	
+	private final Paging paging;
 
 	// http://localhost/product/list-view
 	@GetMapping("/list-view")
@@ -29,9 +33,12 @@ public class ProductController {
 			Model model,
 			@PageableDefault(size = 12, sort = "id" ,direction = Sort.Direction.DESC) Pageable pageable) {
 		log.info("$$$$$$ info pageable = {}", pageable);
-		model.addAttribute("productList", productBO.getProductList(pageable));
+		Page<ProductEntity> productList = productBO.getProductList(pageable);
+		int currentPage = productList.getPageable().getPageNumber();
+		int totalPages = productList.getTotalPages();
+		model.addAttribute("minBundlePage", paging.getMinBundlePage(currentPage));
+		model.addAttribute("maxBundlePage", paging.getMaxBundlePage(currentPage, totalPages));
 		model.addAttribute("viewName", "/product/productList");
-		model.addAttribute("viewNameL", "/include/leftSide");
 		model.addAttribute("viewNameR", "/include/rightSide");
 		return "template/layout";
 	}
@@ -40,10 +47,9 @@ public class ProductController {
 	public String productView(Model model, 
 			@PathVariable int productId) {
 		log.info("$$$$$$ info productId = {}", productId);
-		Product product = productBO.getProductById(productId);
+		ProductEntity product = productBO.getProductById(productId);
 		model.addAttribute("product", product);
 		model.addAttribute("viewName", "/product/product");
-		model.addAttribute("viewNameL", "/include/leftSide");
 		model.addAttribute("viewNameR", "/include/rightSide");
 		return "template/layout";
 	}

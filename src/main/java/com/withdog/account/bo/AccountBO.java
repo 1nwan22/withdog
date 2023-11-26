@@ -1,11 +1,16 @@
 package com.withdog.account.bo;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.withdog.account.entity.AccountEntity;
 import com.withdog.account.repository.AccountRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class AccountBO {
 
@@ -27,6 +32,8 @@ public class AccountBO {
 				.userId(userId)
 				.userName(userName)
 				.password(password)
+				.vetYn("n")
+				.adminYn("n")
 				.build());
 		
 		// entity는 넣은 것을 바로 꺼내올 수 있다. 그리고 엔티티 전부보다는 id만 넘기는게 좋다
@@ -37,15 +44,16 @@ public class AccountBO {
 		
 	}
 	
-	public String updateAccountAdminYnByEmail(String email, String adminYn) {
+	@Transactional
+	public String updateAccountAdminYnByEmail(String email, String yN) {
 		
 		AccountEntity account = accountRepository.findByEmail(email);
 		if (account != null) {
-			account.toBuilder() // 기존 값 유지
-			.adminYn(adminYn)
+			account = account.toBuilder() // 복사본 생성
+			.adminYn(yN)
 			.build();
 			
-			account = accountRepository.save(account);
+			account = accountRepository.save(account); // 수정된 내용 저장
 		}
 		return account.getAdminYn();
 		

@@ -19,7 +19,9 @@ body {background-color: aqua;}
 .search-product-btn {height: 30px;}
 .edit-product-btn {height: 30px;}
 .delete-product-btn {height: 30px;}
-
+.admin-permission-btn {height: 50px; font-size: 13px;}
+#productImage {height: 400px; overflow: hidden; margin-top: 100px;}
+#productImage img {width: 100%; height: auto;}
 .product-box {width: 360px; height: 460px;}
 footer {height: 100px; background-color: blanchedalmond;}
 

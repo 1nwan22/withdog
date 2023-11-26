@@ -42,7 +42,7 @@
 		 	
 		 	 , success:function(data) {
 		 		 alert("로그인 성공");
-		 		 location.href = "/admin/dash-board";
+		 		 location.href = "/";
 		 	 }
 		 	 , error:function(data) {
 		 		 alert("로그인 실패");
