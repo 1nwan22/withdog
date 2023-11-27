@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-between">
 
 	<!-- 제품 이미지 영역 시작 -->
-	<div class="d-flex justify-content-center align-items-center p-4 col-3">
+	<div class="d-flex justify-content-center align-items-center p-3 col-4">
 		<div id="productImage">
 			
 		</div>
@@ -12,7 +12,7 @@
 	<!-- 제품 이미지 영역 끝 -->
 	
 	<!-- 제품 목록 시작 -->
-	<div class="d-flex justify-content-center align-items-center p-4 col-9">
+	<div class="d-flex justify-content-center align-items-center p-2 col-8">
 		<div>
 			<table class="table text-center table-hover">
 				<thead>
@@ -91,16 +91,15 @@
 			            </c:otherwise>
 			        </c:choose>
 			
-			        <c:forEach begin="${minBundlePage}" end="${maxBundlePage}" var="currentPage">
-			            <c:choose>
-			                <c:when test="${productList.number + 1 == currentPage}">
-			                    <li class="page-item active"><a class="page-link" href="/admin/product-manager/?page=${currentPage - 1}">${currentPage}</a></li>
-			                </c:when>
-			                <c:otherwise>
-			                    <li class="page-item"><a class="page-link" href="/admin/product-manager/?page=${currentPage - 1}">${currentPage}</a></li>
-			                </c:otherwise>
-			            </c:choose>
-			        </c:forEach>
+			       <c:forEach begin="${minBundlePage}" end="${maxBundlePage}" var="currentPage">
+					    <c:url var="pageUrl" value="/admin/product-manager/">
+					        <c:param name="page" value="${currentPage - 1}"/>
+					    </c:url>
+					
+					    <li class="page-item ${productList.number + 1 == currentPage ? 'active' : ''}">
+					        <a class="page-link" href="${pageUrl}">${currentPage}</a>
+					    </li>
+					</c:forEach>
 			
 			        <c:choose>
 			            <c:when test="${productList.last}"></c:when>

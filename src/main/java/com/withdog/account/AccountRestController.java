@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.withdog.account.bo.AccountBO;
 import com.withdog.account.entity.AccountEntity;
+import com.withdog.account.kakao.KakaoBO;
 import com.withdog.common.EncryptUtils;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class AccountRestController {
 
 	private final AccountBO accountBO;
+	private final KakaoBO kakaoBO;
 	
 	@RequestMapping("/is-duplicated-email")
 	public Map<String, Object> isDuplicatedEmail(@RequestParam("email") String email) {
@@ -90,6 +94,14 @@ public class AccountRestController {
 		session.setAttribute("adminYn", account.getAdminYn());
 		Map<String, Object> result = new HashMap<>();
 		return result;
+	}
+	
+	
+	@GetMapping("/kakao/oauth")
+	public String kakaoOauth(@RequestParam("code") String code, Model model) {
+		
+		kakaoBO.getUser(kakaoBO.getAccessToken(code).getAccess_token());
+		return "template/layout";
 	}
 	
 	@PutMapping("/admin-permission")

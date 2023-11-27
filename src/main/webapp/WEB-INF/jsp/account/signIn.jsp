@@ -19,8 +19,11 @@
 <script>
  $(document).ready(function () {
 	 $("#emailLogInBtn").on("click", function() {
-		 $("#email").removeClass("d-none");
-		 $("#password").removeClass("d-none");
+		 if ($("#email").hasClass("d-none") && $("#password").hasClass("d-none")) {
+			 $("#email").removeClass("d-none");
+			 $("#password").removeClass("d-none");
+			 return;
+		 }
 		 
 		 let email = $("#email").val().trim();
 		 let password = $("#password").val();

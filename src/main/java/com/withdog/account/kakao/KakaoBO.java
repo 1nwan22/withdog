@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -39,16 +40,16 @@ public class KakaoBO {
 		params.add("client_secret", CLIENT_SECRET);
 		
 		KakaoToken kakaoToken = webClient.post()
-		.uri(TOKEN_URL)
-		.body(BodyInserters.fromFormData(params))
-		.header("Content-type", "application/x-www-form-urlencoded;charset=utf-8")
-		.retrieve()
-		.bodyToMono(KakaoToken.class)
-		.onErrorResume(e -> {
-	        logger.error("Error:###### [카카오 토큰 획득 실패] ", e);
-	        return null;
-	    })
-		.block();
+				.uri(TOKEN_URL)
+				.body(BodyInserters.fromFormData(params))
+				.header("Content-type", "application/x-www-form-urlencoded;charset=utf-8")
+				.retrieve()
+				.bodyToMono(KakaoToken.class)
+				.onErrorResume(e -> {
+					logger.error("Error:###### [카카오 토큰 획득 실패] ", e);
+					return null;
+				})
+				.block();
 		
 		return kakaoToken;
 	}
@@ -70,12 +71,19 @@ public class KakaoBO {
 				
 	}
 	
+
+	
 	@Transactional
-	public void addAccount(String token) {
-		String email = getUser(token).getEmail();
-		String userName = getUser(token).getName();
-		accountBO.getAccountEntityByEmail(email);
+	public Integer addAccount(String token) {
+		String email = getUser(token).getKakaoAccount().getEmail();
+		String userId = email.split("@")[0] + System.currentTimeMillis();
+		logger.info("$$$$$$$$$$$$$$ email = {}", email);
+		logger.info("$$$$$$$$$$$$$$ userId = {}", userId);
+		if (ObjectUtils.isEmpty(accountBO.getAccountEntityByEmail(email))) {
+			return accountBO.addAccountOauth(email, userId);
+		}
 		
+		return null;
 	}
 	
 }
