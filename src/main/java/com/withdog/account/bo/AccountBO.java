@@ -45,16 +45,17 @@ public class AccountBO {
 	}
 	
 	@Transactional
-	public Integer addAccountOauth(String email, String userId) {
+	public AccountEntity addAccountKakaoOauth(String email, String userId) {
 		AccountEntity accountEntity = accountRepository.save(
 				AccountEntity.builder()
 				.email(email)
 				.userId(userId)
 				.vetYn("n")
 				.adminYn("n")
+				.type("kakao")
 				.build());
-		log.info("$$$$$$$$$$$$ accountEntity.getId() = {}", accountEntity.getId());
-		return accountEntity == null ? null : accountEntity.getId();
+		log.info("$$$$$$$$$$$$ accountEntity = {}", accountEntity);
+		return accountEntity == null ? null : accountEntity;
 	}
 	
 	@Transactional

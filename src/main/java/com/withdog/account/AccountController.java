@@ -4,14 +4,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.withdog.account.kakao.KakaoBO;
-import com.withdog.account.kakao.KakaoToken;
-import com.withdog.account.kakao.KakaoUser;
 
 import lombok.RequiredArgsConstructor;
 
@@ -52,19 +48,7 @@ public class AccountController {
 		return "redirect:/account/sign-in-view";
 	}
 	
-	@GetMapping("/kakao/oauth")
-	public String kakaoOauth(@RequestParam("code") String code, HttpSession session) {
-		KakaoToken kakaoToken  = kakaoBO.getAccessTokenResponse(code);
-		if (ObjectUtils.isEmpty(kakaoToken)) {
-			kakaoToken = kakaoBO.getRefreshTokenResponse(kakaoToken.getRefreshToken());
-		}
-		KakaoUser kakaoUser = kakaoBO.getUser(kakaoToken.getAccessToken());
-		
-		kakaoBO.addAccount(kakaoUser);
-		
-		
-		return "redirect:/";
-	}
+
 
 	
 

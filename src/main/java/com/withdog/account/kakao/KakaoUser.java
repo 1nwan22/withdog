@@ -1,36 +1,34 @@
 package com.withdog.account.kakao;
 
-import javax.persistence.Column;
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Data
+@Component
 public class KakaoUser {
 
 	private Long id;
-    private KakaoAccount kakaoAccount;
-    
+	private KakaoAccount kakao_account;
+	
     @Data
     public class KakaoAccount {
     	
-    	@Column(name="profileNicknameNeedsAgreement")
-    	private Boolean profileNicknameNeedsAgreement;
+    	private Boolean profile_nickname_needs_agreement;
     	
     	private Profile profile;
     	
-    	@Column(name="nameNeedsAgreement")
-    	private Boolean nameNeedsAgreement;
+    	private Boolean name_needs_agreement;
     	
     	private String name;
     	
-    	@Column(name="emailNeedsAgreement")
-    	private Boolean emailNeedsAgreement;
+    	private Boolean email_needs_agreement;
     	
-    	@Column(name="isEmailValid")
-    	private Boolean isEmailValid;
+    	private Boolean is_email_valid;
     	
-    	@Column(name="isEmailVerified")
-    	private Boolean isEmailVerified;
+    	private Boolean is_email_verified;
     	
     	private String email;
     	

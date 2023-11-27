@@ -1,11 +1,12 @@
 package com.withdog.account;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,11 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.withdog.account.bo.AccountBO;
 import com.withdog.account.entity.AccountEntity;
 import com.withdog.account.kakao.KakaoBO;
+import com.withdog.account.kakao.KakaoToken;
 import com.withdog.account.kakao.KakaoUser;
 import com.withdog.common.EncryptUtils;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/account")
 @RestController
@@ -95,6 +99,32 @@ public class AccountRestController {
 		session.setAttribute("adminYn", account.getAdminYn());
 		Map<String, Object> result = new HashMap<>();
 		return result;
+	}
+	
+	@GetMapping("/kakao-oauth")
+	public void kakaoOauth(@RequestParam("code") String code, HttpSession session, HttpServletResponse response) {
+	    log.info("$$$$$$$$$$ code={}", code);
+	    
+	    KakaoToken token = kakaoBO.getAccessToken(code);
+	    log.info("$$$$$$$$$$$$ kakaoToken={}", token);
+
+	    if (token == null) {
+	        log.error("@@@@@@@@@@@@@@@@@ code={}", code);
+	    }
+
+	    KakaoUser user = kakaoBO.getUserByToken(token.getAccess_token());
+	    log.warn("$$$$$$$$$$$$ kakaoUser = {}", user);
+	    
+	    AccountEntity account = kakaoBO.addAccount(user);
+	    session.setAttribute("email", account.getEmail());
+	    session.setAttribute("adminYn", account.getAdminYn());
+	    
+	    try {
+			response.sendRedirect("http://localhost");
+		} catch (IOException e) {
+			log.error("@@@@@@@@@@@@@@@@@@@@@@@@@@ error kakaoAccount 없음");
+		}
+	    
 	}
 	
 	

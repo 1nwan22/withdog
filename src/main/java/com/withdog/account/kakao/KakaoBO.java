@@ -1,21 +1,21 @@
 package com.withdog.account.kakao;
 
-
-import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.withdog.account.bo.AccountBO;
+import com.withdog.account.entity.AccountEntity;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Transactional
 @RequiredArgsConstructor
 @Service
@@ -24,15 +24,14 @@ public class KakaoBO {
 	private Logger logger = LoggerFactory.getLogger(KakaoBO.class);
 	private final WebClient webClient;
 	private final AccountBO accountBO;
-	
 	private static final String TOKEN_URL = "https://kauth.kakao.com/oauth/token";
-	public static final String REDIRECT_URI = "http://localhost/account/kakao/oauth";
+	private static final String USER_INFO_URL = "https://kapi.kakao.com/v2/user/me"; // 사용자 정보
+	public static final String REDIRECT_URI = "http://localhost/account/kakao-oauth";
 	public static final String REST_API_KEY = "6773c070982eedbe407df9374aeef8fd"; // client id
 	private static final String CLIENT_SECRET = "rrctSuFWwhE537a2DA9c6Y6IVtJ1B9fR"; // secret client id
-	private static final String USER_INFO_URL = "https://kapi.kakao.com/v2/user/me"; // 사용자 정보
 	private static final String SERVICE_APP_ADMIN_KEY = "7901aef37758282846605303baf8758c"; // admin 키
 	
-	public KakaoToken getAccessTokenResponse(String code) {
+	public KakaoToken getAccessToken(String code) {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("code", code);
 		params.add("grant_type", "authorization_code");
@@ -46,22 +45,17 @@ public class KakaoBO {
 				.header("Content-type", "application/x-www-form-urlencoded;charset=utf-8")
 				.retrieve()
 				.bodyToMono(KakaoToken.class)
-				.onErrorResume(e -> {
-					logger.error("Error:###### [카카오 토큰 획득 실패] ", e);
-					return null;
-				})
 				.block();
-		
-		
+		log.warn("$$$$$$$$$$$$$$$ kakaoToken = {}", kakaoToken);
 		
 		return kakaoToken;
 	}
 	
-	public KakaoToken getRefreshTokenResponse(String refreshToken) {
+	public KakaoToken getRefreshToken(String refreshToken) {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "refresh_token");
-		params.add("client_id", refreshToken);
-		params.add("refresh_token", REDIRECT_URI);
+		params.add("client_id", REDIRECT_URI);
+		params.add("refresh_token", refreshToken);
 		params.add("client_secret", CLIENT_SECRET);
 		
 		KakaoToken kakaoToken = webClient.post()
@@ -70,46 +64,53 @@ public class KakaoBO {
 				.header("Content-type", "application/x-www-form-urlencoded;charset=utf-8")
 				.retrieve()
 				.bodyToMono(KakaoToken.class)
-				.onErrorResume(e -> {
-					logger.error("Error:###### [카카오 토큰 획득 실패] ", e);
-					return null;
-				})
 				.block();
+		log.warn("$$$$$$$$$$$$$$$ kakaoToken = {}", kakaoToken);
 		
 		return kakaoToken;
 	}
 	
-	public KakaoUser getUser(String token) {
-		KakaoUser kakaoUser = webClient.post()
-				.uri(USER_INFO_URL)
-				.header("Authorization", "KakaoAK " + SERVICE_APP_ADMIN_KEY)
-				.header("Content-type", "application/x-www-form-urlencoded;charset=utf-8")
-				.retrieve()
-				.bodyToMono(KakaoUser.class)
-				.onErrorResume(e -> {
-					logger.error("Error:###### [카카오 유저 정보 획득 실패] ", e);
-					return null;
-				})
-				.block();
-		
-	     
-		
+	 public KakaoUser getUserByToken(String accessToken) {
+			KakaoUser kakaoUser = webClient.post()
+					.uri(USER_INFO_URL)
+					.header("Authorization", "Bearer " + accessToken)
+					.header("Content-type", "application/x-www-form-urlencoded;charset=utf-8")
+					.retrieve()
+					.bodyToMono(KakaoUser.class)
+					.block();
+			
+			log.warn("$$$$$$$$$$$$$$$ kakaoUser = {}", kakaoUser);
+			
 			return kakaoUser;
-	}
-	
-
+	 }
+	 
+//	 public KakaoUser getUserByAdmin(Long id) {
+//			KakaoUser kakaoUser = webClient.post()
+//					.uri(USER_INFO_URL)
+//					.header("Authorization", "KakaoAK " + SERVICE_APP_ADMIN_KEY)
+//					.header("Content-type", "application/x-www-form-urlencoded;charset=utf-8")
+//					.retrieve()
+//					.bodyToMono(KakaoUser.class)
+//					.block();
+//			
+//			log.warn("$$$$$$$$$$$$$$$ kakaoUser = {}", kakaoUser);
+//			
+//			return kakaoUser;
+//	 }
+	 
+	 
+	 public AccountEntity getUserByEmail(String email) {
+		 return accountBO.getAccountEntityByEmail(email);
+	 }
 	
 	@Transactional
-	public Integer addAccount(KakaoUser kakaoUser) {
-		String email = kakaoUser.getKakaoAccount().getEmail();
+	public AccountEntity addAccount(KakaoUser kakaoUser) {
+		String email = kakaoUser.getKakao_account().getEmail();
 		String userId = email.split("@")[0] + System.currentTimeMillis();
 		logger.info("$$$$$$$$$$$$$$ email = {}", email);
 		logger.info("$$$$$$$$$$$$$$ userId = {}", userId);
-		if (ObjectUtils.isEmpty(accountBO.getAccountEntityByEmail(email))) {
-			return accountBO.addAccountOauth(email, userId);
-		}
 		
-		return null;
+		return accountBO.getAccountEntityByEmail(email) != null ? accountBO.getAccountEntityByEmail(email) : accountBO.addAccountKakaoOauth(email, userId);
 	}
 	
 }
