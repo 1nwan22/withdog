@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.withdog.account.bo.AccountBO;
 import com.withdog.account.entity.AccountEntity;
 import com.withdog.account.kakao.KakaoBO;
+import com.withdog.account.kakao.KakaoUser;
 import com.withdog.common.EncryptUtils;
 
 import lombok.RequiredArgsConstructor;
@@ -96,13 +97,6 @@ public class AccountRestController {
 		return result;
 	}
 	
-	
-	@GetMapping("/kakao/oauth")
-	public String kakaoOauth(@RequestParam("code") String code, Model model) {
-		
-		kakaoBO.getUser(kakaoBO.getAccessToken(code).getAccess_token());
-		return "template/layout";
-	}
 	
 	@PutMapping("/admin-permission")
 	public Map<String, Object> adminPermission(@RequestParam("email") String email) {
