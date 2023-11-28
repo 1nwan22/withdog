@@ -25,19 +25,17 @@ public class AccountController {
 		model.addAttribute("REST_API_KEY", kakaoBO.REST_API_KEY);
 		model.addAttribute("REDIRECT_URI", kakaoBO.REDIRECT_URI);
 		
-		model.addAttribute("viewName", "/account/signIn");
+		model.addAttribute("viewName", "account/signIn");
 		
-//		model.addAttribute("viewNameL", "/include/leftSide");
-		model.addAttribute("viewNameR", "/include/rightSide");
+		model.addAttribute("viewNameR", "include/rightSide");
 		return "template/layout";
 	}
 	
 	// http://localhost/account/sign-up-view
 	@GetMapping("/sign-up-view")
 	public String signUpView(Model model) {
-		model.addAttribute("viewName", "/account/signUp");
-//		model.addAttribute("viewNameL", "/include/leftSide");
-		model.addAttribute("viewNameR", "/include/rightSide");
+		model.addAttribute("viewName", "account/signUp");
+		model.addAttribute("viewNameR", "include/rightSide");
 		return "template/layout";
 	}
 	

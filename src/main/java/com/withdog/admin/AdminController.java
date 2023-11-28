@@ -30,9 +30,9 @@ public class AdminController {
 	// http://localhost/admin/dash-board
 	@GetMapping("/dash-board")
 	public String dashBoard(Model model, HttpSession session) {
-		model.addAttribute("viewName", "/admin/dashBoard");
-		model.addAttribute("viewNameL", "/admin/leftSideAdmin");
-		model.addAttribute("viewNameR", "/include/rightSide");
+		model.addAttribute("viewName", "admin/dashBoard");
+		model.addAttribute("viewNameL", "admin/leftSideAdmin");
+		model.addAttribute("viewNameR", "include/rightSide");
 		return "template/layout";
 	}
 	
@@ -46,8 +46,9 @@ public class AdminController {
 		model.addAttribute("minBundlePage", paging.getMinBundlePage(currentPage));
 		model.addAttribute("maxBundlePage", paging.getMaxBundlePage(currentPage, totalPages));
 		model.addAttribute("productList", productList);
-		model.addAttribute("viewName", "/admin/productManager");
-		model.addAttribute("viewNameR", "/admin/rightSideProductManager");
+		model.addAttribute("viewName", "admin/productManager");
+		model.addAttribute("viewNameL", "admin/leftSideAdmin");
+		model.addAttribute("viewNameR", "admin/rightSideProductManager");
 		return "template/layout";
 	}
 	
@@ -55,9 +56,9 @@ public class AdminController {
 	@GetMapping("/account-manager")
 	public String accountManager(Model model, HttpSession session) {
 	
-		model.addAttribute("viewName", "/admin/accountManager");
-		model.addAttribute("viewNameL", "/admin/leftSideAdmin");
-		model.addAttribute("viewNameR", "/include/rightSide");
+		model.addAttribute("viewName", "admin/accountManager");
+		model.addAttribute("viewNameL", "admin/leftSideAdmin");
+		model.addAttribute("viewNameR", "include/rightSide");
 		return "template/layout";
 	}
 	

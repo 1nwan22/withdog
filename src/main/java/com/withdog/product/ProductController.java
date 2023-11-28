@@ -38,8 +38,8 @@ public class ProductController {
 		int totalPages = productList.getTotalPages();
 		model.addAttribute("minBundlePage", paging.getMinBundlePage(currentPage));
 		model.addAttribute("maxBundlePage", paging.getMaxBundlePage(currentPage, totalPages));
-		model.addAttribute("viewName", "/product/productList");
-		model.addAttribute("viewNameR", "/include/rightSide");
+		model.addAttribute("viewName", "product/productList");
+		model.addAttribute("viewNameR", "include/rightSide");
 		return "template/layout";
 	}
 	
@@ -49,8 +49,8 @@ public class ProductController {
 		log.info("$$$$$$ info productId = {}", productId);
 		ProductEntity product = productBO.getProductById(productId);
 		model.addAttribute("product", product);
-		model.addAttribute("viewName", "/product/product");
-		model.addAttribute("viewNameR", "/include/rightSide");
+		model.addAttribute("viewName", "product/product");
+		model.addAttribute("viewNameR", "include/rightSide");
 		return "template/layout";
 	}
 }
