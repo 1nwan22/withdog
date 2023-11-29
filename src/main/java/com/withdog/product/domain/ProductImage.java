@@ -11,7 +11,7 @@ public class ProductImage {
 
 	private int productId;
 
-	private String ImagePath;
+	private String imagePath;
 
 	private Date createdAt;
 }

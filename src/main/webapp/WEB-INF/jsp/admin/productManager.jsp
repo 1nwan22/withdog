@@ -5,7 +5,7 @@
 
 	<!-- 제품 이미지 영역 시작 -->
 	<div class="d-flex justify-content-center align-items-center p-3 col-4">
-		<div id="productImage">
+		<div id="productImageAdminAdmin">
 			
 		</div>
 	</div>
@@ -82,33 +82,33 @@
 		
 			<!-- paging 시작 -->
 			<div class="text-xs-center">
-			    <ul class="pagination justify-content-center">
-			        <c:choose>
-			            <c:when test="${productList.first}"></c:when>
-			            <c:otherwise>
-			                <li class="page-item"><a class="page-link" href="/admin/product-manager/?page=0">&lt;&lt;</a></li>
-			                <li class="page-item"><a class="page-link" href="/admin/product-manager/?page=${productList.number - 1}">&lt;</a></li>
-			            </c:otherwise>
-			        </c:choose>
-			
-			       <c:forEach begin="${minBundlePage}" end="${maxBundlePage}" var="currentPage">
-					    <c:url var="pageUrl" value="/admin/product-manager/">
-					        <c:param name="page" value="${currentPage - 1}"/>
-					    </c:url>
+				<ul class="pagination justify-content-center">
+					<c:choose>
+						<c:when test="${productList.first}"></c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="/admin/product-manager/?page=0">&lt;&lt;</a></li>
+							<li class="page-item"><a class="page-link" href="/admin/product-manager/?page=${productList.number - 1}">&lt;</a></li>
+						</c:otherwise>
+					</c:choose>
 					
-					    <li class="page-item ${productList.number + 1 == currentPage ? 'active' : ''}">
-					        <a class="page-link" href="${pageUrl}">${currentPage}</a>
-					    </li>
+					<c:forEach begin="${minBundlePage}" end="${maxBundlePage}" var="currentPage">
+						<c:url var="pageUrl" value="/admin/product-manager/">
+							<c:param name="page" value="${currentPage - 1}"/>
+						</c:url>
+							
+						<li class="page-item ${productList.number + 1 == currentPage ? 'active' : ''}">
+							<a class="page-link" href="${pageUrl}">${currentPage}</a>
+						</li>
 					</c:forEach>
-			
-			        <c:choose>
-			            <c:when test="${productList.last}"></c:when>
-			            <c:otherwise>
-			                <li class="page-item"><a class="page-link" href="/admin/product-manager/?page=${productList.number + 1}">&gt;</a></li>
-			                <li class="page-item"><a class="page-link" href="/admin/product-manager/?page=${productList.totalPages - 1}">&gt;&gt;</a></li>
-			            </c:otherwise>
-			        </c:choose>
-			    </ul>
+					
+					<c:choose>
+						<c:when test="${productList.last}"></c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="/admin/product-manager/?page=${productList.number + 1}">&gt;</a></li>
+							<li class="page-item"><a class="page-link" href="/admin/product-manager/?page=${productList.totalPages - 1}">&gt;&gt;</a></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
 			</div>
 			
 			<!-- paging 끝 -->
@@ -156,12 +156,12 @@ $(document).ready(function() {
 		            url: "/product/get-product-image",
 		            data: {"productId": productId},
 		            success: function (data) {
-		                $("#productImage").html("<img src='" + data.productImage + "' class='w-100' alt='상품이미지'>");
+		                $("#productImageAdmin").html("<img src='" + data.productImageAdmin + "' class='w-100' alt='상품이미지'>");
 		            }
 		        });
 		    },
 		    function() {
-		        $("#productImage").html("<div class='w-100'></div>");
+		        $("#productImageAdmin").html("<div class='w-100'></div>");
 		    }
 		);
 	

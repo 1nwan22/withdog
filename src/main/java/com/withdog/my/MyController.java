@@ -33,13 +33,7 @@ public class MyController {
 		return "template/layout";
 	}
 	
-	// http://localhost/my/cart-view
-	@GetMapping("/cart-view")
-	public String cartView(Model model) {
-		model.addAttribute("viewName", "my/cart");
-		model.addAttribute("viewNameR", "include/rightSide");
-		return "template/layout";
-	}
+	
 	
 	
 }

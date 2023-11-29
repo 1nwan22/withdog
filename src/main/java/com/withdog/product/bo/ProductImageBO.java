@@ -9,6 +9,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.withdog.common.FileManagerService;
+import com.withdog.product.domain.ProductImage;
 import com.withdog.product.mapper.ProductImageMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -35,8 +36,11 @@ public class ProductImageBO {
 		productImageMapper.insertProductImage(productId, imagePathList);
 	}
 	
-	@Transactional
-	public String getImageByProductId(int productId) {
+	public ProductImage getImageByProductId(int productId) {
 		return productImageMapper.selectImageByProductId(productId);
+	}
+	
+	public List<ProductImage> getImageListByProductId(int productId) {
+		return productImageMapper.selectImageListByProductId(productId);
 	}
 }

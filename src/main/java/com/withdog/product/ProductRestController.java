@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.withdog.product.bo.ProductBO;
 import com.withdog.product.bo.ProductImageBO;
+import com.withdog.product.domain.ProductImage;
 import com.withdog.product.entity.ProductEntity;
 
 import lombok.RequiredArgsConstructor;
@@ -74,7 +75,7 @@ public class ProductRestController {
 	
 	@PostMapping("/get-product-image")
 	public Map<String, Object> getThumnail(@RequestParam("productId") int productId) {
-		String productImage = productImageBO.getImageByProductId(productId);
+		ProductImage productImage = productImageBO.getImageByProductId(productId);
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("result", "success");

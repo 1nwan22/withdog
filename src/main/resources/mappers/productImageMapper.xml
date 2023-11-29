@@ -5,9 +5,9 @@
     <insert id="insertProductImage" parameterType="map">
         INSERT INTO `product_image`
         (
-            `productId`,
-            `imagePath`,
-            `createdAt`
+            `productId`
+            ,`imagePath`
+            ,`createdAt`
         )
         VALUES
         <foreach collection="imagePathList" item="imagePath" separator=",">
@@ -15,15 +15,29 @@
         </foreach>
     </insert>
     
-    <select id="selectImageByProductId" parameterType="int" resultType="String">
+    <select id="selectImageByProductId" parameterType="int" resultType="com.withdog.product.domain.ProductImage">
     	SELECT
-    		`imagePath`
+    		`productId`
+            ,`imagePath`
+            ,`createdAt`
     	FROM
     		`product_image`
     	WHERE
     		`productId` = #{productId}
     	LIMIT 1
-    
     </select>
+    
+    <select id="selectImageListByProductId" parameterType="int" resultType="com.withdog.product.domain.ProductImage">
+    	SELECT
+    		`productId`
+            ,`imagePath`
+            ,`createdAt`
+		FROM
+			`product_image`
+		WHERE
+			`productId` = #{productId}
+    </select>
+    
+    
     
 </mapper>

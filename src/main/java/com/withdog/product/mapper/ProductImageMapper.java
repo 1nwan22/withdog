@@ -14,5 +14,7 @@ public interface ProductImageMapper {
 			@Param("productId") int productId,
 			@Param("imagePathList") List<String> imagePathList);
 	
-	public String selectImageByProductId(int productId);
+	public ProductImage selectImageByProductId(int productId);
+	
+	public List<ProductImage> selectImageListByProductId(int productId);
 }
