@@ -113,7 +113,7 @@ public class AccountRestController {
 	    }
 
 	    KakaoUser user = kakaoBO.getUserByToken(token.getAccess_token());
-	    log.warn("$$$$$$$$$$$$ kakaoUser = {}", user);
+	    log.error("$$$$$$$$$$$$ kakaoUser = {}", user);
 	    
 	    AccountEntity account = kakaoBO.addAccount(user);
 	    session.setAttribute("email", account.getEmail());

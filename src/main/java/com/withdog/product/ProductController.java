@@ -56,14 +56,14 @@ public class ProductController {
 	public String productView(Model model, 
 			@PathVariable int productId) {
 		log.info("$$$$$$ info productId = {}", productId);
-		ProductEntity product = productBO.getProductById(productId);
+		ProductView product = productBO.generateProductView(productId);
 		model.addAttribute("product", product);
 		model.addAttribute("viewName", "product/product");
 		model.addAttribute("viewNameR", "product/rightSideProduct");
 		return "template/layout";
 	}
 	
-	// http://localhost/my/cart-view
+	// http://localhost/product/cart-view
 	@GetMapping("/cart-view")
 	public String cartView(Model model) {
 		model.addAttribute("viewName", "product/cart");
@@ -71,7 +71,7 @@ public class ProductController {
 		return "template/layout";
 	}
 	
-	// http://localhost/my/cart-view
+	// http://localhost/product/checkout-view
 	@GetMapping("/checkout-view")
 	public String checkoutView(Model model) {
 		model.addAttribute("viewName", "product/checkout");

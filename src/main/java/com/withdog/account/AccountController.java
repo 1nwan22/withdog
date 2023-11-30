@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.withdog.account.kakao.KakaoBO;
+import com.withdog.aop.TimeTrace;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +20,7 @@ public class AccountController {
 	private final KakaoBO kakaoBO;
 	
 	// http://localhost/account/sign-in-view
+	@TimeTrace
 	@GetMapping("/sign-in-view")
 	public String signInView(Model model, HttpSession session) {
 		// 카카오 

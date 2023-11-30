@@ -27,72 +27,6 @@ public class ProductBO {
 		return productRepository.findById(id).orElse(null);
 	}
 	
-	public Page<ProductEntity> getProductList(Pageable pageable) {
-		return productRepository.findAll(pageable);
-	}
-	
-//	@Transactional
-//	public Page<ProductView> generateProductViewPage() {
-//		List<ProductView> productViewList = new ArrayList<>(); // []
-//		List<ProductEntity> productList = productRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-//		
-//		for (ProductEntity product : productList) {
-//			ProductView productView = new ProductView();
-//			// 상품
-//			productView.setProduct(product);
-//			
-//			// 상품 대표 이미지
-//			productView.setProductImage(productImageBO.getImageByProductId(product.getId()));
-//			
-//			// 상품 이미지들
-//			productView.setProductImageList(productImageBO.getImageListByProductId(product.getId()));
-//			
-//			// 리뷰들
-//			
-//			
-//			// 문의들
-//			
-//			//★★★★★ 마지막에 ViewList에 객체를 넣는다
-//			productViewList.add(productView);
-//		}
-//		// 원래 이 메소드는 정의해놓으면 Page를 자동반환 가능하다 지금은 Test느낌으로
-//		//List<User> userList = userRepotiroy.findAllByName(name);
-//		// 요청으로 들어온 page와 한 page당 원하는 데이터의 갯수
-//		PageRequest pageRequest = PageRequest.ofSize(12);
-//		int start = (int) pageRequest.getOffset();
-//		int end = Math.min((start + pageRequest.getPageSize()), productViewList.size());
-//		Page<ProductView> productViewPage = new PageImpl<>(productViewList.subList(start, end), pageRequest, productViewList.size());
-//		return productViewPage;
-//	}
-	
-	@Transactional
-	public Page<ProductView> generateProductViewPage(Pageable pageable) {
-		
-		Page<ProductEntity> productPage = productRepository.findAll(pageable);
-		List<ProductView> productList = new ArrayList<>();
-		
-		for (ProductEntity product : productPage) {
-			ProductView productView = new ProductView();
-			// 상품
-			productView.setProduct(product);
-			
-			// 상품 대표 이미지
-			productView.setProductImage(productImageBO.getImageByProductId(product.getId()));
-			
-			// 상품 이미지들
-			productView.setProductImageList(productImageBO.getImageListByProductId(product.getId()));
-			
-			// 리뷰들
-			
-			
-			// 문의들
-			
-			//★★★★★ 마지막에 ViewList에 객체를 넣는다
-			productList.add(productView);
-		}
-		return  new PageImpl<>(productList, pageable, productPage.getTotalElements());
-	}
-	
 	@Transactional
 	public Integer addProduct(String name, String brand, int price, int costPrice, int stock, String content, String status, List<MultipartFile> imageList) {
 		ProductEntity product = productRepository.save(
@@ -131,4 +65,62 @@ public class ProductBO {
 	public void deleteProduct(int id) {
 		productRepository.deleteById(id);
 	}
+	
+	public Page<ProductEntity> getProductList(Pageable pageable) {
+		return productRepository.findAll(pageable);
+	}
+	
+	@Transactional
+	public Page<ProductView> generateProductViewPage(Pageable pageable) {
+		
+		Page<ProductEntity> productPage = productRepository.findAll(pageable);
+		List<ProductView> productList = new ArrayList<>();
+		
+		for (ProductEntity product : productPage) {
+			ProductView productView = new ProductView();
+			// 상품
+			productView.setProduct(product);
+			
+			// 상품 대표 이미지
+			productView.setProductImage(productImageBO.getImageByProductId(product.getId()));
+			
+			// 상품 이미지들
+			productView.setProductImageList(productImageBO.getImageListByProductId(product.getId()));
+			
+			// 리뷰들
+			
+			
+			// 문의들
+			
+			//★★★★★ 마지막에 ViewList에 객체를 넣는다
+			productList.add(productView);
+		}
+		return  new PageImpl<>(productList, pageable, productPage.getTotalElements());
+	}
+	
+	@Transactional
+	public ProductView generateProductView(int productId) {
+		
+		ProductView productView = new ProductView();
+		ProductEntity product = productRepository.findById(productId).orElse(null);
+		// 상품
+		productView.setProduct(product);
+			
+		// 상품 대표 이미지
+		productView.setProductImage(productImageBO.getImageByProductId(product.getId()));
+			
+		// 상품 이미지들
+		productView.setProductImageList(productImageBO.getImageListByProductId(product.getId()));
+			
+		// 리뷰들
+		
+			
+		// 문의들
+			
+		return  productView;
+	}
+	
+
+	
+
 }
