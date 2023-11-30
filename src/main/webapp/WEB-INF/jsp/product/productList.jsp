@@ -1,13 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div id="productListWrap">
-	<div>카테고리별 나누기</div>
+<div id="productListWrap" class="p-3">
+	<!-- 상품 카테고리 -->
+	<nav id="productNav">
+				<ul class="nav nav-fill w-100">
+					<li class="nav-item">
+						<a href="#none" class="nav-link font-weight-bold">사료</a>
+					</li>
+					<li class="nav-item">
+						<a href="#none" class="nav-link font-weight-bold">패드</a>
+					</li>
+					<li class="nav-item">
+						<a href="#none" class="nav-link font-weight-bold">간식</a>
+					</li>
+					<li class="nav-item">
+						<a href="#none" class="nav-link font-weight-bold">옷</a>
+					</li>
+					<li class="nav-item">
+						<a href="#none" class="nav-link  font-weight-bold">켄넬</a>
+					</li>
+				</ul>
+	</nav>
 	<!-- 상품 목록 시작 -->
-	<div class="product-boxes d-flex justify-content-between">
+	<div class="product-boxes d-flex flex-wrap justify-content-between p-3">
 		<c:forEach items="${productList.content}" var="product">
-			<div class="product-box" data-product-id="${product.product.id}">
-				<img src="${product.productImage.imagePath}" class="w-100" alt="상품대표이미지">
+			<div class="product-box p-3 mt-3" data-product-id="${product.product.id}">
+				<div class="d-flex justify-content-center w-100">
+					<img src="${product.productImage.imagePath}" width="312px" alt="상품대표이미지">
+				</div>
+				
 				<div class="product-box-info">
 					<div>${product.product.brand}</div>
 					<div>${product.product.name}</div>

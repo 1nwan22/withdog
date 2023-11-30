@@ -34,7 +34,7 @@ public class ProductController {
 			@PageableDefault(size = 12, sort = "id" ,direction = Sort.Direction.DESC) Pageable pageable) {
 		log.info("$$$$$$$$$$$ info pageable = {} $$$$$$$$$$$", pageable);
 		
-		Page<ProductView> productList = productBO.generateProductViewPage();
+		Page<ProductView> productList = productBO.generateProductViewPage(pageable);
 		log.info("$$$$$$$$$$$ info productList = {} $$$$$$$$$$$", productList);
 		
 		int currentPage = productList.getPageable().getPageNumber();
