@@ -40,13 +40,16 @@
 						<nav id="myPageNav" class="d-none">
 							<ul class="nav nav-fill w-100">
 								<li class="nav-item">
-									<a href="/my/profile-view" class="nav-link">프로필</a>
+									<a href="/account/profile-view" class="nav-link">내 프로필</a>
 								</li>
 								<li class="nav-item">
-									<a href="/my/order-history-view" class="nav-link">주문내역</a>
+									<a href="/pet/profile-view" class="nav-link">펫 프로필</a>
 								</li>
 								<li class="nav-item">
-									<a href="/my/cart-view" class="nav-link">장바구니</a>
+									<a href="/order/recent-history-view" class="nav-link">주문내역</a>
+								</li>
+								<li class="nav-item">
+									<a href="/cart" class="nav-link">장바구니</a>
 								</li>
 								<li class="nav-item">
 									<a href="/account/sign-out" class="nav-link">logout</a>

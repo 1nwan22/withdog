@@ -1,39 +1,27 @@
-package com.withdog.my;
+package com.withdog.pet;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/my")
+@RequestMapping("/pet")
 @Controller
-public class MyController {
+public class PetController {
 
-	// http://localhost/my/profile-view
+	// http://localhost/pet/profile-view
 	@GetMapping("/profile-view")
 	public String profileView(Model model) {
-		model.addAttribute("viewName", "my/profile");
+		model.addAttribute("viewName", "pet/petProfile");
 		model.addAttribute("viewNameR", "include/rightSide");
 		return "template/layout";
 	}
 	
-	// http://localhost/my/profile-edit-view
+	// http://localhost/pet/profile-edit-view
 	@GetMapping("/profile-edit-view")
 	public String profileEditView(Model model) {
-		model.addAttribute("viewName", "my/editProfile");
+		model.addAttribute("viewName", "pet/editPetProfile");
 		model.addAttribute("viewNameR", "include/rightSide");
 		return "template/layout";
 	}
-	
-	// http://localhost/my/order-history-view
-	@GetMapping("/order-history-view")
-	public String orderHistoryView(Model model) {
-		model.addAttribute("viewName", "my/orderHistory");
-		model.addAttribute("viewNameR", "include/rightSide");
-		return "template/layout";
-	}
-	
-	
-	
-	
 }

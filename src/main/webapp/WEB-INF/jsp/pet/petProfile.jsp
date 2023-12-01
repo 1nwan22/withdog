@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <div class="d-flex justify-content-center">
 	<div class="p-4">
-		<!-- 내 프로필 -->
+		<!-- 펫 프로필 -->
 		<div class="">
-			이메일
-			아이디
-			이름
-			핸드폰번호
-			주소
+			펫 프로필 이미지
+			펫이름
+			생년월일
+			견종
+			성별
+			중성화
 		</div>
 			
 		<div class="d-flex justify-content-center">

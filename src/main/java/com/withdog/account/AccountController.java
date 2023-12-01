@@ -48,7 +48,21 @@ public class AccountController {
 		return "redirect:/account/sign-in-view";
 	}
 	
-
+	// http://localhost/account/profile-view
+	@GetMapping("/profile-view")
+	public String profileView(Model model) {
+		model.addAttribute("viewName", "account/profile");
+		model.addAttribute("viewNameR", "include/rightSide");
+		return "template/layout";
+	}
+	
+	// http://localhost/account/profile-edit-view
+	@GetMapping("/profile-edit-view")
+	public String profileEditView(Model model) {
+		model.addAttribute("viewName", "account/editProfile");
+		model.addAttribute("viewNameR", "include/rightSide");
+		return "template/layout";
+	}
 
 	
 

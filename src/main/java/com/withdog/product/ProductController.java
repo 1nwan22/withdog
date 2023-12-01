@@ -63,19 +63,5 @@ public class ProductController {
 		return "template/layout";
 	}
 	
-	// http://localhost/product/cart-view
-	@GetMapping("/cart-view")
-	public String cartView(Model model) {
-		model.addAttribute("viewName", "product/cart");
-		model.addAttribute("viewNameR", "include/rightSide");
-		return "template/layout";
-	}
-	
-	// http://localhost/product/checkout-view
-	@GetMapping("/checkout-view")
-	public String checkoutView(Model model) {
-		model.addAttribute("viewName", "product/checkout");
-		model.addAttribute("viewNameR", "include/rightSide");
-		return "template/layout";
-	}
+
 }

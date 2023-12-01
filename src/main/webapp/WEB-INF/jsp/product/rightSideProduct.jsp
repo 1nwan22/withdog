@@ -26,8 +26,8 @@
 		총금액
 	</div>
 	<div>
-		<a href="/product/cart-view" id="cartBtn" class="btn btn-light form-control">장바구니</a>
-		<a href="/product/checkout-view" id="payBtn" class="btn btn-primary form-control">구매하기</a>
+		<a href="/my/cart-view" id="cartBtn" class="btn btn-light form-control">장바구니</a>
+		<a href="/my/checkout-view" id="payBtn" class="btn btn-primary form-control">구매하기</a>
 	</div>
 </div>
 
