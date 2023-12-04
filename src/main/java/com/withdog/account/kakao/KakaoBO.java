@@ -29,7 +29,6 @@ public class KakaoBO {
 	public static final String REDIRECT_URI = "http://localhost/account/kakao-oauth";
 	public static final String REST_API_KEY = "6773c070982eedbe407df9374aeef8fd"; // client id
 	private static final String CLIENT_SECRET = "rrctSuFWwhE537a2DA9c6Y6IVtJ1B9fR"; // secret client id
-	private static final String SERVICE_APP_ADMIN_KEY = "7901aef37758282846605303baf8758c"; // admin 키
 	
 	public KakaoToken getAccessToken(String code) {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();

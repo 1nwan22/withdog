@@ -17,11 +17,5 @@ public class OrderController {
 			return "template/layout";
 		}
 	
-	// http://localhost/order/checkout-view
-	@GetMapping("/checkout-view")
-	public String checkoutView(Model model) {
-		model.addAttribute("viewName", "order/checkout");
-		model.addAttribute("viewNameR", "include/rightSide");
-		return "template/layout";
-	}
+
 }

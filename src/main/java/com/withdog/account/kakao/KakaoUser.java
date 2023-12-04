@@ -1,19 +1,22 @@
 package com.withdog.account.kakao;
 
-import org.springframework.stereotype.Component;
-
-import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @RequiredArgsConstructor
-@Data
-@Component
+@ToString
+@Setter
+@Getter
 public class KakaoUser {
 
 	private Long id;
 	private KakaoAccount kakao_account;
 	
-    @Data
+	@ToString
+	@Setter
+	@Getter
     public class KakaoAccount {
     	
     	private Boolean profile_nickname_needs_agreement;
@@ -32,7 +35,9 @@ public class KakaoUser {
     	
     	private String email;
     	
-    	@Data
+    	@ToString
+    	@Setter
+    	@Getter
     	public class Profile {
     		private String nickname;
     	}

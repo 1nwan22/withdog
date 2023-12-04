@@ -1,16 +1,16 @@
-package com.withdog.cart;
+package com.withdog.payment;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class CartController {
+public class PaymentController {
 
-	// http://localhost/cart
-	@GetMapping("/cart-view")
-	public String cartView(Model model) {
-		model.addAttribute("viewName", "cart/cart");
+	// http://localhost/checkout-view
+	@GetMapping("/checkout-view")
+	public String checkoutView(Model model) {
+		model.addAttribute("viewName", "pay/checkout");
 		model.addAttribute("viewNameR", "include/rightSide");
 		return "template/layout";
 	}
