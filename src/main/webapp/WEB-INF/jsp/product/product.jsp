@@ -13,6 +13,12 @@
 			<div>${product.product.content}</div>
 			<div>별점</div>
 			<div>리뷰 수</div>
+			<div>
+		        <button type="button" class="minus-btn">-</button>
+		        <input type="text" id="count" value="0" readonly>
+				<button type="button" class="plus-btn">+</button>
+			</div>
+			<button type="button" class="addCart btn btn-success" data-product-id="${product.product.id}">장바구니 추가</button>
 		</div>
 	</div>
 	<!-- 상품 상세 정보 박스 -->
@@ -48,17 +54,58 @@
 <script>
 	$(document).ready(function () {
 		
-		 let Offset = $('.product-detail-menu').offset();
-		  $(window).scroll( function() {
-		    if ($(document).scrollTop() > Offset.top ) {
+		/* 메뉴 고정 */
+		let Offset = $('.product-detail-menu').offset();
+		$(window).scroll( function() {
+			if ($(document).scrollTop() > Offset.top ) {
 		      $('.product-detail-menu').addClass('fixed');
 		    }
 		    else {
 		      $('.product-detail-menu').removeClass('fixed');
 		    }
-		  });
+		});
 		
-		$(".product-box").on()
+		/* 장바구니 추가 */
+		$(".addCart").on("click", function() {
+			let productId = $(this).data("product-id");
+			let count = $("#count").val();
+			
+			if (count < 1) {
+				alert("수량을 선택해주세요");
+				return;
+			}
+			
+			$.ajax({
+				type:"POST"
+				, url:"/cart/add"
+				, data:{"productId":productId, "count":count}
+			
+				, success:function(data) {
+					alert("장바구니 추가 완료");
+					location.reload(true);
+				}
+				, error:function(request, status, error) {
+					alert("장바구니 추가 실패");
+				}
+			});
+		});
+		
+		/* 수량 버튼 */
+		$(".plus-btn, .minus-btn").on("click", function() {
+		    let currentCount = parseInt($("#count").val());
+
+		    // 클릭된 버튼에 따라 수량 조절
+		    currentCount += ($(this).hasClass("plus-btn") ? 1 : -1);
+
+		    // 수량이 1 미만이 되지 않도록 보장
+		    currentCount = Math.max(currentCount, 1);
+
+		    // 결과를 #count input에 설정
+		    $("#count").val(currentCount);
+		});
+		
+		  
+		
 	});
 
 </script>

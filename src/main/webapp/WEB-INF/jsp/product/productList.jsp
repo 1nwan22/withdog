@@ -35,7 +35,7 @@
 					<div>${product.product.name}</div>
 					<hr>
 					<div>${product.product.price}원</div>
-					장바구니버튼
+					<button type="button" class="addCart btn btn-success">장바구니 추가</button>
 				</div>
 			</a>
 		</c:forEach>

@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +41,19 @@ class WithDogApplicationTests {
 	}
 	
 	@Test
+	void someMethod(HttpServletRequest request) {
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            System.out.println("Cookie Name: " + cookie.getName());
+	            System.out.println("Cookie Value: " + cookie.getValue());
+	        }
+	    } else {
+	        System.out.println("No cookies found.");
+	    }
+	}
+	
+	//@Test
 	void enum_test1() {
 		// given - 준비
 		Status status = Status.Y;

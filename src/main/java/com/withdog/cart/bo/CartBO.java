@@ -1,8 +1,8 @@
 package com.withdog.cart.bo;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.withdog.cart.dto.CartDTO;
 import com.withdog.cart.entity.CartEntity;
 import com.withdog.cart.repository.CartRepository;
 
@@ -14,28 +14,21 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class CartBO {
 
-	private CartRepository cartRepository;
+	private final CartRepository cartRepository;
 	
-	public CartDTO addCart(CartDTO cartDTO) {
-		// dto -> entity
-		CartEntity entity = CartEntity.toEntity(cartDTO);
-		log.info("$$$$$$$$$$$$$$ CartEntity = {}", entity);
+	@Transactional
+	public void addCart(int accountId, int productId, int count, int price) {
+		log.info("$$$$$$$$ accountId = {}  productId = {}", accountId, productId);
 		
-		// save
-		CartEntity saveEntity = cartRepository.save(entity);
-		log.info("$$$$$$$$$$$$$$ saveCartEntity = {}", saveEntity);
-		
-		// entity -> dto
-		CartDTO dto = CartDTO.toDTO(saveEntity);
-		log.info("$$$$$$$$$$$$$$ CartDTO = {}", dto);
-		
-		return dto;
-		
-		
+		CartEntity cart = cartRepository.save(
+				CartEntity.builder()
+				.accountId(accountId)
+				.productId(productId)
+				.count(count)
+				.price(price)
+				.build());
 		
 	}
 	
-	public Integer addCart(int accountId) {
-		return 1;
-	}
+
 }
