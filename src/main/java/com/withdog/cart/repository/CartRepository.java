@@ -8,4 +8,5 @@ import com.withdog.cart.entity.CartEntity;
 @Repository
 public interface CartRepository extends JpaRepository<CartEntity, Integer> {
 
+	public CartEntity findByProductId(int productId);
 }
