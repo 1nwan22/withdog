@@ -1,3 +1,4 @@
+
 package com.withdog.cart.dto;
 
 import lombok.AllArgsConstructor;
@@ -16,10 +17,14 @@ import lombok.ToString;
 public class CartDTO {
 
 	private int productId;
-	private String productName;
+	
 	private String productBrand;
-	private int count;
+	
+	private String productName;
+	
 	private int price;
+	
+	private int count;
 	
 	
 }

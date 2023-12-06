@@ -96,7 +96,7 @@ public class AccountRestController {
 			HttpSession session) {
 		session.setAttribute("email", email);
 		AccountEntity account = accountBO.getAccountEntityByEmail(email);
-		session.setAttribute("adminYn", account.getAdminYn());
+		session.setAttribute("accountId", account.getId());
 		Map<String, Object> result = new HashMap<>();
 		return result;
 	}

@@ -38,10 +38,10 @@
                 }
 
                 let productInfo = products[i].split(":");
-                let productName = productInfo[0];
                 let productBrand = productInfo[1];
-                let count = productInfo[2];
+                let productName = productInfo[2];
                 let price = productInfo[3];
+                let count = productInfo[4];
 
                 let itemHtml = '<div class="cart-box">' +
                                     '<div class="d-flex justify-content-between">' +

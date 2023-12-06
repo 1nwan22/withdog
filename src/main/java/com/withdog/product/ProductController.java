@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.withdog.common.Paging;
 import com.withdog.product.bo.ProductBO;
 import com.withdog.product.domain.ProductView;
-import com.withdog.product.entity.ProductEntity;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

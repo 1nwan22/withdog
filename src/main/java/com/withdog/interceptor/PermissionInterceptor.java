@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,7 +30,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		logger.info("[$$$$$$$$] preHandle. uri:{}", uri);
 		
 		// 로그인 여부
-		HttpSession session = request.getSession();
+//		HttpSession session = request.getSession();
 //		Integer userId = (Integer) session.getAttribute("userId");
 //		Boolean adminAccount = false;
 //		if (((String) session.getAttribute("adminYn")).equals("y")) {
@@ -75,17 +76,27 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		// view 객체가 mav로 존재한다는건 아직 jsp가 html로 변환되기 전이다.
 		logger.info("[########] postHandle");
 		HttpSession session = request.getSession();
-		String adminYn = (String) session.getAttribute("adminYn");
-		
-		if (mav != null && StringUtils.hasText(adminYn) && adminYn.equals("y")) {
-	        mav.addObject("viewNameL", "/admin/leftSideAdmin");
+	    String email = (String) session.getAttribute("email");
+	    Boolean isEmailEmpty = ObjectUtils.isEmpty(email);
+	    Boolean isMavEmpty = ObjectUtils.isEmpty(mav);
+	    Boolean isAdmin = false;
+	    if (!isEmailEmpty && session.getAttribute("email").equals("pepper@pepper.com")) {
+	    	isAdmin = true;
 	    }
-		if (mav != null && StringUtils.hasText(adminYn) && adminYn.equals("n")) {
-	        mav.addObject("viewNameL", "/account/leftSideAccount");
+	    
+	    
+	    if (!isMavEmpty && isAdmin == true) {
+	    	mav.addObject("viewNameL", "/admin/leftSideAdmin");
 	    }
-		if (mav != null && !StringUtils.hasText(adminYn)) {
-	        mav.addObject("viewNameL", "/include/leftSide");
+	    
+	    if (!isMavEmpty && isAdmin == false) {
+	    	mav.addObject("viewNameL", "/account/leftSideAccount");
 	    }
+
+	    if (!isMavEmpty && isEmailEmpty) {
+	    	mav.addObject("viewNameL", "/include/leftSide");
+	    }
+	    
 		
 	}
 	

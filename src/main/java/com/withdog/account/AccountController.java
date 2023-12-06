@@ -44,7 +44,7 @@ public class AccountController {
 	@RequestMapping("/sign-out")
 	public String signOut(HttpSession session) {
 		session.removeAttribute("email");
-		session.removeAttribute("adminYn");
+		session.removeAttribute("accountId");
 		return "redirect:/account/sign-in-view";
 	}
 	

@@ -38,8 +38,6 @@ public class CartEntity {
 	
 	private int count;
 	
-	private int price;
-	
 	@UpdateTimestamp
 	@Column(name="createdAt", updatable=false)
 	private Date createdAt;
