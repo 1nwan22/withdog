@@ -40,7 +40,7 @@ class WithDogApplicationTests {
 		
 	}
 	
-	@Test
+	//@Test
 	void someMethod(HttpServletRequest request) {
 	    Cookie[] cookies = request.getCookies();
 	    if (cookies != null) {
@@ -53,7 +53,7 @@ class WithDogApplicationTests {
 	    }
 	}
 	
-	//@Test
+	@Test
 	void enum_test1() {
 		// given - 준비
 		Status status = Status.Y;

@@ -30,39 +30,41 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		logger.info("[$$$$$$$$] preHandle. uri:{}", uri);
 		
 		// 로그인 여부
-//		HttpSession session = request.getSession();
-//		Integer userId = (Integer) session.getAttribute("userId");
-//		Boolean adminAccount = false;
-//		if (((String) session.getAttribute("adminYn")).equals("y")) {
-//			adminAccount = true;
-//		}
+		HttpSession session = request.getSession();
+		String email = (String) session.getAttribute("email");
+		Boolean isEmailEmpty = ObjectUtils.isEmpty(email);
+		Boolean isAdmin = false;
+		if (!isEmailEmpty && session.getAttribute("email").equals("pepper@pepper.com")) {
+	    	isAdmin = true;
+	    }
 		
 		
-		// 비로그인 && /post => 로그인 페이지로 이동, 컨트롤러 수행 방지
-//		if (userId == null && uri.startsWith("/post")) {
+//		// 비로그인 && /post => 로그인 페이지로 이동, 컨트롤러 수행 방지
+//		if (isEmailEmpty && uri.startsWith("/post")) {
 //			response.sendRedirect("/user/sign-in-view");
 //			return false; // 컨트롤러 수행 안함(원래 요청에 대해서)
 //		}
-		
-		// 로그인 && /user => 글 목록 페이지 이동, 컨트롤러 수행 방지
+//		
+//		// 로그인 && /user => 글 목록 페이지 이동, 컨트롤러 수행 방지
 //		if (userId != null && uri.startsWith("/user")) {
 //			response.sendRedirect("/post/post-list-view");
 //			return false;
 //		}
 		
-//		if (ObjectUtils.isEmpty(adminAccount) && uri.startsWith("/admin")) {
-//			response.sendRedirect("/account/sign-in-view");
-//			return false;
-//		}
+		// 관리자 페이지
+		if (isAdmin == true && uri.startsWith("/admin")) {
+			
+			return true;
+		}
 		
-//		if (!ObjectUtils.isEmpty(adminAccount)) {
-//			if (adminAccount.equals("y") == false && uri.startsWith("/admin")) {
-//				response.sendRedirect("/account/sign-in-view");
-//				return false;
-//			}
-//		}
+		// 장바구니
+		if (!isEmailEmpty && uri.startsWith("/cart")) {
+			return true;
+		}
 		
+
 		
+		//response.sendRedirect("/account/sign-in-view");
 		return true; // 컨트롤러 수행함
 	}
 	

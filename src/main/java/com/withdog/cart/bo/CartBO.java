@@ -9,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import com.withdog.cart.dto.CartDTO;
+import com.withdog.cart.dto.CartView;
 import com.withdog.cart.entity.CartEntity;
 import com.withdog.cart.repository.CartRepository;
 import com.withdog.product.bo.ProductBO;
+import com.withdog.product.bo.ProductImageBO;
+import com.withdog.product.domain.ProductImage;
 import com.withdog.product.entity.ProductEntity;
 
 import lombok.RequiredArgsConstructor;
@@ -24,12 +27,13 @@ public class CartBO {
 
 	private final CartRepository cartRepository;
 	private final ProductBO productBO;
+	private final ProductImageBO productImageBO;
 	
 	public CartEntity getCartByProductId(int productId) {
 		return cartRepository.findByProductId(productId);
 	}
 	
-	public List<CartDTO> getCartListByAccountId(int accountId) {
+	public List<CartDTO> getCartDTOListByAccountId(int accountId) {
 		List<CartEntity> cartList = cartRepository.findAllByAccountId(accountId);
 		log.info("$$$$$$$$$$$ cartList = {}", cartList);
 		List<CartDTO> cartDTOList = new ArrayList<>(cartList.size());
@@ -39,6 +43,22 @@ public class CartBO {
 			cartDTOList.add(cartDTO);
 		}
 		return cartDTOList;
+	}
+	
+	public List<CartView> getCartViewListByCookieValue(String cookieValue) {
+		log.info("$$$$$$$$$$$ cookieValue = {}", cookieValue);
+		List<CartView> cartViewList = new ArrayList<>();
+		String[] products = cookieValue.split("\\|");
+		for (String product : products) {
+			String[] parts = product.split(":");
+			int productId = Integer.parseInt(parts[0]);
+			int count = Integer.parseInt(parts[4]);
+			ProductEntity productEntity = productBO.getProductById(productId);
+			ProductImage productImage = productImageBO.getImageByProductId(productId);
+			CartView cartView = new CartView(productEntity, productImage, count);
+			cartViewList.add(cartView);
+		}
+		return cartViewList;
 	}
 	
 	@Transactional

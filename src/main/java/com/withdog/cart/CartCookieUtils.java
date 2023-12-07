@@ -81,9 +81,9 @@ public class CartCookieUtils {
 		cookie.setPath("/");
 		response.addCookie(cookie);
 	}
+	
 
-
-	public static Cookie findCartCookie(Cookie[] cookies) {
+	private static Cookie findCartCookie(Cookie[] cookies) {
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("Cart")) {

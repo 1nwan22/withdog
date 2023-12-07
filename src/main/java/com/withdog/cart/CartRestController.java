@@ -55,13 +55,10 @@ public class CartRestController {
         }
         
         if (!ObjectUtils.isEmpty(accountId)) { // 로그인 상태
-        	List<CartDTO> cartList = cartBO.getCartListByAccountId(accountId);
+        	List<CartDTO> cartList = cartBO.getCartDTOListByAccountId(accountId);
         	cartList.forEach(cart -> CartCookieUtils.addToCart(request, response, cart));
         	CartDTO cartDTO = new CartDTO(productId, productBrand, productName, productPrice, count);
         	String cartCookieValue = CartCookieUtils.addToCart(request, response, cartDTO);
-//        	Cookie cartCookie = CartCookieUtils.findCartCookie(request.getCookies());
-//        	log.info("$$$$$$$$$$$$$$$$ cartCookie = {}", cartCookie);
-//        	cartBO.addCart(accountId, cartCookie);
         	Map<Integer, Integer> productIdAndCount = CartCookieUtils.productIdAndCountCartCookie(request, cartCookieValue);
         	log.info("$$$$$$$$$$$$$$$$ productIdAndCount = {}", productIdAndCount);
         	cartBO.addCart(accountId, productIdAndCount);

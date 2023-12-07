@@ -45,6 +45,7 @@ public class AccountController {
 	public String signOut(HttpSession session) {
 		session.removeAttribute("email");
 		session.removeAttribute("accountId");
+		session.removeAttribute("userId");
 		return "redirect:/account/sign-in-view";
 	}
 	
