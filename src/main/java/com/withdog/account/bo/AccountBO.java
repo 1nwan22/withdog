@@ -37,7 +37,6 @@ public class AccountBO {
 				.userName(userName)
 				.password(password)
 				.vetYn("n")
-				.adminYn("n")
 				.build());
 		log.info("$$$$$$$$$$$$ accountEntity.getId() = {}", accountEntity.getId());
 		// entity는 넣은 것을 바로 꺼내올 수 있다. 그리고 엔티티 전부보다는 id만 넘기는게 좋다

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.withdog.cart.bo.CartBO;
-import com.withdog.cart.dto.CartDTO;
+import com.withdog.cart.domain.CartDTO;
 import com.withdog.product.bo.ProductBO;
 import com.withdog.product.entity.ProductEntity;
 

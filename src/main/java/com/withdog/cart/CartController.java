@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.withdog.cart.bo.CartBO;
-import com.withdog.cart.dto.CartView;
+import com.withdog.cart.domain.CartView;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

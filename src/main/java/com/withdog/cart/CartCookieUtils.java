@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.util.ObjectUtils;
 
-import com.withdog.cart.dto.CartDTO;
+import com.withdog.cart.domain.CartDTO;
 
 import lombok.extern.slf4j.Slf4j;
 

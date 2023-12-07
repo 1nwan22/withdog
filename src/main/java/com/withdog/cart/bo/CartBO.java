@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import com.withdog.cart.dto.CartDTO;
-import com.withdog.cart.dto.CartView;
+import com.withdog.cart.domain.CartDTO;
+import com.withdog.cart.domain.CartView;
 import com.withdog.cart.entity.CartEntity;
 import com.withdog.cart.repository.CartRepository;
 import com.withdog.product.bo.ProductBO;

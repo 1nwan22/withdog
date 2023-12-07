@@ -17,12 +17,14 @@
 					전체선택 선택삭제
 					</div>
 					<div>
-					선택
+					<label>
+						<input class="cart-radio" type="checkbox" name="cart" data-product-id="${cart.product.id}">선택
+					</label>
 					${cart.product.brand}
 					<img src="${cart.productImage.imagePath}" alt="상품썸네일" width="150px">
 					${cart.product.name}
 					${cart.product.price}
-					${cart.count}
+					<div class="cartCount" data-product-count="${cart.count}">${cart.count}</div>
 					
 					</div>
 				</div>
@@ -35,7 +37,7 @@
 				상품금액
 				할인금액
 				총결제금액
-				<button type="button" class="btn btn-success">구매하기</button>
+				<button type="button" id="orderBtn" class="btn btn-success">구매하기</button>
 			</div>
 		</div>
 	</div>
@@ -43,6 +45,12 @@
 
 <script>
 	$(document).ready(function() {
-		
+		$("#orderBtn").on("click", function() {
+			let checkedArr = [];
+			$("input[name=cart]:checked").each(function(){
+				checkedArr.push($(this).val());
+			});
+			console.log(checkedArr);
+		});
 	});
 </script>

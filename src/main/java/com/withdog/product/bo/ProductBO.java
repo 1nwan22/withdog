@@ -27,7 +27,6 @@ public class ProductBO {
 		return productRepository.findById(id).orElse(null);
 	}
 	
-	@Transactional
 	public Integer addProduct(String name, String brand, int price, int costPrice, int stock, String content, String status, List<MultipartFile> imageList) {
 		ProductEntity product = productRepository.save(
 				ProductEntity.builder()
@@ -61,7 +60,6 @@ public class ProductBO {
 		return null;
 	}
 	
-	@Transactional
 	public void deleteProduct(int id) {
 		productRepository.deleteById(id);
 	}

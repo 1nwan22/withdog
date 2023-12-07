@@ -1,7 +1,5 @@
-package com.withdog.cart.dto;
 
-import com.withdog.product.domain.ProductImage;
-import com.withdog.product.entity.ProductEntity;
+package com.withdog.cart.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,11 +14,17 @@ import lombok.ToString;
 @Builder
 @Setter
 @Getter
-public class CartView {
+public class CartDTO {
 
-	private ProductEntity product;
+	private int productId;
 	
-	private ProductImage productImage;
+	private String productBrand;
+	
+	private String productName;
+	
+	private int price;
 	
 	private int count;
+	
+	
 }
