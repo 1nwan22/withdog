@@ -22,7 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @Getter
-@Table(name="order")
+@Table(name="product_order")
 @Entity
 public class OrderEntity {
 
@@ -57,11 +57,14 @@ public class OrderEntity {
 	
 	private String status;
 	
-	@Column(name="departTime")
-	private Date departTime;
+	@Column(name="payAt")
+	private Date payAt;
 	
-	@Column(name="arrivalTime")
-	private Date arrivalTime;
+	@Column(name="departAt")
+	private Date departAt;
+	
+	@Column(name="arrivalAt")
+	private Date arrivalAt;
 	
 	@UpdateTimestamp
 	@Column(name="createdAt", updatable = false)

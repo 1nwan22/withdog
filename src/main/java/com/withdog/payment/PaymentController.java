@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PaymentController {
 
-	// http://localhost/checkout-view
-	@GetMapping("/checkout-view")
+	// http://localhost/checkout
+	@GetMapping("/checkout")
 	public String checkoutView(Model model) {
 		model.addAttribute("viewName", "pay/checkout");
 		model.addAttribute("viewNameR", "include/rightSide");

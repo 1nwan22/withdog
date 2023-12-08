@@ -47,6 +47,26 @@ header {height: 100px; background-color: antiquewhite;}
 /* 상품 상세 정보 */
 .product-detail-menu {height: 100px;}
 
+/* 체크아웃 */
+.order-info-box {width: 700px; min-height: 800px;}
+.shipping-info-box{
+	width: 700px; 
+	height: 300px;     
+	background: #fff;
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;}
+.payment-method-box {
+	width: 700px; 
+	height: 500px;
+	background: #fff;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;}
+.payment-info-box {width: 480px; min-height: 600px;}
+.product-info-box {width: 400px; min-height: 250px;}
+
 /* footer */
 footer {height: 100px; background-color: blanchedalmond;}
 

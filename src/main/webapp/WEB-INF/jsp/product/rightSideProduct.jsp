@@ -13,8 +13,8 @@
         총금액
     </div>
     <div>
-        <a href="/cart-view" id="cartBtn" class="btn btn-light form-control">장바구니</a>
-        <a href="/checkout-view" id="payBtn" class="btn btn-primary form-control">구매하기</a>
+        <a href="/cart" id="cartBtn" class="btn btn-light form-control">장바구니</a>
+        <button type="button" id="checkoutBtn" class="btn btn-primary form-control">구매하기</button>
     </div>
 </div>
 
@@ -77,5 +77,9 @@
 		    }
 		    return null;
 		}
+        
+        $("#order-btn").on("click", function() {
+        	
+        });
     });
 </script>

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.withdog.order.mapper.OrderedProductMapper">
 	<insert id="insertOrderedProductMapper" parameterType="map">
-		INSERT INTO `product_image`
+		INSERT INTO `ordered_product`
         (
             `orderId`
             ,`productId`
@@ -14,7 +14,7 @@
         <foreach collection="productIdAndCount" index="productId" item="count" separator=",">
 		(
 			#{orderId}
-			, #{index}
+			, #{productId}
 			, #{count}
 			, NOW()
 		)

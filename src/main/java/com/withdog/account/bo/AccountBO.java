@@ -28,7 +28,6 @@ public class AccountBO {
 		return accountRepository.findByUserId(userId);
 	}
 	
-	@Transactional
 	public Integer addAccount(String email, String userId, String userName, String password) {
 		AccountEntity accountEntity = accountRepository.save(
 				AccountEntity.builder()
@@ -43,7 +42,6 @@ public class AccountBO {
 		return accountEntity == null ? null : accountEntity.getId();
 	}
 	
-	@Transactional
 	public AccountEntity addAccountKakaoOauth(String email, String userId) {
 		AccountEntity accountEntity = accountRepository.save(
 				AccountEntity.builder()
@@ -57,7 +55,6 @@ public class AccountBO {
 		return accountEntity == null ? null : accountEntity;
 	}
 	
-	@Transactional
 	public String updateAccountAdminYnByEmail(String email, String yN) {
 		
 		AccountEntity account = accountRepository.findByEmail(email);

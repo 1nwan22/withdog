@@ -18,13 +18,13 @@
 					</div>
 					<div>
 					<label>
-						<input class="cart-radio" type="checkbox" name="cart" data-product-id="${cart.product.id}">선택
+						<input class="cart-radio" type="checkbox" name="cart" data-product-id="${cart.product.id}" data-product-count="${cart.count}">선택
 					</label>
 					${cart.product.brand}
 					<img src="${cart.productImage.imagePath}" alt="상품썸네일" width="150px">
 					${cart.product.name}
 					${cart.product.price}
-					<div class="cartCount" data-product-count="${cart.count}">${cart.count}</div>
+					<div class="cartCount" >${cart.count}</div>
 					
 					</div>
 				</div>
@@ -37,7 +37,7 @@
 				상품금액
 				할인금액
 				총결제금액
-				<button type="button" id="orderBtn" class="btn btn-success">구매하기</button>
+				<button type="button" class="order-btn btn btn-success">구매하기</button>
 			</div>
 		</div>
 	</div>
@@ -45,12 +45,31 @@
 
 <script>
 	$(document).ready(function() {
-		$("#orderBtn").on("click", function() {
-			let checkedArr = [];
+		$(".order-btn").on("click", function() {
+			let checkedCartList = new Array();
 			$("input[name=cart]:checked").each(function(){
-				checkedArr.push($(this).val());
+				let data = new Object();
+				data.productId = $(this).data("product-id");
+				data.count = $(this).data("product-count");
+				
+				checkedCartList.push(data);
 			});
-			console.log(checkedArr);
+			let jsonData = JSON.stringify(checkedCartList);
+			console.log(jsonData);
+			
+			$.ajax({
+				type:"post"
+				, url:"/order/create-order"
+				, data:jsonData
+				, contentType:"application/json"
+				
+				, success:function(data) {
+					location.href = "/checkout"
+				}
+				, error:function(request, status, error) {
+					alert("구매하기 불가 관리자에게 문의");
+				}
+			});
 		});
 	});
 </script>
