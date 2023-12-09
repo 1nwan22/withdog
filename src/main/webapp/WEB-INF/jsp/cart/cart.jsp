@@ -64,7 +64,7 @@
 				, contentType:"application/json"
 				
 				, success:function(data) {
-					location.href = "/checkout"
+					location.href = "/checkout/" + data.orderId
 				}
 				, error:function(request, status, error) {
 					alert("구매하기 불가 관리자에게 문의");

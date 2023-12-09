@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="p-2">
 	<div>
 		<h1>주문결제</h1>
@@ -21,13 +22,16 @@
 		<div class="payment-info-box">
 			주문상품 개수
 			<!-- 주문 상품 정보 -->
-			<div class="product-info-box">
-				브랜드
-				썸네일
-				상품명
-				상품가격
-				상품수량
-			</div>
+				<c:forEach var="orderedProduct" items="${order.orderedProductList}">
+				    <div class="product-info-box">
+				        <div>${orderedProduct.brand}</div>
+				        <img src="${orderedProduct.productImagePath}" width="150px">
+				        <div>상품명: ${orderedProduct.name}</div>
+				        <div>상품가격: ${orderedProduct.price}</div>
+				        <div>상품수량: ${orderedProduct.count}</div>
+				    </div>
+				</c:forEach>
+			<!-- 결제 정보 -->
 			<div class="payment-box">
 				총 상품금액
 				할인금액
@@ -46,7 +50,7 @@
 <script>
 	$(document).ready(function () {
 		$("#kakaoPayBtn").on("click", function() {
-			 
+			let orderId
 			$.ajax({
 				type:"POST"
 				, url:"/payment/kakao/ready"

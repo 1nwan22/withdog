@@ -31,6 +31,8 @@ public class ProductDTO {
 	
 	private String status;
 	
+	private String productImagePath;
+	
 	private List<ProductImage> productImageList;
 	
 }

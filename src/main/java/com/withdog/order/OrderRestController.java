@@ -38,10 +38,11 @@ public class OrderRestController {
 			log.warn("############ 비로그인 상태");
 			return result;
 		}
-		orderBO.addOrder(accountId, productIdAndCountJson);
+		int orderId = orderBO.addOrder(accountId, productIdAndCountJson);
 		
 		result.put("code", 200);
 		result.put("result", "success");
+		result.put("orderId", orderId);
 		
 		return result;
 	}

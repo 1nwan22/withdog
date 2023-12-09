@@ -4,7 +4,9 @@
 <div class="d-flex flex-row w-100">
 	<div id="logoWrap">
 		<div id="logo" class="d-flex justify-content-center align-items-center">
-			<h1>WITH DOG</h1>
+			<a href="/">
+				<img src="/static/img/logo_withdog.jpg" alt="logo">
+			</a>
 		</div>
 	</div>
 	<!-- 메뉴 그룹 시작 -->

@@ -39,6 +39,7 @@ public class ProductBO {
 		productDTO.setStock(productEntity.getStock());
 		productDTO.setContent(productEntity.getContent());
 		productDTO.setStatus(productEntity.getStatus());
+		productDTO.setProductImagePath(productImageBO.getImageByProductId(id).getImagePath());
 		productDTO.setProductImageList(productImageBO.getImageListByProductId(id));
 		
 		return productDTO;
