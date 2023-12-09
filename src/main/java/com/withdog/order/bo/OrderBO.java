@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import com.withdog.order.domain.OrderDTO;
+import com.withdog.order.domain.OrderedProductDTO;
 import com.withdog.order.entity.OrderEntity;
 import com.withdog.order.repository.OrderRepository;
 
@@ -25,7 +27,22 @@ public class OrderBO {
 		
 		int orderId = createOrder(accountId);
 		log.info("$$$$$$$$$$$$$$ orderId = {}", orderId);
+		
 		orderedProductBO.addOrderedProduct(orderId, productIdAndCountJson);
+		List<OrderedProductDTO> orderedProductDTOList = orderedProductBO.getOrderedProductDTOListByOrderId(orderId);
+		int shippingPrice = 0;
+		int totalPrice = 0;
+		for (OrderedProductDTO opdto : orderedProductDTOList) {
+			int price = opdto.getPrice();
+			int count = opdto.getCount();
+			totalPrice += price * count;
+		}
+		if (totalPrice < 40000) {
+			shippingPrice = 3000; 
+		}
+		
+		editOrder(orderId, shippingPrice, totalPrice);
+		
 		return orderId;
 	}
 
@@ -39,6 +56,18 @@ public class OrderBO {
 		log.info("$$$$$$$$$$$ orderEntity = {}", orderEntity);
 
 		return orderEntity.getId();
+	}
+	
+	public void editOrder(int id, int shippingPrice, int totalPrice) {
+		OrderEntity order = orderRepository.findById(id).orElse(null);
+		if (!ObjectUtils.isEmpty(order)) {
+			order = order.toBuilder()
+					.shippingPrice(shippingPrice)
+					.totalPrice(totalPrice)
+					.build();
+			
+			order = orderRepository.save(order);
+		}
 	}
 	
 	

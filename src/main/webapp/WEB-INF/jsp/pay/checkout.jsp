@@ -32,11 +32,11 @@
 				    </div>
 				</c:forEach>
 			<!-- 결제 정보 -->
-			<div class="payment-box">
+			<div class="payment-box" data-order-id="${order.order.id}">
 				총 상품금액
 				할인금액
 				배송비
-				총 결제금액
+					
 			<button type="button" id="kakaoPayBtn" class="btn btn-warning">카카오페이</button>
 			<button type="button" id="testBtn" class="btn btn-warning">테스트 결제</button>
 			</div>
@@ -50,14 +50,15 @@
 <script>
 	$(document).ready(function () {
 		$("#kakaoPayBtn").on("click", function() {
-			let orderId
+			let orderId = $(".payment-box").data("order-id");
+			console.log(orderId);
 			$.ajax({
 				type:"POST"
 				, url:"/payment/kakao/ready"
-				, data:{}
+				, data:{"orderId":orderId}
 			 
 			 	, success:function(data) {
-			 		alert("결제완료");
+			 		location.href= data.redirect
 			 	}
 			 	, error:function(request, status, error) {
 			 		alert("결제실패");
@@ -65,17 +66,6 @@
 			 });
 		 });
 		
-		/* function requestPayment() {
-		    PortOne.requestPayment({
-		      // 가맹점 storeId로 변경해주세요.
-		      storeId: 'store-4ff4af41-85e3-4559-8eb8-0d08a2c6ceec',
-		      paymentId: 'paymentId_{now()}',
-		      orderName: '나이키 와플 트레이너 2 SD',
-		      totalAmount: 1000,
-		      currency: 'CURRENCY_KRW',
-		      pgProvider: 'PG_PROVIDER_TOSSPAYMENTS',
-		      payMethod: "CARD"
-		    });
-		  } */
+
 	});
 </script>

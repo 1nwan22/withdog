@@ -24,10 +24,6 @@ public class OrderedProductBO {
 	private final OrderedProductMapper orderedProductMapper;
 	private final ProductBO productBO;
 	
-	public List<OrderedProduct> getOrderedProductListByOrderId(int orderId) {
-		return orderedProductMapper.selectOrderedProductListByOrderId(orderId);
-	}
-	
 	public void addOrderedProduct(int orderId, List<Map<String, Object>> productIdAndCountJson) {
 		Map<Integer, Integer> productIdAndCount = new HashMap<>(productIdAndCountJson.size());
 		for (Map<String, Object> pac : productIdAndCountJson) {
@@ -39,17 +35,6 @@ public class OrderedProductBO {
 		
 		orderedProductMapper.insertOrderedProductMapper(orderId, productIdAndCount);
 	}
-	
-//	public List<ProductDTO> getProductDTOListByOrderId(int orderId) {
-//		List<OrderedProduct> opl = orderedProductMapper.selectOrderedProductListByOrderId(orderId);
-//		List<ProductDTO> orderedProductList = new ArrayList<>(opl.size());
-//		for (OrderedProduct op : opl) {
-//			ProductDTO product = productBO.getProductDTOById(op.getProductId());
-//			orderedProductList.add(product);
-//		}
-//	
-//		return orderedProductList;
-//	}
 	
 	public List<OrderedProductDTO> getOrderedProductDTOListByOrderId(int orderId) {
 		List<OrderedProduct> opl = orderedProductMapper.selectOrderedProductListByOrderId(orderId);
@@ -69,10 +54,7 @@ public class OrderedProductBO {
 			opd.setProductImagePath(pd.getProductImagePath());
 			opd.setCount(op.getCount());
 			orderedProductDTOList.add(opd);
-			
 		}
-		
-		
 		
 		return orderedProductDTOList;
 	}

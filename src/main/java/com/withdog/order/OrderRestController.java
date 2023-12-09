@@ -39,7 +39,7 @@ public class OrderRestController {
 			return result;
 		}
 		int orderId = orderBO.addOrder(accountId, productIdAndCountJson);
-		
+		log.info("$$$$$$$$$$$$$$$$$$$ orderId={}", orderId);
 		result.put("code", 200);
 		result.put("result", "success");
 		result.put("orderId", orderId);

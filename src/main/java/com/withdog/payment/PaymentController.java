@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PaymentController {
 
 	private final OrderViewBO orderViewBO;
+	
 	// http://localhost/checkout
 	@GetMapping("/checkout/{orderId}")
 	public String checkoutView(Model model, HttpSession session,

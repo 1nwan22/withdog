@@ -16,6 +16,19 @@
 			orderId = #{orderId}
 		
 	</select>
+	
+	<select id="selectOrderedProductByOrderId" parameterType="int" resultType="com.withdog.order.domain.OrderedProduct">
+		SELECT 
+			`id`
+			,`orderId`
+			,`productId`
+			,`count`
+			,`createdAt`
+		FROM 
+			`ordered_product`
+		WHERE
+			orderId = #{orderId}
+	</select>
 
 
 	<insert id="insertOrderedProductMapper" parameterType="map">

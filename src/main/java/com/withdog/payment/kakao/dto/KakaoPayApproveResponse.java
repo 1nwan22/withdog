@@ -1,6 +1,6 @@
 package com.withdog.payment.kakao.dto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,8 +23,8 @@ public class KakaoPayApproveResponse {
     private String item_name; // 상품명
     private String item_code; // 상품 코드
     private Integer quantity; // 상품 수량
-    private Date created_at; // 결제 요청 시간
-    private Date approved_at; // 결제 승인 시간
+    private LocalDateTime created_at; // 결제 요청 시간
+    private LocalDateTime approved_at; // 결제 승인 시간
     private String payload; // 결제 승인 요청에 대해 저장 값, 요청 시 전달 내용
     
     

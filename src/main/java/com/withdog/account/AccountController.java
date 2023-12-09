@@ -46,6 +46,7 @@ public class AccountController {
 		session.removeAttribute("email");
 		session.removeAttribute("accountId");
 		session.removeAttribute("userId");
+		session.removeAttribute("orderId");
 		return "redirect:/account/sign-in-view";
 	}
 	

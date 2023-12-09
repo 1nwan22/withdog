@@ -11,6 +11,8 @@ import com.withdog.order.domain.OrderedProduct;
 @Repository
 public interface OrderedProductMapper {
 	
+	public OrderedProduct selectOrderedProductByOrderId(int orderId);
+	
 	public List<OrderedProduct> selectOrderedProductListByOrderId(int orderId);
 
 	public void insertOrderedProductMapper(
