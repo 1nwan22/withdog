@@ -30,14 +30,16 @@ public class KakaoPayRestController {
     @PostMapping("/ready")
     public KakaoPayReadyResponse kakaoPayReady() {
 
-        return kakaoPayBO.kakaoPayReady();
+    	
+        return kakaoPayBO.kakaoPayReady(int orderId, int accountId,
+    			String productName, int count, int totalPrice);
     }
     
     @GetMapping("/success")
     public Map<String, Object> kakaoPaySuccess(@RequestParam("pg_token") String pgToken) {
 
     	log.error("@@@@@@@@@@@@@@ pgToken = {}", pgToken);
-        KakaoPayApproveResponse kakaoPayApproveResponse = kakaoPayBO.kakaoPayApprove(pgToken);
+        KakaoPayApproveResponse kakaoPayApproveResponse = kakaoPayBO.kakaoPayApprove(pgToken, orderId, accountId);
         log.info("$$$$$$$$$$$$$$$ kakaoPayApproveResponse = {}", kakaoPayApproveResponse);
         Map<String, Object> result = new HashMap<>();
         result.put("code", 200);

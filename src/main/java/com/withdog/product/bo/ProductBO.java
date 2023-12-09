@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.withdog.product.domain.ProductDTO;
 import com.withdog.product.domain.ProductView;
 import com.withdog.product.entity.ProductEntity;
 import com.withdog.product.repository.ProductRepository;
@@ -25,6 +26,23 @@ public class ProductBO {
 	
 	public ProductEntity getProductById(int id) {
 		return productRepository.findById(id).orElse(null);
+	}
+	
+	public ProductDTO getProductDTOById(int id) {
+		ProductEntity productEntity = productRepository.findById(id).orElse(null);
+		ProductDTO productDTO = new ProductDTO();
+		productDTO.setId(id);
+		productDTO.setName(productEntity.getName());
+		productDTO.setBrand(productEntity.getBrand());
+		productDTO.setPrice(productEntity.getPrice());
+		productDTO.setCostPrice(productEntity.getCostPrice());
+		productDTO.setStock(productEntity.getStock());
+		productDTO.setContent(productEntity.getContent());
+		productDTO.setStatus(productEntity.getStatus());
+		productDTO.setProductImageList(productImageBO.getImageListByProductId(id));
+		
+		return productDTO;
+		
 	}
 	
 	public Integer addProduct(String name, String brand, int price, int costPrice, int stock, String content, String status, List<MultipartFile> imageList) {

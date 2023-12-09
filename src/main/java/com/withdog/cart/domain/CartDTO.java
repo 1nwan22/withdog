@@ -11,7 +11,6 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Setter
 @Getter
 public class CartDTO {

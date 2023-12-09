@@ -31,12 +31,17 @@ public class OrderRestController {
 			@RequestBody List<Map<String, Object>> productIdAndCountJson) {
 		Map<String, Object> result = new HashMap<>();
 		Integer accountId = (Integer) session.getAttribute("accountId");
+		log.info("$$$$$$$$$$$$ accountId = {}", accountId);
 		if (ObjectUtils.isEmpty(accountId)) {
 			result.put("code", 500);
 			result.put("errorMessage", "로그인 후 이용해주세요.");
+			log.warn("############ 비로그인 상태");
 			return result;
 		}
-		Long orderId = orderBO.addOrder(accountId, productIdAndCountJson);
+		orderBO.addOrder(accountId, productIdAndCountJson);
+		
+		result.put("code", 200);
+		result.put("result", "success");
 		
 		return result;
 	}

@@ -1,7 +1,5 @@
 package com.withdog.account.kakao;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
@@ -21,7 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class KakaoBO {
 	
-	private Logger logger = LoggerFactory.getLogger(KakaoBO.class);
 	private final WebClient webClient;
 	private final AccountBO accountBO;
 	private static final String TOKEN_URL = "https://kauth.kakao.com/oauth/token";
@@ -106,8 +103,8 @@ public class KakaoBO {
 	public AccountEntity addAccount(KakaoUser kakaoUser) {
 		String email = kakaoUser.getKakao_account().getEmail();
 		String userId = email.split("@")[0] + System.currentTimeMillis();
-		logger.info("$$$$$$$$$$$$$$ email = {}", email);
-		logger.info("$$$$$$$$$$$$$$ userId = {}", userId);
+		log.info("$$$$$$$$$$$$$$ email = {}", email);
+		log.info("$$$$$$$$$$$$$$ userId = {}", userId);
 		
 		return accountBO.getAccountEntityByEmail(email) != null ? accountBO.getAccountEntityByEmail(email) : accountBO.addAccountKakaoOauth(email, userId);
 	}

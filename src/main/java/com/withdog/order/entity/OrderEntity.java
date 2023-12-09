@@ -28,7 +28,7 @@ public class OrderEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private int id;
 	
 	@Column(name="accountId")
 	private int accountId;
@@ -53,7 +53,7 @@ public class OrderEntity {
 	private int shippingPrice;
 	
 	@Column(name="totalPrice")
-	private long totalPrice;
+	private int totalPrice;
 	
 	private String status;
 	

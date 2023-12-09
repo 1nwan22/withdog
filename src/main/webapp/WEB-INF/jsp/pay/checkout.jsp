@@ -61,7 +61,7 @@
 			 });
 		 });
 		
-		function requestPayment() {
+		/* function requestPayment() {
 		    PortOne.requestPayment({
 		      // 가맹점 storeId로 변경해주세요.
 		      storeId: 'store-4ff4af41-85e3-4559-8eb8-0d08a2c6ceec',
@@ -72,6 +72,6 @@
 		      pgProvider: 'PG_PROVIDER_TOSSPAYMENTS',
 		      payMethod: "CARD"
 		    });
-		  }
+		  } */
 	});
 </script>
