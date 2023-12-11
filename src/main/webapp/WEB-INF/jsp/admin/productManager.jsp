@@ -45,14 +45,14 @@
 				            <td>${product.content}</td>
 				            <td>${product.status}</td>
 				            <td>
-				                <button type="button" class="edit-product-btn btn btn-warning btn-sm" data-toggle="modal"  data-target="#modal">수정</button>
+				                <button type="button" class="edit-product-btn btn btn-warning btn-sm" data-toggle="modal"  data-target="#modalProductManager">수정</button>
 				            </td>
 				            <td>
 				                <button type="button" class="delete-product-btn btn btn-danger btn-sm" data-product-id="${product.id}">삭제</button>
 				            </td>
 				        </tr>
 				        <!-- Modal -->
-						<div class="modal fade" id="modal">
+						<div class="modal fade" id="modalProductManager">
 							<!-- modal-sm:작은 모달 modal-dialog-centered: 수직 기준 가운데 -->
 							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content">

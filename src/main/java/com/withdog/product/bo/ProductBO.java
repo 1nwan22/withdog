@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.withdog.inquiry.bo.InquiryBO;
 import com.withdog.product.domain.ProductDTO;
 import com.withdog.product.domain.ProductView;
 import com.withdog.product.entity.ProductEntity;
@@ -23,6 +24,7 @@ public class ProductBO {
 
 	private final ProductRepository productRepository;
 	private final ProductImageBO productImageBO;
+	private final InquiryBO inquiryBO;
 	
 	public ProductEntity getProductById(int id) {
 		return productRepository.findById(id).orElse(null);
@@ -105,6 +107,7 @@ public class ProductBO {
 			productView.setProductImageList(productImageBO.getImageListByProductId(product.getId()));
 			
 			// 리뷰들
+			productView.setInquiryList(inquiryBO.ge);
 			
 			
 			// 문의들

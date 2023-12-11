@@ -12,14 +12,25 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.util.ObjectUtils;
 
-import lombok.Getter;
+import com.withdog.inquiry.dto.InquiryDTO;
+import com.withdog.inquiry.entity.InquiryEntity;
+import com.withdog.inquiry.repository.InquiryRepository;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequiredArgsConstructor
 @SpringBootTest // spring boot를 기동 (BO 테스트 등) 가볍게 볼 때는 어노테이션 없으면 순수한 자바
 class WithDogApplicationTests {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final InquiryRepository inquiryRepository;
 	
 	@Getter
 	public enum Status { // domain이나 entity 패키지에 넣기 controller에서 enum으로 변환하고 DB까지 

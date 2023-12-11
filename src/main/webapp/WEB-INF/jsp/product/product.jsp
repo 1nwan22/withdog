@@ -18,7 +18,7 @@
 		        <input type="text" id="count" value="0" readonly>
 				<button type="button" class="plus-btn">+</button>
 			</div>
-			<button type="button" class="addCart btn btn-success" data-product-id="${product.product.id}">장바구니 추가</button>
+			<button type="button" class="addCart btn btn-success" id="addCartBtn" data-product-id="${product.product.id}">장바구니 추가</button>
 		</div>
 	</div>
 	<!-- 상품 상세 정보 박스 -->
@@ -44,7 +44,145 @@
 		
 		<!-- 상품 상세 정보 -->
 		<div>
-		
+			<!-- 상세 설명 -->
+			<div>
+			
+			</div>
+			
+			<!-- 상품평 -->
+			<div>
+				
+			</div>
+			
+			<!-- 상품문의 -->
+			<div>
+				<div>상품문의하기</div> + 상품문의 개수
+				<button class="product-inquiry-btn btn btn-info" data-toggle="modal"  data-target="#modalProductInquriy">문의하기</button>
+				<a href="#">내 문의보기</a>
+				<a href="#">전체 문의보기</a>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>문의종류</th>
+							<th>답변상태</th>
+							<th>제목</th>
+							<th>문의자</th>
+							<th>등록일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<!-- 문의하기 페이징 -->
+				
+				<!-- 문의하기 모달 -->
+				<div class="modal fade" id="modalProductInquriy">
+					<!-- modal-sm:작은 모달 modal-dialog-centered: 수직 기준 가운데 -->
+					<div class="modal-dialog modal-dialog-centered modal-lg">
+						<div class="modal-content">
+							<div class="product-info p-3 border-bottom">
+								<div>
+									<h2>판매자에게 문의하기</h2>
+									<hr>
+									<table>
+										<tbody>
+											<tr>
+												<th>문의종류</th>
+												<td>
+													<ul>
+														<li>
+															<span>
+																<em><input type="radio" id="ic1" name="inquiryCategory" class="" value="1" checked></em>
+																<label for="ic1">상품</label>
+															</span>
+														</li>
+														<li>
+															<span>
+																<em><input type="radio" id="ic2" name="inquiryCategory" class="" value="2" ></em>
+																<label for="ic2">배송</label>
+															</span>
+														</li>
+														<li>
+															<span>
+																<em><input type="radio" id="ic3" name="inquiryCategory" class="" value="3" ></em>
+																<label for="ic3">취소</label>
+															</span>
+														</li>
+														<li>
+															<span>
+																<em><input type="radio" id="ic4" name="inquiryCategory" class="" value="4" ></em>
+																<label for="ic4">반품</label>
+															</span>
+														</li>
+														<li>
+															<span>
+																<em><input type="radio" id="ic5" name="inquiryCategory" class="" value="5" ></em>
+																<label for="ic5">교환</label>
+															</span>
+														</li>
+														<li>
+															<span>
+																<em><input type="radio" id="ic6" name="inquiryCategory" class="" value="6" ></em>
+																<label for="ic6">기타</label>
+															</span>
+														</li>
+														
+													</ul>
+												</td>
+											</tr>
+											<tr>
+												<th>상품명</th>
+												<td>${product.product.name}</td>
+											</tr>
+											<tr>
+												<th>아이디</th>
+												<td></td>
+											</tr>
+											<tr>
+												<th>제목</th>
+												<td>
+													<input type="text" id="inquirySubject" class="form-control">
+												</td>
+											</tr>
+											<tr>
+												<th>내용</th>
+												<td>
+													<textarea title="내용" id="inquiryContent" class="form-control"></textarea>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<div>
+										<input type="checkbox" id="checkSecret" class="form-control">
+										<label for="checkSecret">비밀글로 문의하기</label>
+									</div>
+								</div>
+							</div>
+							<div class="py-3 border-bottom text-center">
+								<button type="button" class="btn btn-primary" id="inquirySaveBtn" data-dismiss="modal">확인</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 문의하기 모달 끝 -->
+				
+			</div>
+			
+			<!-- 교환/반품안내 -->
+			<div>
+			
+			</div>
 		</div>
 	</div>
 	<!-- 상품 상세 정보 박스 끝 -->
@@ -102,6 +240,47 @@
 
 		    // 결과를 #count input에 설정
 		    $("#count").val(currentCount);
+		});
+		
+		/* 초기화 */
+		$(".product-inquiry-btn").on("click", function() {
+			$("#ic1").prop("checked", true);
+			$("#inquirySubject").val("");
+			$("#inquiryContent").val("");
+			$("#checkSecret").prop("checked", false);
+		});
+		
+		/* 문의하기 저장 */
+		$("#inquirySaveBtn").on("click", function() {
+			let productId = $("#addCartBtn").data("product-id");
+			let inquiryCategory = $("input:radio[name='inquiryCategory']:checked").val();
+			let inquirySubject = $("#inquirySubject").val().trim();
+			let inquiryContent = $("#inquiryContent").val().trim();
+			let inquirySecret = 2;
+			if ($("#checkSecret").is(":checked")) {
+				let inquirySecret = 1;
+			}
+			
+			console.log(productId);
+			console.log(inquiryCategory);
+			console.log(inquirySubject);
+			console.log(inquiryContent);
+			console.log(inquirySecret);
+			
+			$.ajax({
+				type:"post"
+				, url:"/inquiry/add"
+				, data:{"productId":productId, "inquiryCategory":inquiryCategory, "inquirySubject":inquirySubject, "inquiryContent":inquiryContent, "inquirySecret":inquirySecret}
+			
+				, success:function(data) {
+					alert("문의하기 성공");
+					location.reload(true);
+				}
+				, error:function(request, status, error) {
+					alert("문의하기 실패");
+				}
+			});
+			
 		});
 		
 		  

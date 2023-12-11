@@ -2,6 +2,7 @@ package com.withdog.product.domain;
 
 import java.util.List;
 
+import com.withdog.inquiry.dto.InquiryDTO;
 import com.withdog.product.entity.ProductEntity;
 
 import lombok.Data;
@@ -14,6 +15,8 @@ public class ProductView {
 	private ProductImage productImage;
 	
 	private List<ProductImage> productImageList;
+	
+	private List<InquiryDTO> inquiryList;
 	
 	//TODO 리뷰 , 평점 , 문의	
 }

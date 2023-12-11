@@ -38,6 +38,8 @@
 			 return;
 		 }
 		 
+		 /* 비밀번호 일치 추가 */
+		 
 		 $.ajax({
 			type:"post"
 			 , url:"/account/sign-in"
