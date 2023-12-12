@@ -1,5 +1,7 @@
 package com.withdog.product;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -52,10 +54,13 @@ public class ProductController {
 	}
 	
 	@GetMapping("/{productId}")
-	public String productView(Model model, 
+	public String productView(Model model, HttpSession session,
 			@PathVariable int productId) {
 		log.info("$$$$$$ info productId = {}", productId);
+		String userId = (String) session.getAttribute("userId");
 		ProductView product = productBO.generateProductView(productId);
+		
+		model.addAttribute("userId", userId);
 		model.addAttribute("product", product);
 		model.addAttribute("viewName", "product/product");
 		model.addAttribute("viewNameR", "product/rightSideProduct");

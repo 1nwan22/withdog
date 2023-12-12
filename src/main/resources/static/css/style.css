@@ -1,5 +1,11 @@
 @charset "UTF-8";
 a, a:hover {text-decoration: none; color: black;}
+hr {unicode-bidi: isolate;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    overflow: hidden;}
 
 /* 헤더 */
 header {height: 100px; background-color: antiquewhite;}
@@ -12,9 +18,9 @@ header {height: 100px; background-color: antiquewhite;}
 
 
 /* 섹션 */
-.contents {min-height: 880px; background-color: bisque;}
+.contents {min-height: 880px;}
 .content-box {display: flex;}
-.content {width: 64%; background-color: beige; margin: 0%;}
+.content {width: 64%;  margin: 0%;}
 
 /* 사이드*/
 #leftSide {min-height: 880px; width: 18%; background-color: cornsilk; margin: 0%;}
@@ -35,11 +41,45 @@ header {height: 100px; background-color: antiquewhite;}
 .delete-product-btn {height: 30px;}
 .admin-permission-btn {height: 50px; font-size: 13px;}
 
+/* 카트 */
+.cart-img {
+	background-image: url("/static/img/cart.png");
+		background-size : 100%;
+		background-color: #ffffff;
+		border: none;
+		width: 30px;
+		height: 30px;
+}
+
+/* 좋아요 버튼*/
+.button-favorite {
+		background-image: url("/static/img/heart_empty.png");
+		background-size : 100%;
+		background-color: #ffffff;
+		border: none;
+		width: 30px;
+		height: 30px;}
+		
+.button-favorite-active {
+		background-image: url("/static/img/heart_full.png");
+		background-size : 100%;
+		background-color: #ffffff;
+		border: none;
+		width: 30px;
+		height: 30px;
+}
+
 /* 상품 목록 */
 #productImage {height: 750px; overflow: hidden;}
 #productImage img {width: 100%; height: auto;}
-.product-box {width: 360px; height: 550px; border-radius: 5%; background-color: azure;}
-.product-box:hover {box-shadow: 5px 5px gray;}
+.product-boxes {padding: 32px;}
+.product-box {
+ 	width: 360px;
+    height: 520px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(150, 150, 150, 0.5);
+    transition: box-shadow 0.3s ease;}
+.product-box:hover {box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.2);}
 .product-category-menu {background-color: coral;}
 
 .fixed {position: fixed; top: 0px; width: 64%;}

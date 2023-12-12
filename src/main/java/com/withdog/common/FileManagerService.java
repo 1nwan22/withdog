@@ -17,10 +17,10 @@ public class FileManagerService {
 	private Logger logger = LoggerFactory.getLogger(FileManagerService.class); // this.getclass()
 	
 	// 실제 업로드가 된 이미지가 저장될 경로(서버) 주소마지막에 / 붙이기
-//	public static final String FILE_UPLOAD_PATH = "C:\\Salt\\coding\\project\\withdog\\workspace\\images/";
+	public static final String FILE_UPLOAD_PATH = "C:\\Salt\\coding\\project\\withdog\\workspace\\images/";
 	
 	//학원용
-	public static final String FILE_UPLOAD_PATH = "D:\\godh22\\7_project\\withdog\\workspace\\images/";
+//	public static final String FILE_UPLOAD_PATH = "D:\\godh22\\7_project\\withdog\\workspace\\images/";
 	
 	
 	// input: userLoginId, file(이미지)		output: web imagePath

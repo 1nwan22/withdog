@@ -1,7 +1,5 @@
 package com.withdog.inquiry.dto;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +19,7 @@ public class InquiryDTO {
 	
 	private int productId;
 	
-	private int category;
+	private String category;
 	
 	private String subject;
 	
@@ -33,5 +31,5 @@ public class InquiryDTO {
 	
 	private String reply;
 	
-	private LocalDateTime createdAt;
+	private String createdAt;
 }

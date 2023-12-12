@@ -1,6 +1,7 @@
 package com.withdog.inquiry.bo;
 
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,6 @@ import org.springframework.stereotype.Service;
 import com.withdog.inquiry.dto.InquiryDTO;
 import com.withdog.inquiry.entity.InquiryEntity;
 import com.withdog.inquiry.repository.InquiryRepository;
-import com.withdog.product.domain.ProductView;
-import com.withdog.product.entity.ProductEntity;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +48,42 @@ public class InquiryBO {
 	}
 	
 	public List<InquiryDTO> getInquiryListByProductId(int productId) {
+		List<InquiryEntity> inquiryEntityList = inquiryRepository.findByProductId(productId);
+		List<InquiryDTO> inquiryList = new ArrayList<>(inquiryEntityList.size());
 		
+		for (InquiryEntity inquiryEntity : inquiryEntityList) {
+			InquiryDTO inquiry = new InquiryDTO();
+			
+			inquiry.setId(inquiryEntity.getId());
+			inquiry.setAccountId(inquiryEntity.getAccountId());
+			inquiry.setProductId(inquiryEntity.getProductId());
+			String category = null;
+			if (inquiryEntity.getCategory() == 1) {
+				category = "상품";
+			} else if (inquiryEntity.getCategory() == 2) {
+				category = "배송";
+			} else if (inquiryEntity.getCategory() == 3) {
+				category = "취소";
+			} else if (inquiryEntity.getCategory() == 4) {
+				category = "반품";
+			} else if (inquiryEntity.getCategory() == 5) {
+				category = "교환";
+			} else {
+				category = "기타";
+			}
+			inquiry.setCategory(category);
+			inquiry.setSubject(inquiryEntity.getSubject());
+			inquiry.setContent(inquiryEntity.getContent());
+			inquiry.setSecret(inquiryEntity.getSecret());
+			inquiry.setStatus(inquiryEntity.getStatus());
+			inquiry.setReply(inquiryEntity.getReply());
+			String createdAt = inquiryEntity.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			inquiry.setCreatedAt(createdAt);
+			
+			inquiryList.add(inquiry);
+		}
+		
+		return inquiryList;
 	}
 	
 	public Page<InquiryDTO> generateProductViewPage(Pageable pageable) {
@@ -63,13 +97,28 @@ public class InquiryBO {
 			inquiry.setId(inquiryEntity.getId());
 			inquiry.setAccountId(inquiryEntity.getAccountId());
 			inquiry.setProductId(inquiryEntity.getProductId());
-			inquiry.setCategory(inquiryEntity.getCategory());
+			String category = null;
+			if (inquiryEntity.getCategory() == 1) {
+				category = "상품";
+			} else if (inquiryEntity.getCategory() == 2) {
+				category = "배송";
+			} else if (inquiryEntity.getCategory() == 3) {
+				category = "취소";
+			} else if (inquiryEntity.getCategory() == 4) {
+				category = "반품";
+			} else if (inquiryEntity.getCategory() == 5) {
+				category = "교환";
+			} else {
+				category = "기타";
+			}
+			inquiry.setCategory(category);
 			inquiry.setSubject(inquiryEntity.getSubject());
 			inquiry.setContent(inquiryEntity.getContent());
 			inquiry.setSecret(inquiryEntity.getSecret());
 			inquiry.setStatus(inquiryEntity.getStatus());
 			inquiry.setReply(inquiryEntity.getReply());
-			inquiry.setCreatedAt(inquiryEntity.getCreatedAt());
+			String createdAt = inquiryEntity.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			inquiry.setCreatedAt(createdAt);
 			
 			//★★★★★ 마지막에 ViewList에 객체를 넣는다
 			inquiryList.add(inquiry);

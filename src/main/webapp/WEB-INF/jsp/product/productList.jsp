@@ -23,9 +23,10 @@
 		</ul>
 	</nav>
 	<!-- 상품 목록 시작 -->
-	<div class="product-boxes d-flex flex-wrap justify-content-between p-3">
+	<div class="product-boxes d-flex flex-wrap justify-content-between">
 		<c:forEach items="${productList.content}" var="product">
-			<a href="/product/${product.product.id}" class="product-box mt-3" data-product-id="${product.product.id}">
+		<div class="product-box my-3">
+			<a href="/product/${product.product.id}" data-product-id="${product.product.id}">
 				<div class="d-flex justify-content-center w-100">
 					<img src="${product.productImage.imagePath}" width="312px" alt="상품대표이미지">
 				</div>
@@ -34,10 +35,15 @@
 					<div>${product.product.brand}</div>
 					<div>${product.product.name}</div>
 					<hr>
-					<div>${product.product.price}원</div>
-					<button type="button" class="addCart btn btn-success">장바구니 추가</button>
 				</div>
 			</a>
+			<div class="d-flex justify-content-between">
+				<div>${product.product.price}원</div>
+				<div>
+					<button type="button" class="favorite-button button-favorite" aira-pressed="false"></button>
+				</div>
+			</div>
+		</div>
 		</c:forEach>
 	</div>
 	<!-- 상품 목록 끝 -->
@@ -88,7 +94,16 @@
 		    }
 		  });
 		
-		$(".product-box").on()
+		$(".favorite-button").on("click", function() {
+			if ($(this).hasClass("button-favorite")) {
+				$(this).removeClass("button-favorite");
+				$(this).addClass("button-favorite-active");
+				return;
+			} else {
+				$(this).removeClass("button-favorite-active");
+				$(this).addClass("button-favorite");
+			}
+		});
 	});
 
 </script>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div id="productWrap" class="p-4">
 	<!-- 상품 정보 -->
 	<div class="d-flex w-100">
@@ -18,7 +20,8 @@
 		        <input type="text" id="count" value="0" readonly>
 				<button type="button" class="plus-btn">+</button>
 			</div>
-			<button type="button" class="addCart btn btn-success" id="addCartBtn" data-product-id="${product.product.id}">장바구니 추가</button>
+			<button type="button" class="add-cart cart-img" id="addCartBtn" data-product-id="${product.product.id}"></button>
+			<button type="button" class="favorite-button button-favorite"></button>
 		</div>
 	</div>
 	<!-- 상품 상세 정보 박스 -->
@@ -72,14 +75,16 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${product.inquiryList}" var="productInquiry">
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>${productInquiry.id}</td>
+							<td>${productInquiry.category}</td>
+							<td>${productInquiry.status}</td>
+							<td>${productInquiry.subject}</td>
+							<td>${userId}</td>
+							<td>${productInquiry.createdAt}</td>
 						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				
@@ -204,7 +209,7 @@
 		});
 		
 		/* 장바구니 추가 */
-		$(".addCart").on("click", function() {
+		$(".add-cart").on("click", function() {
 			let productId = $(this).data("product-id");
 			let count = $("#count").val();
 			
@@ -281,6 +286,17 @@
 				}
 			});
 			
+		});
+		
+		$(".favorite-button").on("click", function() {
+			if ($(this).hasClass("button-favorite")) {
+				$(this).removeClass("button-favorite");
+				$(this).addClass("button-favorite-active");
+				return;
+			} else {
+				$(this).removeClass("button-favorite-active");
+				$(this).addClass("button-favorite");
+			}
 		});
 		
 		  

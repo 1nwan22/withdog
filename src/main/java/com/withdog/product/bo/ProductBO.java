@@ -107,10 +107,10 @@ public class ProductBO {
 			productView.setProductImageList(productImageBO.getImageListByProductId(product.getId()));
 			
 			// 리뷰들
-			productView.setInquiryList(inquiryBO.ge);
 			
 			
 			// 문의들
+			productView.setInquiryList(inquiryBO.getInquiryListByProductId(product.getId()));
 			
 			//★★★★★ 마지막에 ViewList에 객체를 넣는다
 			productList.add(productView);
@@ -136,6 +136,7 @@ public class ProductBO {
 		
 			
 		// 문의들
+		productView.setInquiryList(inquiryBO.getInquiryListByProductId(productId));
 			
 		return  productView;
 	}
