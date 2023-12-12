@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.withdog.common.Paging;
-import com.withdog.product.bo.ProductBO;
-import com.withdog.product.entity.ProductEntity;
+import com.withdog.product.bo.ProductViewBO;
+import com.withdog.product.domain.ProductView;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class AdminController {
 
-	private final ProductBO productBO;
+	private final ProductViewBO productViewBO;
 	private final Paging paging;
 	
 	// http://localhost/admin/dash-board
@@ -40,7 +40,7 @@ public class AdminController {
 	@RequestMapping("/product-manager")
 	public String productManager(Model model, @PageableDefault(size = 12, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 		log.info("$$$$$$ info pageable = {}", pageable);
-		Page<ProductEntity> productList = productBO.getProductList(pageable);
+		Page<ProductView> productList = productViewBO.generateProductViewPage(pageable);
 		int currentPage = productList.getPageable().getPageNumber();
 		int totalPages = productList.getTotalPages();
 		model.addAttribute("minBundlePage", paging.getMinBundlePage(currentPage));

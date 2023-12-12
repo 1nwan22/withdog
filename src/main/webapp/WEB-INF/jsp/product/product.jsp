@@ -58,6 +58,9 @@
 			</div>
 			
 			<!-- 상품문의 -->
+			<div id="productInquiry">
+				<jsp:include page="../inquiry.jsp"></jsp:include>
+			</div>
 			<div>
 				<div>상품문의하기</div> + 상품문의 개수
 				<button class="product-inquiry-btn btn btn-info" data-toggle="modal"  data-target="#modalProductInquriy">문의하기</button>
@@ -88,7 +91,39 @@
 					</tbody>
 				</table>
 				
-				<!-- 문의하기 페이징 -->
+				<!-- paging 시작 -->
+				<div class="text-xs-center">
+					<ul class="pagination justify-content-center">
+						<c:choose>
+							<c:when test="${inquiryPage.first}"></c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="/product/${product.product.id}/?page=0">&lt;&lt;</a></li>
+								<li class="page-item"><a class="page-link" href="/product/${product.product.id}/?page=${inquiryPage.number - 1}">&lt;</a></li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:forEach begin="${minBundlePage}" end="${maxBundlePage}" var="currentPage">
+							<c:url var="pageUrl" value="/product/${product.product.id}">
+								<c:param name="page" value="${currentPage - 1}"/>
+							</c:url>
+								
+							<li class="page-item ${inquiryPage.number + 1 == currentPage ? 'active' : ''}">
+								<a class="page-link" href="${pageUrl}">${currentPage}</a>
+							</li>
+						</c:forEach>
+						
+						<c:choose>
+							<c:when test="${inquiryPage.last}"></c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="/product/${product.product.id}/?page=${inquiryPage.number + 1}">&gt;</a></li>
+								<li class="page-item"><a class="page-link" href="/product/${product.product.id}/?page=${inquiryPage.totalPages - 1}">&gt;&gt;</a></li>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+				</div>
+				<!-- paging 끝 -->
+				
+				
 				
 				<!-- 문의하기 모달 -->
 				<div class="modal fade" id="modalProductInquriy">

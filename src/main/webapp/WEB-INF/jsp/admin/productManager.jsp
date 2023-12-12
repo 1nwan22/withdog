@@ -5,8 +5,7 @@
 
 	<!-- 제품 이미지 영역 시작 -->
 	<div class="d-flex justify-content-center align-items-center p-3 col-4">
-		<div id="productImageAdminAdmin">
-			
+		<div id="productImageAdmin">
 		</div>
 	</div>
 	<!-- 제품 이미지 영역 끝 -->
@@ -31,24 +30,24 @@
 				</thead>
 				<tbody>
 				    <c:forEach items="${productList.content}" var="product">
-				        <tr class="hoverTable" data-product-id="${product.id}">
+				        <tr class="hoverTable" data-product-id="${product.product.id}">
 				            <td>
-				            	<a href="/product/${product.id}">
-				            		${product.id}
+				            	<a href="/product/${product.product.id}">
+				            		${product.product.id}
 				            	</a>
 				            </td>
-				            <td>${product.name}</td>
-				            <td>${product.brand}</td>
-				            <td>${product.price}</td>
-				            <td>${product.costPrice}</td>
-				            <td>${product.stock}</td>
-				            <td>${product.content}</td>
-				            <td>${product.status}</td>
+				            <td>${product.product.name}</td>
+				            <td>${product.product.brand}</td>
+				            <td>${product.product.price}</td>
+				            <td>${product.product.costPrice}</td>
+				            <td>${product.product.stock}</td>
+				            <td>${product.product.content}</td>
+				            <td>${product.product.status}</td>
 				            <td>
 				                <button type="button" class="edit-product-btn btn btn-warning btn-sm" data-toggle="modal"  data-target="#modalProductManager">수정</button>
 				            </td>
 				            <td>
-				                <button type="button" class="delete-product-btn btn btn-danger btn-sm" data-product-id="${product.id}">삭제</button>
+				                <button type="button" class="delete-product-btn btn btn-danger btn-sm" data-product-id="${product.product.id}">삭제</button>
 				            </td>
 				        </tr>
 				        <!-- Modal -->
@@ -57,13 +56,13 @@
 							<div class="modal-dialog modal-dialog-centered">
 								<div class="modal-content">
 									<div class="product-info p-3 border-bottom">
-										<span>이름</span><input type="text" id="editName" class="edit-product form-control my-3" value="${product.name}">
-										<span>브랜드</span><input type="text" id="editBrand" class="edit-product form-control my-3" value="${product.brand}">
-										<span>가격</span><input type="text" id="editPrice" class="edit-product form-control my-3" value="${product.price}">
-										<span>원가</span><input type="text" id="editCostPrice" class="edit-product form-control my-3" value="${product.costPrice}">
-										<span>재고</span><input type="text" id="editStock" class="edit-product form-control my-3" value="${product.stock}">
-										<span>설명</span><input type="text" id="editContent" class="edit-product form-control my-3" value="${product.content}">
-										<span>상태</span><input type="text" id="editStatus" class="edit-product form-control my-3" value="${product.status}">
+										<span>이름</span><input type="text" id="editName" class="edit-product form-control my-3" value="${product.product.name}">
+										<span>브랜드</span><input type="text" id="editBrand" class="edit-product form-control my-3" value="${product.product.brand}">
+										<span>가격</span><input type="text" id="editPrice" class="edit-product form-control my-3" value="${product.product.price}">
+										<span>원가</span><input type="text" id="editCostPrice" class="edit-product form-control my-3" value="${product.product.costPrice}">
+										<span>재고</span><input type="text" id="editStock" class="edit-product form-control my-3" value="${product.product.stock}">
+										<span>설명</span><input type="text" id="editContent" class="edit-product form-control my-3" value="${product.product.content}">
+										<span>상태</span><input type="text" id="editStatus" class="edit-product form-control my-3" value="${product.product.status}">
 										<input type="file" id="editFile" name="file" multiple accept="image/*" class="edit-product form-cnotrol my-3">
 									</div>
 									<div class="py-3 border-bottom text-center">
@@ -156,7 +155,7 @@ $(document).ready(function() {
 		            url: "/product/get-product-image",
 		            data: {"productId": productId},
 		            success: function (data) {
-		                $("#productImageAdmin").html("<img src='" + data.productImageAdmin + "' class='w-100' alt='상품이미지'>");
+		                $("#productImageAdmin").html("<img src='" + data.productImage + "' class='w-100' alt='상품이미지'>");
 		            }
 		        });
 		    },

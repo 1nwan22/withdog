@@ -79,7 +79,7 @@ public class ProductRestController {
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("result", "success");
-		result.put("productImage", productImage);
+		result.put("productImage", productImage.getImagePath());
 		return result;
 	}
 	

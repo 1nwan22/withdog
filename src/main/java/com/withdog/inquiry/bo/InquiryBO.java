@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -86,12 +87,12 @@ public class InquiryBO {
 		return inquiryList;
 	}
 	
-	public Page<InquiryDTO> generateProductViewPage(Pageable pageable) {
-		Page<InquiryEntity> inquiryEntityPage = inquiryRepository.findAll(pageable);
-		List<InquiryDTO> inquiryList = new ArrayList<>(inquiryEntityPage.getNumberOfElements());
-		log.info("$$$$$$$$$$$$$$$$$$$$$$$$$ inquiryPage 갯수", inquiryEntityPage.getNumberOfElements());
+	public Page<InquiryDTO> generateProductViewPage(Pageable pageable, int productId) {
+		List<InquiryEntity> inquiryEntityList = inquiryRepository.findByProductId(productId);
+		List<InquiryDTO> inquiryList = new ArrayList<>(inquiryEntityList.size());
+		Page<InquiryEntity> inquiryPage = inquiryRepository.findAllByProductId(pageable, productId);
 		
-		for (InquiryEntity inquiryEntity : inquiryEntityPage) {
+		for (InquiryEntity inquiryEntity : inquiryEntityList) {
 			InquiryDTO inquiry = new InquiryDTO();
 			
 			inquiry.setId(inquiryEntity.getId());
@@ -124,7 +125,8 @@ public class InquiryBO {
 			inquiryList.add(inquiry);
 		}
 		
-		return  new PageImpl<>(inquiryList, pageable, inquiryEntityPage.getTotalElements());
+		
+		return new PageImpl<>(inquiryList, pageable, inquiryList.size());
 	}
 
 }
