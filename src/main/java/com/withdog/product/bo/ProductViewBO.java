@@ -44,17 +44,6 @@ public class ProductViewBO {
 			// 상품 대표 이미지
 			productView.setProductImage(productImageBO.getImageByProductId(productEntity.getId()));
 			
-			// 상품 이미지들
-			productView.setProductImageList(productImageBO.getImageListByProductId(productEntity.getId()));
-			
-			// 리뷰들
-			productView.setReviewList(reviewBO.getReviewListByProductId(productEntity.getId()));
-				
-			// 문의들
-			productView.setInquiryList(inquiryBO.getInquiryListByProductId(productEntity.getId()));
-			
-			
-			
 			//★★★★★ 마지막에 ViewList에 객체를 넣는다
 			productList.add(productView);
 		}
@@ -62,7 +51,7 @@ public class ProductViewBO {
 	}
 	
 	@Transactional
-	public ProductView getProductView(int productId) {
+	public ProductView getProductView(Pageable pageable, int productId) {
 		
 		ProductView productView = new ProductView();
 		ProductDTO product = productBO.getProductDTOById(productId);
@@ -77,9 +66,14 @@ public class ProductViewBO {
 			
 		// 리뷰들
 		productView.setReviewList(reviewBO.getReviewListByProductId(product.getId()));
+		
+		productView.setReviewPage(reviewBO.generateReviewPage(pageable, productId));
 			
 		// 문의들
 		productView.setInquiryList(inquiryBO.getInquiryListByProductId(product.getId()));
+		
+		productView.setInquiryPage(inquiryBO.generateInquiryPage(pageable, product.getId()));
+		log.info("$$$$$$$$$$$$$$$$$$$ total page{}", inquiryBO.generateInquiryPage(pageable, product.getId()).getTotalPages());
 		
 			
 		return  productView;

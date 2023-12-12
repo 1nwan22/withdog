@@ -87,12 +87,12 @@ public class InquiryBO {
 		return inquiryList;
 	}
 	
-	public Page<InquiryDTO> generateProductViewPage(Pageable pageable, int productId) {
+	public Page<InquiryDTO> generateInquiryPage(Pageable pageable, int productId) {
+		Page<InquiryEntity> inquiryPage = inquiryRepository.findAllByProductId(pageable, productId);
 		List<InquiryEntity> inquiryEntityList = inquiryRepository.findByProductId(productId);
 		List<InquiryDTO> inquiryList = new ArrayList<>(inquiryEntityList.size());
-		Page<InquiryEntity> inquiryPage = inquiryRepository.findAllByProductId(pageable, productId);
 		
-		for (InquiryEntity inquiryEntity : inquiryEntityList) {
+		for (InquiryEntity inquiryEntity : inquiryPage) {
 			InquiryDTO inquiry = new InquiryDTO();
 			
 			inquiry.setId(inquiryEntity.getId());
@@ -126,7 +126,7 @@ public class InquiryBO {
 		}
 		
 		
-		return new PageImpl<>(inquiryList, pageable, inquiryList.size());
+		return new PageImpl<>(inquiryList, pageable, inquiryEntityList.size());
 	}
 
 }

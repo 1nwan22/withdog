@@ -38,7 +38,7 @@ public class ReviewEntity {
 	@Column(name="productId")
 	private int productId;
 	
-	private double point;
+	private int point;
 	
 	private String content;
 	

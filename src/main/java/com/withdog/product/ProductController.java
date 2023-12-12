@@ -8,13 +8,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.withdog.common.Paging;
-import com.withdog.inquiry.bo.InquiryBO;
-import com.withdog.inquiry.dto.InquiryDTO;
 import com.withdog.product.bo.ProductViewBO;
 import com.withdog.product.domain.ProductView;
 
@@ -29,7 +29,6 @@ public class ProductController {
 	
 	private final ProductViewBO productViewBO;
 	private final Paging paging;
-	private final InquiryBO inquiryBO;
 
 	// http://localhost/product/list-view
 	@GetMapping("/list-view")
@@ -59,29 +58,32 @@ public class ProductController {
 	@GetMapping("/{productId}")
 	public String productView(Model model, HttpSession session,
 			@PathVariable int productId,
-			@PageableDefault(size = 12, sort = "id" ,direction = Sort.Direction.DESC) Pageable pageable) {
+			@RequestParam(name ="productContentName", required = false) String productContentName,
+			@RequestParam(name="page", required=false) Integer page,
+			@PageableDefault(size = 10, sort = "id" ,direction = Sort.Direction.DESC) Pageable pageable) {
 		log.info("$$$$$$ info productId = {}", productId);
 		String userId = (String) session.getAttribute("userId");
-		ProductView product = productViewBO.getProductView(productId);
+		ProductView product = productViewBO.getProductView(pageable, productId);
 		
-		Page<InquiryDTO> inquiryPage = inquiryBO.generateProductViewPage(pageable, productId);
-		
-		int currentPage = inquiryPage.getPageable().getPageNumber();
+		int currentPage = product.getInquiryPage().getNumber();
 		log.info("$$$$$$$$$$$ info currentPage = {} $$$$$$$$$$$", currentPage);
 		
-		int totalPages = inquiryPage.getTotalPages();
+		int totalPages = product.getInquiryPage().getTotalPages();
 		log.info("$$$$$$$$$$$ info totalPages = {} $$$$$$$$$$$", totalPages);
 		
 		model.addAttribute("minBundlePage", paging.getMinBundlePage(currentPage));
 		model.addAttribute("maxBundlePage", paging.getMaxBundlePage(currentPage, totalPages));
 		
-		
+		if(ObjectUtils.isEmpty(productContentName)) {
+			productContentName = "product/inquiry.jsp";
+		}
+		log.info("$$$$$$$$$$$ productContentName = {} $$$$$$$$$$$", productContentName);
 		
 		model.addAttribute("userId", userId);
 		model.addAttribute("product", product);
-		model.addAttribute("inquiryPage", inquiryPage);
 		model.addAttribute("viewName", "product/product");
 		model.addAttribute("viewNameR", "product/rightSideProduct");
+		model.addAttribute("productContentName", productContentName);
 		return "template/layout";
 	}
 	

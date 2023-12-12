@@ -21,16 +21,20 @@
 			<jsp:include page="../include/header.jsp"></jsp:include>
 		</header>
 		<section class="contents">
-			<div class="content-box">
+			<div class="content-box d-flex">
+			
 				<div id="leftSide">
 					<jsp:include page="../${viewNameL}.jsp"></jsp:include>
 				</div>
-				<div id="" class="content">
+				
+				<div class="content">
 					<jsp:include page="../${viewName}.jsp"></jsp:include>
 				</div>
-				<div id="rightSide" class="">
+				
+				<div id="rightSide">
 					<jsp:include page="../${viewNameR}.jsp"></jsp:include>
 				</div>
+				
 			</div>
 		</section>
 		<footer>

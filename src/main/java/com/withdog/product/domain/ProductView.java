@@ -28,6 +28,8 @@ public class ProductView {
 	
 	private List<ReviewDTO> reviewList;
 	
+	private Page<ReviewDTO> reviewPage;
+	
 	private List<InquiryDTO> inquiryList;
 	
 	private Page<InquiryDTO> inquiryPage;

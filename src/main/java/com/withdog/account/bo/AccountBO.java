@@ -18,7 +18,7 @@ public class AccountBO {
 	private AccountRepository accountRepository;
 	
 	public AccountEntity getAccountEntityById(int id) {
-		return accountRepository.findById(null).orElse(null);
+		return accountRepository.findById(id).orElse(null);
 	}
 	public AccountEntity getAccountEntityByEmail(String email) {
 		return accountRepository.findByEmail(email);

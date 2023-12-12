@@ -1,11 +1,5 @@
 package com.withdog.review.dto;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-
-import org.hibernate.annotations.UpdateTimestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,11 +15,11 @@ public class ReviewDTO {
 
 	private int id;
 	
-	private int accountId;
+	private String userId;
 	
 	private int productId;
 	
-	private double point;
+	private int point;
 	
 	private String content;
 	
