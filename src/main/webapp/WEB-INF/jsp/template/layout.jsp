@@ -22,7 +22,6 @@
 		</header>
 		<section class="contents">
 			<div class="content-box d-flex">
-			
 				<div id="leftSide">
 					<jsp:include page="../${viewNameL}.jsp"></jsp:include>
 				</div>
@@ -40,6 +39,116 @@
 		<footer>
 			<jsp:include page="../include/footer.jsp"></jsp:include>
 		</footer>
+		
+		<!-- 글쓰기 모달 -->
+		<div class="modal fade" id="modalPostCreate">
+			<!-- modal-sm:작은 모달 modal-dialog-centered: 수직 기준 가운데 -->
+			<div class="modal-dialog modal-dialog-centered modal-lg">
+				<div class="modal-content">
+					<div class="post-create p-3 border-bottom">
+						<div>
+							<div class="py-3 border-bottom">
+								새 게시물 만들기
+							</div>
+							
+							<!-- 이미지 업로드 // TODO: 파일 미리보기, drag and drop -->
+							<div class="border-bottom">
+								<input type="file" class="post-file d-none" multiple accept="image/*"> 
+								<a href="#none" class="post-file-btn"> 
+									<img width="35" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png">
+								</a>
+								<div id="postFileName"></div>
+							</div>
+							
+							
+							<div class="border-bottom">
+								<textarea class="post-text-area form-control" placeholder="내용을 입력해주세요" class="w-100 border-0"></textarea>
+							</div>
+						</div>
+						
+						<div class="py-3 text-center">
+							<button type="button" class="create-post-btn btn btn-primary" data-dismiss="modal">확인</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 글쓰기 모달 끝 -->
 	</div>
 </body>
+<script>
+$(document).ready(function() {
+	
+	$(".post-file-btn").on("click", function(e) {
+		e.preventDefault();  // a 태그의 올라가는 현상 방지
+		$(".post-file").click();
+	});
+	
+	let selectFiles = new Array();
+	let selectFilesName = new Array();
+	
+	$(".post-file").on("change", function(e) {
+		selectFiles = []; // 초기화
+		selectFilesName = [];
+		$("#postFileName").empty(); // 파일명비우기
+		let files = e.target.files;
+		let filesArr = Array.prototype.slice.call(files);
+		console.log(files);
+		console.log(filesArr);
+		for (let i = 0; i < filesArr.length; i++) {
+			console.log(files[i].name);
+			selectFilesName.push(files[i].name);
+			$("#postFileName").prepend("<div>" + files[i].name + "</div>");
+		}
+		if (filesArr.length < 2) {
+			$("#postFileName").empty();
+		}
+		
+		filesArr.forEach(function(f) { // 이미지파일 체크
+			if (!f.type.match("image.*")) {
+				alert ("이미지 파일만 업로드하세요.");
+				return;
+			}
+			
+			selectFiles.push(f);
+		});
+	});
+	
+	$(".create-post-btn").on("click", function() {
+		let content = $(".post-text-area").val().trim();
+		console.log(content);
+		let formData = new FormData();
+		
+		for (let i = 0; i < selectFiles.length; i++) {
+			console.log(selectFiles[i]);
+			formData.append("imageList", selectFiles[i]);
+		}
+		console.log(formData);
+		formData.append("content", content);
+		
+		$.ajax({
+			type:"POST"
+			, url:"/post/add"
+			, data:formData
+			, enctype:"multipart/form-data"
+			, processData:false
+			, contentType:false
+			
+			, success:function(data) {
+				if (data.result == "success") {
+					alert("글 등록 성공");
+					location.reload(true);
+				} else {
+					alert("글 등록 실패");
+				}
+			}
+			, error:function(request, status, error) {
+				alert("글 등록 에러")
+			}
+		});
+		
+	});
+});
+</script>
 </html>

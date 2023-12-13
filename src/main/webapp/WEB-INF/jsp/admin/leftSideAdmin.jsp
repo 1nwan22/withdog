@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div id="leftSideWrap" class="">
+<div id="leftSideWrap">
 	<h1>어드민 사이드</h1>
 	<div>
 		<div class="left-side-menu">
@@ -10,9 +10,13 @@
 			<div><a href="">스토어</a></div>
 			<div><a href="">플레이스</a></div>
 			<div><a href="">알림</a></div>
-			<div><a href="">글쓰기</a></div>
+			<div>
+				<a href="#" class="" data-toggle="modal" data-target="#modalPostCreate">글쓰기</a>
+			</div>
 			<div><a href="/my/profile-view">프로필</a></div>
 		</div>
+		
+			
 		
 		<hr>
 		<div class="left-side-admin-menu">
@@ -25,6 +29,7 @@
 	<div class="d-flex mt-5">
 		<div>이미지프로필</div>
 		<div>유저아이디</div>
+	</div>
 	</div>
 </div>
 <script>

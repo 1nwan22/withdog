@@ -1,4 +1,4 @@
-package com.withdog.product.domain;
+package com.withdog.post.domain;
 
 import java.time.LocalDateTime;
 
@@ -13,13 +13,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ProductImage {
+public class PostImage {
 
 	private int id;
-
-	private int productId;
-
+	private int postId;
 	private String imagePath;
-
 	private LocalDateTime createdAt;
 }

@@ -8,12 +8,10 @@
 	<div><a href="">스토어</a></div>
 	<div><a href="">플레이스</a></div>
 	<div><a href="">알림</a></div>
-	<div><a href="">글쓰기</a></div>
+	<div>
+		<a href="#" class="product-inquiry-btn btn btn-info"data-toggle="modal" data-target="#modalPostCreate">글쓰기</a>
+	</div>
 	<div><a href="">프로필</a></div>
-	
-	
-	
-	
 	
 	
 	

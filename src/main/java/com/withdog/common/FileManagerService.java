@@ -17,17 +17,17 @@ public class FileManagerService {
 	private Logger logger = LoggerFactory.getLogger(FileManagerService.class); // this.getclass()
 	
 	// 실제 업로드가 된 이미지가 저장될 경로(서버) 주소마지막에 / 붙이기
-	public static final String FILE_UPLOAD_PATH = "C:\\Salt\\coding\\project\\withdog\\workspace\\images/";
+//	public static final String FILE_UPLOAD_PATH = "C:\\Salt\\coding\\project\\withdog\\workspace\\images/";
 	
 	//학원용
-//	public static final String FILE_UPLOAD_PATH = "D:\\godh22\\7_project\\withdog\\workspace\\images/";
+	public static final String FILE_UPLOAD_PATH = "D:\\godh22\\7_project\\withdog\\workspace\\images/";
 	
 	
 	// input: userLoginId, file(이미지)		output: web imagePath
-	public String saveProductFile(int productId, MultipartFile file) {
+	public String saveImageFile(int id, MultipartFile file) {
 		// 폴더 생성 (로그인아이디 + 현재시간 ms)
 		// 예: aaaa_14324123/sun.png
-		String directoryName = productId + "_" + System.currentTimeMillis();
+		String directoryName = id + "_" + System.currentTimeMillis();
 		String filePath = FILE_UPLOAD_PATH + directoryName;  //D:\\godh22\\5_spring_project\\memo\\workspace\\images/aaaa_14324123
 		
 		File directory = new File(filePath);
@@ -44,7 +44,7 @@ public class FileManagerService {
 			Path path = Paths.get(filePath + "/" + file.getOriginalFilename()); // 디렉토리 경로 + 사용자가 올린 파일명
 			Files.write(path, bytes); // 파일 업로드
 		} catch (IOException e) {
-			logger.error("[이미지 업로드] 업로드 실패 productId:{}, filePath:{}", productId, filePath);
+			logger.error("[이미지 업로드] 업로드 실패 id:{}, filePath:{}", id, filePath);
 			return null; // 이미지 업로드 실패 시 null 리턴
 		}
 		

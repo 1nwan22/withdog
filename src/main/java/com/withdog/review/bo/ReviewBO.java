@@ -56,7 +56,7 @@ public class ReviewBO {
 			review.setPoint(reviewEntity.getPoint());
 			review.setContent(reviewEntity.getContent());
 			String createdAt = reviewEntity.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-			String updatedAt = reviewEntity.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			String updatedAt = reviewEntity.getUpdatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			review.setCreatedAt(createdAt);
 			review.setUpdatedAt(updatedAt);
 			
@@ -81,7 +81,7 @@ public class ReviewBO {
 			review.setPoint(reviewEntity.getPoint());
 			review.setContent(reviewEntity.getContent());
 			String createdAt = reviewEntity.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
-			String updatedAt = reviewEntity.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			String updatedAt = reviewEntity.getUpdatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			review.setCreatedAt(createdAt);
 			review.setUpdatedAt(updatedAt);
 			

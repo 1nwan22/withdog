@@ -1,6 +1,4 @@
-package com.withdog.product.domain;
-
-import java.time.LocalDateTime;
+package com.withdog.post.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,13 +11,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ProductImage {
-
+public class PostDTO {
+	
 	private int id;
+	
+	private int accountId;
+	
+	private String content;
+	
+	private String createdAt;
+	
+	private String updatedAt;
 
-	private int productId;
-
-	private String imagePath;
-
-	private LocalDateTime createdAt;
 }

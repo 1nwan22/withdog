@@ -29,7 +29,7 @@ public class ProductImageBO {
 
 		if (!ObjectUtils.isEmpty(imageList)) {
 			for (MultipartFile image : imageList) {
-				imagePath = fms.saveProductFile(productId, image);
+				imagePath = fms.saveImageFile(productId, image);
 				imagePathList.add(imagePath);
 			}
 		}

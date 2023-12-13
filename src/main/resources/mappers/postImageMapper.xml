@@ -1,0 +1,42 @@
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.withdog.post.mapper.PostImageMapper">
+    <insert id="insertPostImage" parameterType="map">
+        INSERT INTO `post_image`
+        (
+            `postId`
+            ,`imagePath`
+            ,`createdAt`
+        )
+        VALUES
+        <foreach collection="imagePathList" item="imagePath" separator=",">
+            (#{postId}, #{imagePath}, NOW())
+        </foreach>
+    </insert>
+    
+    <select id="selectImageByPostId" parameterType="int" resultType="com.withdog.post.domain.PostImage">
+    	SELECT
+    		`postId`
+            ,`imagePath`
+            ,`createdAt`
+    	FROM
+    		`post_image`
+    	WHERE
+    		`postId` = #{postId}
+    	LIMIT 1
+    </select>
+    
+    <select id="selectImageListByPostId" parameterType="int" resultType="com.withdog.post.domain.PostImage">
+    	SELECT
+    		`postId`
+            ,`imagePath`
+            ,`createdAt`
+		FROM
+			`post_image`
+		WHERE
+			`postId` = #{postId}
+    </select>
+    
+</mapper>
