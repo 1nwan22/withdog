@@ -2,6 +2,8 @@ package com.withdog.product.bo;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -80,8 +82,11 @@ public class ProductBO {
 		return null;
 	}
 	
+	@Transactional
 	public void deleteProduct(int id) {
 		productRepository.deleteById(id);
+		
+		// 이미지 , 리뷰, 문의 삭제 추가
 	}
 	
 	public Page<ProductEntity> getProductList(Pageable pageable) {

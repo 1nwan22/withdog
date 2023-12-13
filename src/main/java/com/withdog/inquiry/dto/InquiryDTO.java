@@ -15,7 +15,7 @@ public class InquiryDTO {
 
 	private int id;
 	
-	private int accountId;
+	private String userId;
 	
 	private int productId;
 	

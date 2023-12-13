@@ -7,10 +7,11 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.withdog.account.bo.AccountBO;
+import com.withdog.account.entity.AccountEntity;
 import com.withdog.inquiry.dto.InquiryDTO;
 import com.withdog.inquiry.entity.InquiryEntity;
 import com.withdog.inquiry.repository.InquiryRepository;
@@ -24,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class InquiryBO {
 	
 	private final InquiryRepository inquiryRepository;
+	private final AccountBO accountBO;
 	
 	public void addInquiry(
 			int accountId,
@@ -56,7 +58,8 @@ public class InquiryBO {
 			InquiryDTO inquiry = new InquiryDTO();
 			
 			inquiry.setId(inquiryEntity.getId());
-			inquiry.setAccountId(inquiryEntity.getAccountId());
+			AccountEntity account = accountBO.getAccountEntityById(inquiryEntity.getAccountId());
+			inquiry.setUserId(account.getUserId());
 			inquiry.setProductId(inquiryEntity.getProductId());
 			String category = null;
 			if (inquiryEntity.getCategory() == 1) {
@@ -96,7 +99,8 @@ public class InquiryBO {
 			InquiryDTO inquiry = new InquiryDTO();
 			
 			inquiry.setId(inquiryEntity.getId());
-			inquiry.setAccountId(inquiryEntity.getAccountId());
+			AccountEntity account = accountBO.getAccountEntityById(inquiryEntity.getAccountId());
+			inquiry.setUserId(account.getUserId());
 			inquiry.setProductId(inquiryEntity.getProductId());
 			String category = null;
 			if (inquiryEntity.getCategory() == 1) {

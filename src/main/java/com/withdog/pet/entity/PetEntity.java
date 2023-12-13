@@ -1,5 +1,6 @@
 package com.withdog.pet.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.UpdateTimestamp;
-
-import com.withdog.account.entity.AccountEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,11 +47,13 @@ public class PetEntity {
 	@Column(name="profileImagePath")
 	private String profileImagePath;
 	
+	private String introduce;
+	
 	@UpdateTimestamp
 	@Column(name="createdAt", updatable = false)
-	private Date createdAt;
+	private LocalDateTime createdAt;
 	
 	@UpdateTimestamp
 	@Column(name="updatedAt")
-	private Date updatedAt;
+	private LocalDateTime updatedAt;
 }

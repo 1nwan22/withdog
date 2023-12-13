@@ -118,7 +118,6 @@ public class AccountRestController {
 	    
 	    AccountEntity account = kakaoBO.addAccount(user);
 	    session.setAttribute("email", account.getEmail());
-	    session.setAttribute("adminYn", account.getAdminYn());
 	    
 	    try {
 			response.sendRedirect("http://localhost");
@@ -129,17 +128,17 @@ public class AccountRestController {
 	}
 	
 	
-	@PutMapping("/admin-permission")
-	public Map<String, Object> adminPermission(@RequestParam("email") String email) {
-		String adminYn = accountBO.updateAccountAdminYnByEmail(email, "y");
-		Map<String, Object> result = new HashMap<>();
-		if (adminYn.equals("n")) {
-			result.put("code", 500);
-			result.put("errorMessage", "관리자 승인 실패");
-			return result;
-		}
-		result.put("code", 200);
-		result.put("result", "success");
-		return result;
-	}
+//	@PutMapping("/admin-permission")
+//	public Map<String, Object> adminPermission(@RequestParam("email") String email) {
+//		String adminYn = accountBO.updateAccountAdminYnByEmail(email, "y");
+//		Map<String, Object> result = new HashMap<>();
+//		if (adminYn.equals("n")) {
+//			result.put("code", 500);
+//			result.put("errorMessage", "관리자 승인 실패");
+//			return result;
+//		}
+//		result.put("code", 200);
+//		result.put("result", "success");
+//		return result;
+//	}
 }

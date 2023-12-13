@@ -55,9 +55,6 @@ public class AccountEntity {
 	
 	private String type;
 	
-	@Column(name="adminYn")
-	private String adminYn;
-	
 	@UpdateTimestamp
 	@Column(name="createdAt", updatable = false)
 	private Date createdAt;

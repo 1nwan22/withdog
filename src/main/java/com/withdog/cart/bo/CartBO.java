@@ -36,6 +36,9 @@ public class CartBO {
 	public List<CartDTO> getCartDTOListByAccountId(int accountId) {
 		List<CartEntity> cartList = cartRepository.findAllByAccountId(accountId);
 		log.info("$$$$$$$$$$$ cartList = {}", cartList);
+		if (ObjectUtils.isEmpty(cartList)) {
+			return null;
+		}
 		List<CartDTO> cartDTOList = new ArrayList<>(cartList.size());
 		for (CartEntity cart : cartList) {
 			ProductEntity product = productBO.getProductById(cart.getProductId());

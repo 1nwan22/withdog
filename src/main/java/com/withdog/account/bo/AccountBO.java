@@ -4,7 +4,9 @@ package com.withdog.account.bo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
+import com.withdog.account.dto.AccountDTO;
 import com.withdog.account.entity.AccountEntity;
 import com.withdog.account.repository.AccountRepository;
 
@@ -48,24 +50,42 @@ public class AccountBO {
 				.email(email)
 				.userId(userId)
 				.vetYn("n")
-				.adminYn("n")
 				.type("kakao")
 				.build());
 		log.info("$$$$$$$$$$$$ accountEntity = {}", accountEntity);
 		return accountEntity == null ? null : accountEntity;
 	}
 	
-	public String updateAccountAdminYnByEmail(String email, String yN) {
+	public void editAccountById(AccountDTO account) {
+		AccountEntity accountEntity = accountRepository.findById(account.getId()).orElse(null);
 		
-		AccountEntity account = accountRepository.findByEmail(email);
-		if (account != null) {
-			account = account.toBuilder() // 복사본 생성
-			.adminYn(yN)
-			.build();
+		if(!ObjectUtils.isEmpty(accountEntity)) {
+			accountEntity = accountEntity.toBuilder()
+					.userId(account.getUserId())
+					.userName(account.getUserName())
+					.phoneNumber(account.getPhoneNumber())
+					.address(account.getAddress())
+					.zipCode(account.getZipCode())
+					.introduce(account.getIntroduce())
+					.vetYn(account.getVetYn())
+					.type(account.getType())
+					.build();
+			accountEntity = accountRepository.save(accountEntity);
 			
-			account = accountRepository.save(account); // 수정된 내용 저장
 		}
-		return account.getAdminYn();
-		
 	}
+	
+//	public String updateAccountAdminYnByEmail(String email, String yN) {
+//		
+//		AccountEntity account = accountRepository.findByEmail(email);
+//		if (account != null) {
+//			account = account.toBuilder() // 복사본 생성
+//			.adminYn(yN)
+//			.build();
+//			
+//			account = accountRepository.save(account); // 수정된 내용 저장
+//		}
+//		return account.getAdminYn();
+//		
+//	}
 }

@@ -1,4 +1,12 @@
 @charset "UTF-8";
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
 a, a:hover {text-decoration: none; color: black;}
 hr {unicode-bidi: isolate;
     margin-block-start: 0.5em;
@@ -6,6 +14,7 @@ hr {unicode-bidi: isolate;
     margin-inline-start: auto;
     margin-inline-end: auto;
     overflow: hidden;}
+    
 
 /* 헤더 */
 header {width: 1920px; height: 100px; background-color: antiquewhite;}
@@ -18,14 +27,14 @@ header {width: 1920px; height: 100px; background-color: antiquewhite;}
 
 
 /* 섹션 */
-.contents {width: 1920px; min-height: 880px;}
+.contents {width: 1920px; min-height: 1080px;}
 .content {width: 1200px;  margin: 0%;}
 
 /* 사이드*/
-#leftSide {min-height: 880px; width: 360px; background-color: cornsilk; margin: 0%;}
+#leftSide {min-height: 1080px; width: 360px; background-color: cornsilk; margin: 0%;}
 #leftSideWrap {position: fixed; padding-left: 20px;}
 .right-side-wrap {position: relative; float: right;}
-#rightSide {min-height: 880px; width: 360px; background-color: blueviolet; margin: 0%;}
+#rightSide {min-height: 1080px; width: 360px; background-color: blueviolet; margin: 0%;}
 
 /* 콘텐츠 */
 /* 회원가입 */
@@ -86,7 +95,7 @@ header {width: 1920px; height: 100px; background-color: antiquewhite;}
 
 
 /* 상품 상세 정보 */
-.product-menu-detail {height: 100px;}
+.product-menu-detail {width: 1200px; height: 50px; background: #a9b3bc; font-size: 20px;}
 .star-empty {
 		background-image: url("/static/img/star_empty.png");
 		background-size : 100%;

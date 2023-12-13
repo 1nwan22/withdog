@@ -58,10 +58,10 @@ public class FileManagerService {
 	}
 	
 	// input: userLoginId, file(이미지)		output: web imagePath
-		public String savePostFile(String loginId, MultipartFile file) {
+		public String savePetProfileFile(String petName, MultipartFile file) {
 			// 폴더 생성 (로그인아이디 + 현재시간 ms)
 			// 예: aaaa_14324123/sun.png
-			String directoryName = loginId + "_" + System.currentTimeMillis();
+			String directoryName = petName + "_" + System.currentTimeMillis();
 			String filePath = FILE_UPLOAD_PATH + directoryName;  //D:\\godh22\\5_spring_project\\memo\\workspace\\images/aaaa_14324123
 			
 			File directory = new File(filePath);
@@ -78,7 +78,7 @@ public class FileManagerService {
 				Path path = Paths.get(filePath + "/" + file.getOriginalFilename()); // 디렉토리 경로 + 사용자가 올린 파일명
 				Files.write(path, bytes); // 파일 업로드
 			} catch (IOException e) {
-				logger.error("[이미지 업로드] 업로드 실패 loginId:{}, filePath:{}", loginId, filePath);
+				logger.error("[이미지 업로드] 업로드 실패 loginId:{}, filePath:{}", petName, filePath);
 				return null; // 이미지 업로드 실패 시 null 리턴
 			}
 			

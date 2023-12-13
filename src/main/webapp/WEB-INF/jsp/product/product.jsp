@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<div id="productWrap" class="p-4">
+<div id="productWrap">
 	<!-- 상품 정보 -->
-	<div class="d-flex w-100">
+	<div class="d-flex w-100 p-4">
 		<div id="productImg" class="col-6">
 			<img src="${product.productImage.imagePath}" class="w-100"
 				alt="상품대표이미지">
@@ -48,9 +48,9 @@
 		<!-- 상품 상세 정보 메뉴 끝 -->
 
 		<!-- 상품 상세 정보 -->
-		<div>
+		<div class="p-4">
 			<!-- 상세 설명 -->
-			<div id="tabDetail">
+			<div id="tabDetail" class="product-tab">
 				<div id="detailImageWrap">
 					<c:forEach items="${product.productImageList}" var="productImage">
 						<div class="d-flex justify-content-center">
@@ -74,7 +74,7 @@
 			</div>
 
 			<!-- 상품평 -->
-			<div id="tabReview">
+			<div id="tabReview" class="product-tab d-none">
 				<c:forEach items="${product.reviewPage.content}" var="review">
 					<div class="">
 						<div class="d-flex">
@@ -139,7 +139,7 @@
 			</div>
 
 			<!-- 상품문의 -->
-			<div id="tabInquiry">
+			<div id="tabInquiry" class="product-tab d-none">
 				<div>
 					<div>상품문의하기</div>
 					+ 상품문의 개수
@@ -165,7 +165,7 @@
 									<td>${productInquiry.category}</td>
 									<td>${productInquiry.status}</td>
 									<td>${productInquiry.subject}</td>
-									<td>${userId}</td>
+									<td>${productInquiry.userId}</td>
 									<td>${productInquiry.createdAt}</td>
 								</tr>
 							</c:forEach>
@@ -184,7 +184,7 @@
 							</c:choose>
 							
 							<c:forEach begin="${minBundlePage}" end="${maxBundlePage}" var="currentPage">
-								<c:url var="pageUrl" value="/product/list-view/">
+								<c:url var="pageUrl" value="/product/${product.product.id}/">
 									<c:param name="page" value="${currentPage - 1}"/>
 								</c:url>
 									
@@ -290,7 +290,7 @@
 			<!-- 상품 문의 끝 -->
 
 			<!-- 교환/반품안내 -->
-			<div id="tabChange" class="text-center">
+			<div id="tabChange" class="text-center product-tab d-none">
 				<h1>교환 반품 안내 사항</h1>
 				<h1>교환 반품 안내 사항</h1>
 				<h1>교환 반품 안내 사항</h1>
@@ -308,12 +308,12 @@
 	$(document).ready(function() {
 
 		/* 메뉴 고정 */
-		let Offset = $('.product-detail-menu').offset();
+		let Offset = $('.product-menu-detail').offset();
 		$(window).scroll(function() {
 			if ($(document).scrollTop() > Offset.top) {
-				$('.product-detail-menu').addClass('fixed');
+				$('.product-menu-detail').addClass('fixed');
 			} else {
-				$('.product-detail-menu').removeClass('fixed');
+				$('.product-menu-detail').removeClass('fixed');
 			}
 		});
 
@@ -419,6 +419,14 @@
 			$(".board-pagenation").children().children().children().on("click", function() {
 				$(".board-pagenation").find(".on").removeClass("on");
 				$(this).parent().addClass("on");
+			});
+			
+			$(".product-menu-tab").on("click", function() {
+				let tabName = $(this).children().attr("href").substring(1);
+				$(".product-tab").addClass("d-none");
+				$("#" + tabName).removeClass("d-none");
+				
+				
 			});
 			
 /* 			$("#paginationContainer").on("click", ".page-link", function (e) {
