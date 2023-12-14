@@ -5,9 +5,10 @@ body {
     align-items: center;
     justify-content: center;
     margin: 0;
+    color: #362724;
 }
 
-a, a:hover {text-decoration: none; color: black;}
+a, a:hover {text-decoration: none; color: #362724;}
 hr {unicode-bidi: isolate;
     margin-block-start: 0.5em;
     margin-block-end: 0.5em;
@@ -17,12 +18,13 @@ hr {unicode-bidi: isolate;
     
 
 /* 헤더 */
-header {width: 1920px; height: 100px; background-color: antiquewhite;}
-#headerBox {width:1200px; height: 100px; background-color: azure;}
-#logoWrap {width: 360px; height: 100px; background-color: beige;}
+header {width: 1920px; height: 100px; ;}
+#logoWrap {width: 360px; height: 100px; background-color: #D3B998;}
+.header-side {width: 360px; height: 100px; background-color:#D3B998;}
 #logo {width: 360px; height: 100px; position: fixed;}
-.nav-group {width: 1200px; background-color: aquamarine;}
+.nav-group {width: 1200px; background-color: #D3B998}
 #mainNav {height: 60px;}
+#mainNav ul a{height: 60px; line-height: 3;}
 .sub-nav {height: 40px;}
 
 
@@ -31,10 +33,10 @@ header {width: 1920px; height: 100px; background-color: antiquewhite;}
 .content {width: 1200px;  margin: 0%;}
 
 /* 사이드*/
-#leftSide {min-height: 1080px; width: 360px; background-color: cornsilk; margin: 0%;}
+#leftSide {min-height: 1080px; width: 360px; margin: 0%; background-color: #E8E3DD;}
 #leftSideWrap {position: fixed; padding-left: 20px;}
 .right-side-wrap {position: relative; float: right;}
-#rightSide {min-height: 1080px; width: 360px; background-color: blueviolet; margin: 0%;}
+#rightSide {min-height: 1080px; width: 360px;  margin: 0%; background-color: #E8E3DD;}
 
 /* 콘텐츠 */
 /* 회원가입 */
@@ -88,7 +90,8 @@ header {width: 1920px; height: 100px; background-color: antiquewhite;}
     box-shadow: 0px 0px 10px rgba(150, 150, 150, 0.5);
     transition: box-shadow 0.3s ease;}
 .product-box:hover {box-shadow: 10px 20px 20px rgba(0, 0, 0, 0.2);}
-.product-category-menu {background-color: coral;}
+.product-category-menu {background-color: #836E59;}
+.product-category-menu a {color: #E8E3DD;}
 
 .fixed {position: fixed; top: 0px; width: 1200px;}
 
@@ -165,7 +168,7 @@ header {width: 1920px; height: 100px; background-color: antiquewhite;}
 .product-info-box {width: 400px; min-height: 250px;}
 
 /* footer */
-footer {height: 100px; background-color: blanchedalmond;}
+footer {height: 100px; background-color: #D3B998;}
 
 
 

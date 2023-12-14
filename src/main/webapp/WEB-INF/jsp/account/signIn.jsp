@@ -29,12 +29,12 @@
 		 let password = $("#password").val();
 		 
 		 if (!email) {
-			 alet("이메일을 입력하세요.");
+			 alert("이메일을 입력하세요.");
 			 return;
 		 }
 		 
 		 if (!password) {
-			 alet("비밀번호를 입력하세요.");
+			 alert("비밀번호를 입력하세요.");
 			 return;
 		 }
 		 

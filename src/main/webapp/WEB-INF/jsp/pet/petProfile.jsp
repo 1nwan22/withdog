@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="d-flex justify-content-center">
-	<div class="p-4">
+	<div class="p-4 w-75">
 		<!-- 펫 프로필 -->
 		<div class="">
 			<table class="table">

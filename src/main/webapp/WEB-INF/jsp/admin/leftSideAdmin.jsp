@@ -30,7 +30,6 @@
 		<div>이미지프로필</div>
 		<div>유저아이디</div>
 	</div>
-	</div>
 </div>
 <script>
 $(document).ready(function(){
