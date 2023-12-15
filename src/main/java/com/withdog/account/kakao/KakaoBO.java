@@ -23,7 +23,8 @@ public class KakaoBO {
 	private final AccountBO accountBO;
 	private static final String TOKEN_URL = "https://kauth.kakao.com/oauth/token";
 	private static final String USER_INFO_URL = "https://kapi.kakao.com/v2/user/me"; // 사용자 정보
-	public static final String REDIRECT_URI = "http://localhost/account/kakao-oauth";
+//	public static final String REDIRECT_URI = "http://localhost/account/kakao-oauth";
+	public static final String REDIRECT_URI = "http://3.39.6.159/account/kakao-oauth";
 	public static final String REST_API_KEY = "6773c070982eedbe407df9374aeef8fd"; // client id
 	private static final String CLIENT_SECRET = "rrctSuFWwhE537a2DA9c6Y6IVtJ1B9fR"; // secret client id
 	
