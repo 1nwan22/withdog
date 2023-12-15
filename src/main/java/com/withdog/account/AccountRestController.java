@@ -118,6 +118,8 @@ public class AccountRestController {
 	    
 	    AccountEntity account = kakaoBO.addAccount(user);
 	    session.setAttribute("email", account.getEmail());
+	    session.setAttribute("accountId", account.getId());
+		session.setAttribute("userId", account.getUserId());
 	    
 	    try {
 			response.sendRedirect("http://3.39.6.159:8080/");

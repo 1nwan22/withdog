@@ -12,7 +12,7 @@ public class TestTaskJob {
 	@Scheduled(cron = "1 * * * * *")
 	public void test() {
 		// Job 내용
-		log.info("########## test job 수행");
+		//log.info("########## test job 수행");
 	}
 
 
