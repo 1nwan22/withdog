@@ -120,7 +120,7 @@ public class AccountRestController {
 	    session.setAttribute("email", account.getEmail());
 	    
 	    try {
-			response.sendRedirect("http://localhost");
+			response.sendRedirect("http://3.39.6.159:8080/");
 		} catch (IOException e) {
 			log.error("@@@@@@@@@@@@@@@@@@@@@@@@@@ error kakaoAccount 없음");
 		}
