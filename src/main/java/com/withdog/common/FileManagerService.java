@@ -20,7 +20,10 @@ public class FileManagerService {
 //	public static final String FILE_UPLOAD_PATH = "C:\\Salt\\coding\\project\\withdog\\workspace\\images/";
 	
 	//학원용
-	public static final String FILE_UPLOAD_PATH = "D:\\godh22\\7_project\\withdog\\workspace\\images/";
+//	public static final String FILE_UPLOAD_PATH = "D:\\godh22\\7_project\\withdog\\workspace\\images/";
+	
+	// AWS
+	public static final String FILE_UPLOAD_PATH = "/home/ec2-user/images/";
 	
 	
 	// input: userLoginId, file(이미지)		output: web imagePath
