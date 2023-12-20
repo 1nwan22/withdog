@@ -17,6 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CartCookieUtils {
 
+	public static String getCartCookieValue(HttpServletRequest request) {
+		// 기존 쿠키 가져오기
+		Cookie[] cookies = request.getCookies();
+
+		// 장바구니 쿠키 생성 또는 가져오기
+		Cookie cartCookie = findCartCookie(cookies);
+		
+		return cartCookie.getValue();
+				
+	}
 	@Transactional
 	public static String addToCart(HttpServletRequest request, HttpServletResponse response, CartDTO cartDTO) {
 		// 기존 쿠키 가져오기

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.withdog.cart.bo.CartBO;
 import com.withdog.cart.domain.CartDTO;
+import com.withdog.cart.domain.CartView;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +42,9 @@ public class CartController {
         	if (!ObjectUtils.isEmpty(cartList)) {
         		cartList.forEach(cart -> CartCookieUtils.addToCart(request, response, cart));
         	}
-        	model.addAttribute("cartList", cartList);
+        	cartCookieValue = CartCookieUtils.getCartCookieValue(request);
+        	List<CartView> cartViewList = cartBO.getCartViewListByCookieValue(cartCookieValue);
+        	model.addAttribute("cartList", cartViewList);
         }
 		
 		model.addAttribute("viewName", "cart/cart");
