@@ -14,5 +14,17 @@
             (#{postId}, #{imagePath}, NOW())
         </foreach>
 	</insert>
+	
+	<select id="selectImageByPostId" parameterType="int" resultType="com.withdog.post.domain.PostImage">
+		SELECT
+    		`postId`
+            ,`imagePath`
+            ,`createdAt`
+    	FROM
+    		`post_image`
+    	WHERE
+    		`postId` = #{postId}
+    	LIMIT 1
+	</select>
 
 </mapper>

@@ -2,8 +2,12 @@ package com.withdog.post.bo;
 
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -50,6 +54,46 @@ public class PostBO {
 		postDTO.setUpdatedAt(updatedAt);
 		
 		return postDTO;
+	}
+	
+	public List<PostDTO> getPostList() {
+		List<PostEntity> postEntityList = postRepository.findAll();
+		List<PostDTO> postList = new ArrayList<>(postEntityList.size());
+		
+		for (PostEntity postEntity : postEntityList) {
+			PostDTO post = new PostDTO();
+			post.setId(postEntity.getId());
+			post.setAccountId(postEntity.getAccountId());
+			post.setImagePath(postImageBO.getImageByPostId(postEntity.getId()).getImagePath());
+			post.setContent(postEntity.getContent());
+			post.setCreatedAt(postEntity.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+			post.setUpdatedAt(postEntity.getUpdatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+			postList.add(post);
+		}
+		return postList;
+	}
+	
+	public Slice<PostDTO> generatePostSlice(Pageable pageable) {
+	    Slice<PostEntity> postEntitySlice = postRepository.findAllByOrderByIdDesc(pageable);
+	    List<PostEntity> postEntityList = postEntitySlice.getContent();
+	    List<PostDTO> content = new ArrayList<>();
+	    for (PostEntity postEntity : postEntityList) {
+	        content.add(new PostDTO(
+	            postEntity.getId(),
+	            postEntity.getAccountId(),
+	            postImageBO.getImageByPostId(postEntity.getId()).getImagePath(),
+	            postEntity.getContent(),
+	            postEntity.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+	            postEntity.getUpdatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+	        ));
+	    }
+
+	    
+	    return new SliceImpl<>(content, pageable, postEntitySlice.hasNext());
+	}
+	
+	public Slice<PostEntity> generatePostEntitySlice(Pageable pageable) {
+		return postRepository.findAllByOrderByIdDesc(pageable);
 	}
 
 }

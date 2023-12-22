@@ -43,7 +43,7 @@ public class PostImageBO {
 		postImageMapper.insertPostImage(postId, imagePathList);
 	}
 	
-	public PostImageDTO getImageByProductId(int postId) {
+	public PostImageDTO getImageByPostId(int postId) {
 		PostImage postImage = postImageMapper.selectImageByPostId(postId);
 		PostImageDTO postImageDTO = new PostImageDTO();
 		
@@ -56,7 +56,7 @@ public class PostImageBO {
 		return postImageDTO;
 	}
 	
-	public List<PostImageDTO> getImageListByProductId(int postId) {
+	public List<PostImageDTO> getImageListByPostId(int postId) {
 		List<PostImage> postImageList = postImageMapper.selectImageListByPostId(postId);
 		List<PostImageDTO> postImageDTOList = new ArrayList<>(postImageList.size());
 		

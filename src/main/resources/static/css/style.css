@@ -18,14 +18,17 @@ hr {unicode-bidi: isolate;
     
 
 /* 헤더 */
-header {width: 1920px; height: 100px; ;}
-#logoWrap {width: 360px; height: 100px; background-color: #D3B998;}
-.header-side {width: 360px; height: 100px; background-color:#D3B998;}
+header {width: 1920px; height: 100px;}
+#logoWrap {width: 360px; height: 100px; background-color: white; border-right: 1px solid #836E59;}
+.header-side {width: 360px; height: 100px; background-color:white; border-left: 1px solid #836E59;}
 #logo {width: 360px; height: 100px; position: fixed;}
-.nav-group {width: 1200px; background-color: #D3B998}
+.nav-group {width: 1200px; background-color:}
 #mainNav {height: 60px;}
-#mainNav ul a{height: 60px; line-height: 3;}
+#mainNav ul li{width: 120px; height: 60px;}
+#mainNav ul a{width: 120px; height: 40px;}
+#mainNav ul li .on {height: 40px; border-radius: 8px; background-color: #836E59; color: #E8E3DD;}
 .sub-nav {height: 40px;}
+.sub-nav .on {height: 40px; border-bottom: 1px solid #836E59;}
 
 
 /* 섹션 */
@@ -33,14 +36,19 @@ header {width: 1920px; height: 100px; ;}
 .content {width: 1200px;  margin: 0%;}
 
 /* 사이드*/
-#leftSide {min-height: 1080px; width: 360px; margin: 0%; background-color: #E8E3DD;}
-#leftSideWrap {position: fixed; padding-left: 20px;}
+#leftSide {min-height: 1080px; width: 360px; margin: 0%; border-right: 1px solid #836E59;}
+#leftSideWrap {position: fixed; padding-left: 30px; font-size: 18px;}
 .right-side-wrap {position: relative; float: right;}
-#rightSide {min-height: 1080px; width: 360px;  margin: 0%; background-color: #E8E3DD;}
+#rightSide {min-height: 1080px; width: 360px;  margin: 0%; border-left: 1px solid #836E59;}
 
 /* 콘텐츠 */
+.post-image {width: 300px; height: 300px;}
+
+
+
+
 /* 회원가입 */
-.sign-box {width: 450px; height: 650px; background-color: aquamarine;}
+.sign-box {width: 450px; height: 650px; background-color: #E8E3DD;}
 #emailCehckBtn {width: 100px; font-size: 12px; height: 30px;}
 #userIdCheckBtn {width: 100px; font-size: 12px; height: 30px;}
 .check-text {font-size: 12px;}

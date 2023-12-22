@@ -17,6 +17,8 @@ public class PostDTO {
 	
 	private int accountId;
 	
+	private String imagePath;
+	
 	private String content;
 	
 	private String createdAt;
