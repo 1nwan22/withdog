@@ -31,7 +31,7 @@
 						</c:if>
 						<c:if test="${not empty email}">
 						<li class="nav-item d-flex justify-content-center align-items-center">
-							<a href="#none" id="myPage" class="on nav-link font-weight-bold">마이 페이지</a>
+							<a href="#none" id="myPage" class="nav-link font-weight-bold">마이 페이지</a>
 						</li>
 						</c:if>
 					</ul>
@@ -62,18 +62,24 @@
 			<!-- 서브 메뉴 끝 -->
 		</div>
 	<!-- 메뉴 그룹 끝 -->
-	<div class="header-side">
-	
+	<div id="headerSide">
+		<div class="header-side"></div>
 	</div>
 </div>
 
 <script>
-$(document).ready(function () {
+	$(document).ready(function () {
+		
+	    // 마이 페이지 메뉴 토글
+	    $("#myPage").on("click", function () {
+	        $("#myPageNav").toggleClass("d-none");
+	    });
 	
-	$("#myPage").on("click", function () {
-		
-		$("#myPageNav").removeClass("d-none");
-		
+	    // 메인 메뉴 하위 <a> 태그 토글
+	    $("#mainNav a").on("click", function () {
+	        $(this).toggleClass("on");
+	        $("#headerSide .header-side").toggleClass("on");
+	    });
+	    
 	});
-});
 </script>

@@ -9,12 +9,12 @@
     
     <hr>
     <!-- 버튼 박스 -->
-    <div>
-        총금액
+    <div id="totalPrice">
+        
     </div>
     <div>
         <a href="/cart" id="cartBtn" class="btn btn-light form-control">장바구니</a>
-        <button type="button" id="checkoutBtn" class="btn btn-primary form-control">구매하기</button>
+        <button type="button" id="checkoutBtn" class="btn form-control">구매하기</button>
     </div>
 </div>
 
@@ -27,10 +27,11 @@
         });
         
         let cartCookie = getCookie("Cart");
+		let totalPrice = 0;
 
         if (cartCookie) {
             let products = cartCookie.split("|");
-
+            
             for (let i = 0; i < products.length; i++) {
                 // 값이 없는 경우 continue
                 if (!products[i]) {
@@ -42,17 +43,18 @@
                 let productName = productInfo[2];
                 let price = productInfo[3];
                 let count = productInfo[4];
+                totalPrice += price * count;
 
-                let itemHtml = '<div class="cart-box">' +
+                let itemHtml = '<div class="cart-box my-2">' +
                                     '<div class="d-flex justify-content-between">' +
                                         '<div>' + productBrand + '</div>' +
                                         '<div>' + productName + '</div>' +
-                                        '<div>deleteButton</div>' +
+                                        '<div>X</div>' +
                                     '</div>' +
                                     '<hr>' +
                                     '<div>' +
                                         '<button type="button" class="minus-btn">-</button>' +
-                                        '<input type="text" id="updatedCount" value="' + count + '" readonly>' +
+                                        '<input type="text" class="count" value="' + count + '">' +
                                         '<button type="button" class="plus-btn">+</button>' +
                                     '</div>' +
                                     '<div>' +
@@ -65,6 +67,7 @@
         } else {
             $("#cartItems").html("장바구니가 비어있음");
         }
+        $("#totalPrice").append('<div class="my-2">총 금액: ' + totalPrice + '원</div>');
 
         // 쿠키 가져오기 함수
         function getCookie(name) {

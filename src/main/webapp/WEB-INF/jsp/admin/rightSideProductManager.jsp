@@ -22,26 +22,17 @@
 	<!-- 제품 검색 -->
 	<div class="d-flex justify-content-center align-items-center">
 		<div>
-				<div class="d-flex align-items-center">
-					<input type="text" id="nameSearch" class="form-control my-3" placeholder="제품명">
-					<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
-				</div>
-				<div class="d-flex align-items-center">
-					<input type="text" id="brandSearch" class="form-control my-3" placeholder="브랜드">
-					<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
-				</div>
-				<div class="d-flex align-items-center">
-					<input type="text" id="priceSearch" class="form-control my-3" placeholder="가격">
-					<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
-				</div>
-				<div class="d-flex align-items-center">
-					<input type="text" id="costPriceSearch" class="form-control my-3" placeholder="원가">
-					<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
-				</div>
-				<div class="d-flex align-items-center">
-					<input type="text" id="stockSearch" class="form-control my-3" placeholder="재고">
-					<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
-				</div>
+			<select class="search-product form-control">
+				<option>제품명</option>
+				<option>브랜드</option>
+				<option>가격</option>
+				<option>원가</option>
+				<option>재고</option>
+			</select>
+			<div class="d-flex align-items-center">
+				<input type="text" id="nameSearch" class="form-control my-3" placeholder="검색어">
+				<input type="button" class="search-product-btn btn btn-success py-0" value="검색">
+			</div>
 		</div>
 	</div>
 </div>

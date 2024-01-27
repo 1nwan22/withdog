@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
 	<!--  시작 -->
-	<div class="home-boxes d-flex flex-wrap justify-content-between" data-page-size="${postList.size}">
+	<div class="home-boxes d-flex flex-wrap" data-page-size="${postList.size}">
 		<c:forEach items="${postList.content}" var="post">
 		<div class="home-box my-2 p-0 m-0">
 			<a href="/post/${post.id}" data-post-id="${post.id}" ">
@@ -28,7 +28,6 @@ $(document).ready(function() {
             $.ajax({
                 type: "GET",
                 url: "/post/load",
-                data: {"page": page},
                 success: function (data) {
                     let postList = data.postSlice.content;
 

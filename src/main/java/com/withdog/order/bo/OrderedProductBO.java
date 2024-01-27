@@ -27,8 +27,8 @@ public class OrderedProductBO {
 	public void addOrderedProduct(int orderId, List<Map<String, Object>> productIdAndCountJson) {
 		Map<Integer, Integer> productIdAndCount = new HashMap<>(productIdAndCountJson.size());
 		for (Map<String, Object> pac : productIdAndCountJson) {
-			int productId = (int) pac.get("productId");
-			int count = (int) pac.get("count");
+			 int productId = Integer.parseInt(String.valueOf(pac.get("productId")));
+		     int count = Integer.parseInt(String.valueOf(pac.get("count")));
 			
 			productIdAndCount.put(productId, count);
 		}

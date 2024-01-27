@@ -45,7 +45,7 @@ public class PostRestController {
 	
 	@GetMapping("/load")
 	public Map<String, Object> loadMorePosts(HttpSession session,
-			@PageableDefault(size = 16, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
+			@PageableDefault(size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
 			) {
 		int page = (int) session.getAttribute("page");
 		page += 1;

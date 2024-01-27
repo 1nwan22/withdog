@@ -20,9 +20,9 @@ hr {unicode-bidi: isolate;
 /* 헤더 */
 header {width: 1920px; height: 100px;}
 #logoWrap {width: 360px; height: 100px; background-color: white; border-right: 1px solid #836E59;}
-.header-side {width: 360px; height: 100px; background-color:white; border-left: 1px solid #836E59;}
+#headerSide .on {width: 360px; height: 100px; background-color:white; border-left: 1px solid #836E59;}
 #logo {width: 360px; height: 100px; position: fixed;}
-.nav-group {width: 1200px; background-color:}
+.nav-group {width: 1200px;}
 #mainNav {height: 60px;}
 #mainNav ul li{width: 120px; height: 60px;}
 #mainNav ul a{width: 120px; height: 40px;}
@@ -39,10 +39,11 @@ header {width: 1920px; height: 100px;}
 #leftSide {min-height: 1080px; width: 360px; margin: 0%; border-right: 1px solid #836E59;}
 #leftSideWrap {position: fixed; padding-left: 30px; font-size: 18px;}
 .right-side-wrap {position: relative; float: right;}
-#rightSide {min-height: 1080px; width: 360px;  margin: 0%; border-left: 1px solid #836E59;}
+#rightSide {min-height: 1080px; width: 360px;  margin: 0%;}
 
 /* 콘텐츠 */
-.post-image {width: 300px; height: 300px;}
+.post-image {width: 350px;}
+.home-boxes {padding: 25px; gap: 50px; margin-top: 50px;}
 
 
 
@@ -102,11 +103,11 @@ header {width: 1920px; height: 100px;}
 .product-category-menu a {color: #E8E3DD;}
 
 .fixed {position: fixed; top: 0px; width: 1200px;}
-
-
+.product-inquiry-btn {background-color: #836E59; color: #E8E3DD;}
+.inquiry-text{color: #836E59; font-size: 22px; font-weight: bold;}
 
 /* 상품 상세 정보 */
-.product-menu-detail {width: 1200px; height: 50px; background: #a9b3bc; font-size: 20px;}
+.product-menu-detail {width: 1200px; height: 50px; background: #D3B998; font-size: 20px;}
 .star-empty {
 		background-image: url("/static/img/star_empty.png");
 		background-size : 100%;
@@ -155,25 +156,50 @@ header {width: 1920px; height: 100px;}
     border-color: #007bff;
 }*/
 
+/* 체크된 상태의 배경색 */
+input[type="checkbox"]:checked {
+     accent-color: #836E59;;
+}
+
+.cart-box {background-color: #E8E3DD; border-radius: 8px;}
+.minus-btn {font-size: 15px; border-radius: 30%; border: none; font-weight: bold; width: 30px; background-color: #E8E3DD;}
+.plus-btn {border-radius: 30%; border: none; font-weight: bold; width: 30px; background-color: #E8E3DD;}
+.count {width: 40px; border-radius: 10px; border: none;  text-align: center;}
+.delete-btn {margin-bottom: 25px; border-radius: 30%; border: none; font-weight: bold; width: 30px; background-color: #E8E3DD;}
+.pay-info-box {
+	border: 1px solid #836E59; border-radius: 10px; margin-top: 30px;
+}
+.order-progress-text {font-size: 25px;}
+.order-btn {background-color: #836E59; font-size: 20px; color: #E8E3DD; font-weight: bold; width: 350px; height: 60px;}
+.pay-btn {background-color: #836E59; font-size: 20px; color: #E8E3DD; font-weight: bold; width: 480px; height: 60px; text-align: center;}
+.pay-info-text {font-size: 20px;}
+.pay-info-text2 {font-size: 16px;}
+#checkoutBtn {background-color: #836E59; color: #E8E3DD;}
 /* 체크아웃 */
-.order-info-box {width: 700px; min-height: 800px;}
+.order-info-box {width: 700px; min-height: 400px;}
+.shipping-text {font-size: 20px; color: #836E59;}
+.shipping-btn {border: 1px solid #836E59; color: #836E59;}
+.shipping-address {font-size: 18px; color: #836E59;}
 .shipping-info-box{
-	width: 700px; 
-	height: 300px;     
+	width: 600px; 
+	height: 350px;     
 	background: #fff;
     padding: 30px;
     box-sizing: border-box;
     border-radius: 8px;
-    border: 1px solid #e0e0e0;}
+    border: 1px solid #E8E3DD;}
 .payment-method-box {
-	width: 700px; 
-	height: 500px;
+	width: 600px; 
+	height: 400px;
 	background: #fff;
     box-sizing: border-box;
     border-radius: 8px;
-    border: 1px solid #e0e0e0;}
-.payment-info-box {width: 480px; min-height: 600px;}
-.product-info-box {width: 400px; min-height: 250px;}
+    border: 1px solid #E8E3DD;}
+.payment-info-box {width: 550px; min-height: 400px; border-radius: 8px;
+    border: 1px solid #E8E3DD;}
+.product-info-box {width: 400px; min-height: 100px;}
+#kakaoPayLogo {width: 60px; height: 40px; border-radius: 10px;}
+.pay-success-text {font-size: 40px; font-weight: bold; color: #836E59;}
 
 /* footer */
 footer {height: 100px; background-color: #D3B998;}

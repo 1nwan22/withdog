@@ -27,7 +27,7 @@ public class TimelineController {
 	// http://localhost
 	@GetMapping("")
 	public String timelineView(Model model, HttpSession session,
-			@PageableDefault(size = 16, sort = "id" ,direction = Sort.Direction.DESC) Pageable pageable
+			@PageableDefault(size = 15, sort = "id" ,direction = Sort.Direction.DESC) Pageable pageable
 			) {
 		session.setAttribute("page", pageable.getPageNumber());
 		Slice<PostDTO> postList = postBO.generatePostSlice(pageable);

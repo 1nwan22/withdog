@@ -18,7 +18,7 @@
 			<div>리뷰 수</div>
 			<div>
 				<button type="button" class="minus-btn">-</button>
-				<input type="text" id="count" value="0" readonly>
+				<input type="text" class="count" value="0">
 				<button type="button" class="plus-btn">+</button>
 			</div>
 			<button type="button" class="add-cart cart-img" id="addCartBtn"
@@ -141,11 +141,17 @@
 			<!-- 상품문의 -->
 			<div id="tabInquiry" class="product-tab d-none">
 				<div>
-					<div>상품문의하기</div>
-					+ 상품문의 개수
-					<button class="product-inquiry-btn btn btn-info"
-						data-toggle="modal" data-target="#modalProductInquriy">문의하기</button>
-					<a href="#">내 문의보기</a> <a href="#">전체 문의보기</a>
+					<div class="d-flex justify-content-between my-3">
+						<div class="inquiry-text">상품문의</div>
+						<div>
+						<input id="myInquiry" type="radio" name="inquiry">
+						<label for="myInquiry">내 문의</label> 
+						<input id="totalInquiry" type="radio" name="inquiry">
+						<label for="totalInquiry">전체 문의</label> 
+						<button class="product-inquiry-btn btn"
+							data-toggle="modal" data-target="#modalProductInquriy">문의하기</button>
+						</div>
+					</div>
 					<table class="table">
 						<thead>
 							<tr>
@@ -345,9 +351,9 @@
 			});
 		});
 
-		/* 수량 버튼 */
+	    /* 수량 버튼 */
 		$(".plus-btn, .minus-btn").on("click", function() {
-			let currentCount = parseInt($("#count").val());
+			let currentCount = parseInt($(this).siblings(".count").val());
 
 			// 클릭된 버튼에 따라 수량 조절
 			currentCount += ($(this).hasClass("plus-btn") ? 1 : -1);
@@ -355,8 +361,8 @@
 			// 수량이 1 미만이 되지 않도록 보장
 			currentCount = Math.max(currentCount, 1);
 
-			// 결과를 #count input에 설정
-			$("#count").val(currentCount);
+			// 결과를 count input에 설정
+			$(this).siblings(".count").val(currentCount); 
 		});
 
 		/* 초기화 */
